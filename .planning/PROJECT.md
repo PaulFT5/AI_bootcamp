@@ -21,20 +21,23 @@ An incoming student can enter their home-university courses and get ranked, expl
 - [ ] Enrich courses with metadata from official UPT faculty pages / study plans: ECTS, semester, study year, host faculty, evaluation type, English status (fully taught in English vs. English tutoring/materials)
 - [ ] Student enters home-university courses (name, description, ECTS) and gets ranked UPT equivalents with similarity score, short AI reason, ECTS, semester, faculty, English status
 - [ ] Student can add matched courses to a saved Learning Agreement selection
+- [ ] Student can upload a home-course syllabus PDF and see possible UPT matches
+- [ ] Browse/filter catalogue; English-only filter on by default; LA draft CSV/print export
 
 **Module 2 — Paperwork & Legal Assistant (priority 2)**
 - [ ] 4-question onboarding: Citizenship (EU/EEA vs Non-EU), Grant (KA131 vs KA171), Mobility (Study vs Traineeship), Arrival Date
 - [ ] Generates a personalized pre-arrival + Week 1 checklist with dependencies and deadlines (e.g., single-PDF email to incoming@upt.ro, Non-EU study visa steps, 3cm x 4cm ID photos, 600 RON cash dorm deposit vs card-only monthly rent, Rectorate Office 107 registration hours, Căminul 11C / after-hours key pickup at Căminul 8C)
 - [ ] Student can tick off checklist items; progress persists
-- [ ] Campus utilities info: cafeterias, sports complexes, library access card desk, student clinic
 
 **Module 3 — Cross-Year Schedule Builder (priority 3)**
-- [ ] Combine courses from different study years and faculties into one personal schedule using structured timetable data
-- [ ] AI schedule extractor: upload PDF, screenshot or pasted text from faculty timetable portals (ac.upt.ro, etc.upt.ro, mec.upt.ro) → parsed courses, labs, seminars
-- [ ] Detect time overlaps, handle odd/even week parity
+- [ ] Pick a course (e.g., OOP) from any faculty/year and see all its available slots on the weekly grid; combine into one personal schedule (pre-loaded timetable data)
+- [ ] Detect time overlaps, handle odd/even week parity and week ranges
 - [ ] Suggest conflict-free lab subgroups when multiple lab slots exist
-- [ ] Translate UPT room codes (e.g., B410 in the Electro complex) into building/wing/floor directions
+- [ ] Decode UPT room codes (e.g., B417 → wing B, floor 4, room 17) with a Google Maps link to the building
 - [ ] Export unified schedule as .ics calendar file
+
+**Campus Map**
+- [ ] Map of UPT points of interest (faculty buildings, dorms, UPT-owned/partner food & cafés, services); filter by category; select one for details + Google Maps link
 
 **Platform**
 - [ ] Own accounts (students have no UPT credentials on arrival) — matches, checklist and schedule saved per user
@@ -49,6 +52,9 @@ An incoming student can enter their home-university courses and get ranked, expl
 - Mobile-specific API work before Sunday — the mobile app will later reuse this backend, so keep business logic behind a clean server/API boundary, but build no mobile endpoints, tokens or docs for the demo
 - UPT SSO / Student UPT portal integration — students lack credentials before in-person registration
 - Languages other than English — English-first is the point; Romanian translation not needed for v1
+- AI timetable extractor (upload PDF/screenshot/text) — deferred to v2; v1 uses pre-loaded timetables
+- Traineeship-specific checklist items, campus utilities info page — deferred to v2
+- Non-UPT, non-partner businesses on the map — user wants only UPT-owned or partner places
 
 ## Context
 
