@@ -1,6 +1,13 @@
 ---
-gsd_state_version: '1.0'
+gsd_state_version: "1.0"
+current_phase: 1
+current_phase_name: Course Matcher
 status: planning
+stopped_at: Roadmap and state initialized; ready for `/gsd-plan-phase 1` (or `/gsd-discuss-phase 1`)
+last_updated: "2026-11-20T23:00:30.263Z"
+last_activity: 2026-11-20
+last_activity_desc: Roadmap created (4 phases, 28/28 v1 requirements mapped)
+state_head: b737fd7849248bc8dba872d48f82bb07bb6b4e13
 progress:
   total_phases: 4
   completed_phases: 0
@@ -68,6 +75,10 @@ None yet.
 - [Phase 1]: Get the Voyage API key Friday. If it is missing by Saturday noon, use Plan B (Claude-only ranking)
 - [Phase 1]: Confirm Claude model IDs, API key tier and spend cap on Friday
 - [Phase 3]: UPT odd/even parity convention and Week 1 anchor are unverified. This is a gate before .ics export
+
+### Roadmap Evolution
+
+- Phase 1 edited: edited fields: goal, requirements, success_criteria, notes (2026-27 catalogue, AC syllabus matching, City Lines design)
 
 ## Deferred Items
 

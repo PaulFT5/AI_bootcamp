@@ -14,15 +14,17 @@ Requirements for the Sunday 2026-11-22 demo. Each maps to roadmap phases. Detail
 
 ### Course Matcher
 
-- [ ] **MATCH-01**: The UPT course catalogue is available in the app, ingested from the official Erasmus Course Catalogue (current year if the user downloads it, otherwise the public 2021-22 snapshot, labelled as such in the UI)
+- [ ] **MATCH-01**: The UPT course catalogue is available in the app, imported from the official 2026-27 Erasmus Course Catalogue files (full-time Bachelor and Master only, no distance learning), labelled with its source year in the UI
 - [ ] **MATCH-02**: User can enter one or more home-university courses (name, description, ECTS, study year) and get the top UPT matches for each, ranked with a score band and a 1-2 sentence reason
-- [ ] **MATCH-03**: Each match shows ECTS, semester, study year, faculty, programme and English status (taught in English / English materials / individual study in English / unknown) taken from catalogue data, never from model output
+- [ ] **MATCH-03**: Each match shows ECTS, semester, study year, faculty, programme and teaching language (plus the "English materials" / "individual study in English" flags where the catalogue has them), taken from catalogue data, never from model output
 - [ ] **MATCH-04**: User can upload a home-course syllabus as a PDF or a screenshot (PNG/JPEG); files that are too large are rejected before upload with a clear message stating the limit, and screenshots are downscaled in the browser to fit; the course name, description, ECTS and topics are extracted and pre-filled for the user to review, then matched (format reference: UPT "fișa disciplinei" examples; one course per PDF)
-- [ ] **MATCH-05**: User can browse the full UPT catalogue and filter by faculty, semester, ECTS and English status
+- [ ] **MATCH-05**: User can browse the full UPT catalogue and filter by faculty, semester, ECTS, language and "has UPT syllabus"
 - [ ] **MATCH-06**: An "English-taught only" filter is on by default and shows how many courses it hides
 - [ ] **MATCH-07**: User can add matched UPT courses to a Learning Agreement draft that shows the running ECTS total
-- [ ] **MATCH-08**: User can export the Learning Agreement draft as CSV and as a printable view
+- [ ] **MATCH-08**: The Learning Agreement draft panel in the Matcher opens the full draft page, which exports the draft as CSV and as a printable view (no separate Learning Agreement navigation item)
 - [ ] **MATCH-09**: Match results show that suggestions are not official equivalences and that final approval is by the faculty Erasmus coordinator, with that coordinator's contact
+- [ ] **MATCH-10**: UPT syllabi (fișa disciplinei) for Automation and Computers catalogue courses are collected offline with a manifest (catalogue code, local file, original UPT URL, document language, academic year, download date), paired to catalogue rows by code, and can be opened from the catalogue and from matches via the official UPT link; courses without one show "Syllabus not available yet"
+- [ ] **MATCH-11**: Each match shows how it was compared ("Compared with UPT syllabus" or "Compared by catalogue entry"); for AC courses with a syllabus, matching compares the home course with the topics extracted from the UPT syllabus and shows which of the student's topics are covered and which are not
 
 ### Paperwork & Legal
 
@@ -69,6 +71,7 @@ Deferred. Tracked but not in the current roadmap.
 
 - **MATCH-V2-01**: Evaluation type (exam/colloquium/verification) enriched from UPT study-plan PDFs
 - **MATCH-V2-02**: Syllabus/transcript PDFs containing multiple courses, with every course extracted and matched
+- **MATCH-V2-03**: UPT syllabi collected and matched syllabus-to-syllabus for the faculties beyond Automation and Computers
 
 ### Platform
 
@@ -107,6 +110,8 @@ Which phases cover which requirements. Filled during roadmap creation.
 | MATCH-07 | Phase 1 | Pending |
 | MATCH-08 | Phase 1 | Pending |
 | MATCH-09 | Phase 1 | Pending |
+| MATCH-10 | Phase 1 | Pending |
+| MATCH-11 | Phase 1 | Pending |
 | PAPER-01 | Phase 2 | Pending |
 | PAPER-02 | Phase 2 | Pending |
 | PAPER-03 | Phase 2 | Pending |
@@ -126,10 +131,10 @@ Which phases cover which requirements. Filled during roadmap creation.
 | MAP-03 | Phase 4 | Pending |
 
 **Coverage:**
-- v1 requirements: 28 total
-- Mapped to phases: 28
+- v1 requirements: 30 total
+- Mapped to phases: 30
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-11-20*
-*Last updated: 2026-11-20 after roadmap creation (traceability filled)*
+*Last updated: 2026-11-21 after Phase 1 edit (2026-27 catalogue, AC syllabus matching: MATCH-10, MATCH-11)*
