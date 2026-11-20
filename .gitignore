@@ -1,0 +1,17 @@
+# Local env and IDE
+.env*.local
+.idea/
+
+# Personal Claude Code / Impeccable settings
+.claude/settings.local.json
+.impeccable/config.local.json
+
+# GSD install: contains machine-specific paths. Each developer installs it after cloning:
+#   npx -y @opengsd/gsd-core@latest --claude --local
+.claude/gsd-core/
+.claude/commands/
+.claude/hooks/
+.claude/scripts/
+.claude/agents/gsd-*
+.claude/gsd-*
+.claude/.gsd-profile
