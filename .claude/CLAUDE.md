@@ -14,7 +14,7 @@ Erasmus@UPT is an English-first web assistant for incoming Erasmus+ exchange stu
 - **AI provider**: Claude API (matching rationale, PDF/screenshot timetable extraction via vision) — user has/can get an API key
 - **Tech stack**: No bootcamp constraint — pick what ships fastest
 - **Platform**: Web only (responsive) for now; a colleague's mobile app will later call this same backend
-- **Database**: Plain Postgres + pgvector (`pgvector/pgvector:pg17`) in Docker via docker compose; demo runs on the laptop. No cloud DB for now — moving to hosted Postgres (e.g., Neon) later only changes `DATABASE_URL`
+- **Database**: Plain Postgres + pgvector (`pgvector/pgvector:pg17`) in Docker via docker compose; development and the demo run on the laptop. User testing runs on Vercel + Neon (Postgres 17), reached by changing `DATABASE_URL`, then `CREATE EXTENSION vector` + `drizzle-kit push` + reseed
 - **Catalogue access**: Current 2024-27 Erasmus catalogues sit in SharePoint folders that block automated fetch — user must download them in a browser; fallback is the public 2021-22 `.xls` catalogue (~2,700 rows)
 - **Data accuracy**: Admin/legal checklist content must come from official UPT guides, not invented — wrong paperwork advice harms students
 
@@ -37,8 +37,8 @@ Erasmus@UPT is an English-first web assistant for incoming Erasmus+ exchange stu
 | Zod | 4.6.7 | Schemas for structured outputs, form validation, seed-data validation | Same schema defines Claude's output contract AND runtime validation. |
 | Better Auth | 1.7.27 | Email+password accounts | Library-in-your-repo (no external dashboard/keys), Next 16 `proxy.ts` documented, Drizzle adapter. Auth.js is effectively superseded by it. |
 | Drizzle ORM + drizzle-kit | 0.45.4 / 0.31.11 | Type-safe DB access + `drizzle-kit push` | No codegen step (unlike Prisma), SQL-like, native `vector()` column type for pgvector. Better Auth peer range matches (`drizzle-orm ^0.45.2`, `drizzle-kit >=0.31.4`). |
-| PostgreSQL on Neon (via Vercel Marketplace) | managed | Users, saved selections, checklist progress, schedules, courses + embeddings | Hosted from minute 1, same DB for local dev and prod (no SQLite-vs-prod drift), `CREATE EXTENSION vector` is one SQL line and free on all Neon plans. Zero native Windows installs. |
-| Vercel (Hobby) | n/a | Hosting for the demo | `git push` = deploy, Marketplace Neon integration injects `DATABASE_URL`. Fallback: demo from `next start` on the laptop against the same Neon DB. |
+| PostgreSQL + pgvector: Docker (`pgvector/pgvector:pg17`) for dev/demo, Neon (Postgres 17) for user testing | managed | Users, saved selections, checklist progress, schedules, courses + embeddings | **Decided 2026-11-20:** Docker is offline, fast, freely resettable and already installed (Docker 29.9.1). Neon gives testers a hosted DB behind a public Vercel URL. Same `pg` driver for both; switching is `DATABASE_URL` + `CREATE EXTENSION vector` + `drizzle-kit push` + reseed. |
+| Vercel (Hobby) | n/a | Hosting for user testing | `git push` = deploy, Marketplace Neon integration injects `DATABASE_URL`. The demo itself runs from `next start` on the laptop against Docker. Before sharing the link: set an Anthropic spend limit and `maxDuration = 60` on AI routes. |
 
 ### Claude usage (models and API surface)
 
@@ -95,7 +95,7 @@ Erasmus@UPT is an English-first web assistant for incoming Erasmus+ exchange stu
 |------|---------|-------|
 | `drizzle-kit push` | Apply schema straight to Neon | Skip migration files for a 2-day build (`shortcut: no migration history, adopt `generate`+`migrate` after the demo`). |
 | `npx auth@latest generate` | Generate Better Auth tables as Drizzle schema | Documented command; paste output into `schema.ts`, then `drizzle-kit push`. |
-| Vercel CLI or GitHub import | Deploy | GitHub import is fastest; install Neon from Vercel Marketplace, then `vercel env pull .env.local` so local dev uses the same DB. |
+| Vercel CLI or GitHub import | Deploy | GitHub import is fastest; install Neon from Vercel Marketplace for the testing deploy. Local dev keeps its Docker `DATABASE_URL` in `.env.local` (do not `vercel env pull` over it). |
 
 ## Ingestion strategy (PDF/HTML -> seed data)
 
@@ -120,7 +120,7 @@ Erasmus@UPT is an English-first web assistant for incoming Erasmus+ exchange stu
 
 # Env (.env.local)
 
-# ANTHROPIC_API_KEY=...   VOYAGE_API_KEY=...   DATABASE_URL=...(Neon pooled)   BETTER_AUTH_SECRET=...   BETTER_AUTH_URL=http://localhost:3000
+# ANTHROPIC_API_KEY=...   VOYAGE_API_KEY=...   DATABASE_URL=...(Docker locally; Neon pooled on Vercel)   BETTER_AUTH_SECRET=...   BETTER_AUTH_URL=http://localhost:3000
 
 ## Alternatives Considered
 
@@ -151,7 +151,6 @@ Erasmus@UPT is an English-first web assistant for incoming Erasmus+ exchange stu
 | `temperature`, prefill, `thinking: {type:"enabled", budget_tokens}` | 400 on current models | `output_config.effort` |
 | `ics`/`ical-generator` RRULE for odd/even weeks | Parity math + timezone rendering errors are invisible until a client imports the file | Expand to explicit occurrences, floating times |
 | Email verification / password reset flows | Needs an email provider (extra account, DNS) | Off for the demo; document as post-demo work |
-| Docker / self-hosted Postgres | Setup + deploy burden | Neon via Vercel Marketplace |
 | Mobile-oriented stack (React Native, PWA tooling, shared API contract) | Out of scope (colleague owns mobile) | Responsive Tailwind layout only |
 | UPT SSO | Students lack credentials | Own accounts |
 

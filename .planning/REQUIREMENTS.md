@@ -17,7 +17,7 @@ Requirements for the Sunday 2026-11-22 demo. Each maps to roadmap phases. Detail
 - [ ] **MATCH-01**: The UPT course catalogue is available in the app, ingested from the official Erasmus Course Catalogue (current year if the user downloads it, otherwise the public 2021-22 snapshot, labelled as such in the UI)
 - [ ] **MATCH-02**: User can enter one or more home-university courses (name, description, ECTS, study year) and get the top UPT matches for each, ranked with a score band and a 1-2 sentence reason
 - [ ] **MATCH-03**: Each match shows ECTS, semester, study year, faculty, programme and English status (taught in English / English materials / individual study in English / unknown) taken from catalogue data, never from model output
-- [ ] **MATCH-04**: User can upload a home-course syllabus PDF; the course name, description, ECTS and topics are extracted and pre-filled for the user to review, then matched (format reference: UPT "fișa disciplinei" examples; one course per PDF)
+- [ ] **MATCH-04**: User can upload a home-course syllabus as a PDF or a screenshot (PNG/JPEG); files that are too large are rejected before upload with a clear message stating the limit, and screenshots are downscaled in the browser to fit; the course name, description, ECTS and topics are extracted and pre-filled for the user to review, then matched (format reference: UPT "fișa disciplinei" examples; one course per PDF)
 - [ ] **MATCH-05**: User can browse the full UPT catalogue and filter by faculty, semester, ECTS and English status
 - [ ] **MATCH-06**: An "English-taught only" filter is on by default and shows how many courses it hides
 - [ ] **MATCH-07**: User can add matched UPT courses to a Learning Agreement draft that shows the running ECTS total

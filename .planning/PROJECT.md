@@ -21,7 +21,7 @@ An incoming student can enter their home-university courses and get ranked, expl
 - [ ] Enrich courses with metadata from official UPT faculty pages / study plans: ECTS, semester, study year, host faculty, evaluation type, English status (fully taught in English vs. English tutoring/materials)
 - [ ] Student enters home-university courses (name, description, ECTS) and gets ranked UPT equivalents with similarity score, short AI reason, ECTS, semester, faculty, English status
 - [ ] Student can add matched courses to a saved Learning Agreement selection
-- [ ] Student can upload a home-course syllabus PDF and see possible UPT matches
+- [ ] Student can upload a home-course syllabus (PDF or screenshot) and see possible UPT matches
 - [ ] Browse/filter catalogue; English-only filter on by default; LA draft CSV/print export
 
 **Module 2 — Paperwork & Legal Assistant (priority 2)**
@@ -71,7 +71,7 @@ An incoming student can enter their home-university courses and get ranked, expl
 - **AI provider**: Claude API (matching rationale, PDF/screenshot timetable extraction via vision) — user has/can get an API key
 - **Tech stack**: No bootcamp constraint — pick what ships fastest
 - **Platform**: Web only (responsive) for now; a colleague's mobile app will later call this same backend
-- **Database**: Plain Postgres + pgvector (`pgvector/pgvector:pg17`) in Docker via docker compose; demo runs on the laptop. No cloud DB for now — moving to hosted Postgres (e.g., Neon) later only changes `DATABASE_URL`
+- **Database**: Plain Postgres + pgvector (`pgvector/pgvector:pg17`) in Docker via docker compose; development and the demo run on the laptop. User testing runs on Vercel + Neon (Postgres 17), reached by changing `DATABASE_URL`, then `CREATE EXTENSION vector` + `drizzle-kit push` + reseed
 - **Catalogue access**: Current 2024-27 Erasmus catalogues sit in SharePoint folders that block automated fetch — user must download them in a browser; fallback is the public 2021-22 `.xls` catalogue (~2,700 rows)
 - **Data accuracy**: Admin/legal checklist content must come from official UPT guides, not invented — wrong paperwork advice harms students
 
@@ -85,6 +85,8 @@ An incoming student can enter their home-university courses and get ranked, expl
 | Own accounts (not UPT SSO) | Students have no UPT credentials on arrival | — Pending |
 | Web only now; mobile later shares backend | Colleague owns mobile; keep API boundary clean, no mobile work before Sunday | — Pending |
 | Postgres + pgvector in Docker, demo on laptop | No cloud account, works offline, no network latency at demo; hosted Postgres later is a DATABASE_URL change | — Pending |
+| User testing on Vercel + Neon (Postgres 17) | Testers need a public URL that works without the laptop; schema lives in code, so the move is `drizzle-kit push` + reseed | — Pending |
+| Syllabus upload accepts PDF and screenshots (PNG/JPEG) | Students may only have a screenshot; Claude reads both. File-size errors shown before upload (Vercel ~4.5 MB body limit) | — Pending |
 | RAG chatbot = stretch goal | User unsure it ships; build last | — Pending |
 | Build order Matcher → Paperwork → Schedule | User's stated priority | — Pending |
 
