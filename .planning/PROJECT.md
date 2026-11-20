@@ -45,8 +45,8 @@ An incoming student can enter their home-university courses and get ranked, expl
 
 ### Out of Scope
 
-- Native / cross-platform mobile app — a colleague builds mobile separately; this project is web only
-- Shared backend API for mobile — mobile app is independent; no API contract work for it
+- Native / cross-platform mobile app — a colleague builds mobile later; this project is web only for now
+- Mobile-specific API work before Sunday — the mobile app will later reuse this backend, so keep business logic behind a clean server/API boundary, but build no mobile endpoints, tokens or docs for the demo
 - UPT SSO / Student UPT portal integration — students lack credentials before in-person registration
 - Languages other than English — English-first is the point; Romanian translation not needed for v1
 
@@ -64,7 +64,9 @@ An incoming student can enter their home-university courses and get ranked, expl
 - **Timeline**: Demo-ready by Sunday 2026-11-22 — ruthless scope; seed/pre-processed data over live scraping at runtime
 - **AI provider**: Claude API (matching rationale, PDF/screenshot timetable extraction via vision) — user has/can get an API key
 - **Tech stack**: No bootcamp constraint — pick what ships fastest
-- **Platform**: Web only (responsive); mobile handled by a colleague separately
+- **Platform**: Web only (responsive) for now; a colleague's mobile app will later call this same backend
+- **Database**: Plain Postgres + pgvector (`pgvector/pgvector:pg17`) in Docker via docker compose; demo runs on the laptop. No cloud DB for now — moving to hosted Postgres (e.g., Neon) later only changes `DATABASE_URL`
+- **Catalogue access**: Current 2024-27 Erasmus catalogues sit in SharePoint folders that block automated fetch — user must download them in a browser; fallback is the public 2021-22 `.xls` catalogue (~2,700 rows)
 - **Data accuracy**: Admin/legal checklist content must come from official UPT guides, not invented — wrong paperwork advice harms students
 
 ## Key Decisions
@@ -75,7 +77,8 @@ An incoming student can enter their home-university courses and get ranked, expl
 | Matcher output: ranked + score + AI reason + metadata | User's choice of what matters most | — Pending |
 | Claude API for AI features | Strong at documents and vision for the schedule extractor | — Pending |
 | Own accounts (not UPT SSO) | Students have no UPT credentials on arrival | — Pending |
-| Web only; mobile separate | Colleague owns mobile; focus for the 2-day deadline | — Pending |
+| Web only now; mobile later shares backend | Colleague owns mobile; keep API boundary clean, no mobile work before Sunday | — Pending |
+| Postgres + pgvector in Docker, demo on laptop | No cloud account, works offline, no network latency at demo; hosted Postgres later is a DATABASE_URL change | — Pending |
 | RAG chatbot = stretch goal | User unsure it ships; build last | — Pending |
 | Build order Matcher → Paperwork → Schedule | User's stated priority | — Pending |
 
