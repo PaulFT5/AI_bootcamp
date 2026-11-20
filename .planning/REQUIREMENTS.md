@@ -96,12 +96,40 @@ Which phases cover which requirements. Filled during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
+| PLAT-01 | Phase 1 | Pending |
+| PLAT-02 | Phase 3 | Pending |
+| MATCH-01 | Phase 1 | Pending |
+| MATCH-02 | Phase 1 | Pending |
+| MATCH-03 | Phase 1 | Pending |
+| MATCH-04 | Phase 1 | Pending |
+| MATCH-05 | Phase 1 | Pending |
+| MATCH-06 | Phase 1 | Pending |
+| MATCH-07 | Phase 1 | Pending |
+| MATCH-08 | Phase 1 | Pending |
+| MATCH-09 | Phase 1 | Pending |
+| PAPER-01 | Phase 2 | Pending |
+| PAPER-02 | Phase 2 | Pending |
+| PAPER-03 | Phase 2 | Pending |
+| PAPER-04 | Phase 2 | Pending |
+| PAPER-05 | Phase 2 | Pending |
+| PAPER-06 | Phase 2 | Pending |
+| SCHED-01 | Phase 3 | Pending |
+| SCHED-02 | Phase 3 | Pending |
+| SCHED-03 | Phase 3 | Pending |
+| SCHED-04 | Phase 3 | Pending |
+| SCHED-05 | Phase 3 | Pending |
+| SCHED-06 | Phase 3 | Pending |
+| SCHED-07 | Phase 3 | Pending |
+| SCHED-08 | Phase 3 | Pending |
+| MAP-01 | Phase 4 | Pending |
+| MAP-02 | Phase 4 | Pending |
+| MAP-03 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 28 total
-- Mapped to phases: 0
-- Unmapped: 28 ⚠️
+- Mapped to phases: 28
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-11-20*
-*Last updated: 2026-11-20 after initial definition*
+*Last updated: 2026-11-20 after roadmap creation (traceability filled)*
