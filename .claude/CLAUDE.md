@@ -11,7 +11,7 @@ Erasmus@UPT is an English-first web assistant for incoming Erasmus+ exchange stu
 ### Constraints
 
 - **Timeline**: Demo-ready by Sunday 2026-11-22 — ruthless scope; seed/pre-processed data over live scraping at runtime
-- **AI provider**: Claude API (matching rationale, PDF/screenshot timetable extraction via vision) — user has/can get an API key
+- **AI provider**: Gemini API free tier (decided 2026-11-21, D-20 in `.planning/phases/01-course-matcher/01-CONTEXT.md`; supersedes the Claude API sections below): `GEMINI_MODEL=gemini-3.5-flash-lite` for PDF/screenshot extraction, `GEMINI_EMBED_MODEL=gemini-embedding-2` (768 dims) + pgvector for syllabus matching, name similarity in code for name search. No paid API key. No login: one mock student account (D-18)
 - **Tech stack**: No bootcamp constraint — pick what ships fastest
 - **Platform**: Web only (responsive) for now; a colleague's mobile app will later call this same backend
 - **Database**: Plain Postgres + pgvector (`pgvector/pgvector:pg17`) in Docker via docker compose; development and the demo run on the laptop. User testing runs on Vercel + Neon (Postgres 17), reached by changing `DATABASE_URL`, then `CREATE EXTENSION vector` + `drizzle-kit push` + reseed
