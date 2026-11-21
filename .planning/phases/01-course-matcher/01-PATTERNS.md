@@ -3,7 +3,7 @@
 > **Scope note:** Scope narrowed 2026-11-21 to AC only (D-17, `.planning/phases/01-course-matcher/01-CONTEXT.md`). Multi-faculty content below is reference for a later phase.
 
 **Mapped:** 2026-11-21
-**Greenfield repo:** no application code exists. The only analogs are the tracked prototype `.impeccable/mocks/prototype/index.html` (633 lines, git-tracked) and `COLOR-GUIDE.md` (tracked). Everything else: "no analog, follow RESEARCH.md section X".
+**Greenfield repo:** no application code exists. The only analogs are the tracked prototype `prototype/index.html` (633 lines, git-tracked) and `COLOR-GUIDE.md` (tracked). Everything else: "no analog, follow RESEARCH.md section X".
 Line numbers below are from the Read tool on the prototype (+/- 2).
 The BOM `"﻿"` in the prototype csv() is the invisible-unicode scan hit, and it is intentional.
 

@@ -2,7 +2,7 @@
 
 One palette for the web app and the mobile app, so both look like the same product.
 
-**Source of truth:** `.impeccable/mocks/prototype/index.html` (the working prototype), which implements
+**Source of truth:** `prototype/index.html` (the working prototype), which implements
 `.impeccable/mocks/colors/4-charcoal.html` (Charcoal + teal). Dark theme comes from `.impeccable/mocks/colors/6-dark.html`.
 
 **Rule:** both platforms use the token names below, never raw hex in components.

@@ -85,7 +85,7 @@ A student hosted by the Faculty of Automation and Computers (AC), entering as th
 - `data/raw/catalogue-2024-27/Course_catalogue_Automatics and Computing_2026-2027_ERASMUS.xlsx` — the only file imported (D-17). Bachelor and Master sheets only; skip `Lista`. The other six files in the folder (CT `.xlsb`, ET/Power Engineering, ARH, IH, MEC, RIA) stay untouched for later.
 
 ### Design
-- `.impeccable/mocks/prototype/index.html` — working reference prototype (LA panel, 30-ECTS meter messages, CSV export, home-course linking).
+- `prototype/index.html` — working reference prototype (LA panel, 30-ECTS meter messages, CSV export, home-course linking).
 - `.impeccable/mocks/colors/`, `.impeccable/mocks/decision/` — shape brief and design decision.
 - `PRODUCT.md` — product context for impeccable.
 
@@ -95,7 +95,7 @@ A student hosted by the Faculty of Automation and Computers (AC), entering as th
 ## Existing Code Insights
 
 ### Reusable Assets
-- No application code yet (greenfield). The prototype `.impeccable/mocks/prototype/index.html` is the UI reference: its LA meter logic (under / at 30 / over messages) and CSV export are the behaviour to reproduce.
+- No application code yet (greenfield). The prototype `prototype/index.html` is the UI reference: its LA meter logic (under / at 30 / over messages) and CSV export are the behaviour to reproduce.
 
 ### Established Patterns
 - Stack fixed in `.claude/CLAUDE.md`: Next.js 16 App Router, Drizzle + pg, Better Auth, `@anthropic-ai/sdk` `messages.parse` + `zodOutputFormat`, shadcn/Tailwind 4.
