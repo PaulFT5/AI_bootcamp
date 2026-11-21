@@ -1,0 +1,74 @@
+[
+  {
+    "label": "Data Structures and Algorithms",
+    "home": { "name": "Data Structures and Algorithms", "description": "Lists, stacks and queues; trees and heaps; hash tables; sorting algorithms; graph algorithms; complexity analysis" },
+    "expectCodesTop3": ["L002.25.03.F2"]
+  },
+  {
+    "label": "Operating Systems",
+    "home": { "name": "Operating Systems", "description": "Processes and threads, CPU scheduling, memory management, file systems, synchronisation" },
+    "expectCodesTop3": ["L002.25.04.F4"]
+  },
+  {
+    "label": "Databases",
+    "home": { "name": "Database Systems", "description": "Relational model, SQL, normalisation, transactions, ER modelling" },
+    "expectCodesTop3": ["L002.25.03.F1", "L002.23.07.S2-08", "L001.23.07.S2-08"]
+  },
+  {
+    "label": "Computer Networks",
+    "home": { "name": "Computer Networks", "description": "OSI and TCP/IP layers, routing, switching, transport protocols, network security basics" },
+    "expectCodesTop3": ["L002.25.04.F3"]
+  },
+  {
+    "label": "Object-Oriented Programming",
+    "home": { "name": "Object-Oriented Programming", "description": "Classes and objects, inheritance, polymorphism, interfaces, exceptions, design in Java" },
+    "expectCodesTop3": ["L002.25.03.F3"]
+  },
+  {
+    "label": "Fundamentals of Machine Learning",
+    "home": { "name": "Fundamentals of Machine Learning", "description": "Supervised learning, regression and classification, decision trees, model evaluation, clustering" },
+    "expectCodesTop3": ["M3.26.01.S1-01"]
+  },
+  {
+    "label": "Computer Architecture",
+    "home": { "name": "Computer Architecture", "description": "Instruction set architecture, pipelining, cache memory hierarchy, assembly language, processor datapath" },
+    "expectCodesTop3": ["L002.25.03.F4"]
+  },
+  {
+    "label": "Compiler Construction",
+    "home": { "name": "Compiler Construction", "description": "Lexical analysis, parsing, syntax trees, semantic analysis, code generation" },
+    "expectCodesTop3": ["L002.24.06.D2", "M1.26.01.S1-02"]
+  },
+  {
+    "label": "Computer Graphics",
+    "home": { "name": "Computer Graphics", "description": "Rasterisation, 2D and 3D transformations, shading and lighting, OpenGL rendering pipeline" },
+    "expectCodesTop3": ["L002.24.06.F1", "M028.25.03.C3-03"]
+  },
+  {
+    "label": "Computer Security",
+    "home": { "name": "Computer Security", "description": "Cryptography basics, authentication, access control, software vulnerabilities, network attacks" },
+    "expectCodesTop3": ["L002.24.06.S3-07"]
+  },
+  {
+    "label": "Natural Language Processing",
+    "home": { "name": "Natural Language Processing", "description": "Tokenisation, language models, part-of-speech tagging, word embeddings, text classification" },
+    "expectCodesTop3": ["M3.26.02.S1-03"]
+  },
+  {
+    "label": "Digital Logic Design",
+    "home": { "name": "Digital Logic Design", "description": "Boolean algebra, logic gates, combinational circuits, flip-flops, finite state machines" },
+    "expectCodesTop3": ["L002.26.02.F5", "L002.25.03.F5"]
+  },
+  {
+    "label": "Ancient Greek Philosophy (negative)",
+    "home": { "name": "Ancient Greek Philosophy", "description": "Presocratics, Plato, Aristotle, ethics, metaphysics" },
+    "expectCodesTop3": [],
+    "negative": true
+  },
+  {
+    "label": "Organic Chemistry (negative)",
+    "home": { "name": "Organic Chemistry", "description": "Hydrocarbons, functional groups, reaction mechanisms, stereochemistry, spectroscopy" },
+    "expectCodesTop3": [],
+    "negative": true
+  }
+]
