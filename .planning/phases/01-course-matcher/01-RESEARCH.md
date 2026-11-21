@@ -1,5 +1,7 @@
 # Phase 1: Course Matcher - Research
 
+> **Scope note:** Scope narrowed 2026-11-21 to AC only (D-17, `.planning/phases/01-course-matcher/01-CONTEXT.md`). Multi-faculty content below is reference for a later phase.
+
 **Researched:** 2026-11-21
 **Domain:** Next.js 16 + Drizzle/Postgres + Better Auth foundation; XLSX/XLSB catalogue import; Claude-based course matching (structured output, PDF/image extraction, prompt caching); LA draft export
 **Confidence:** MEDIUM-HIGH (HIGH on catalogue shapes, which were measured on the real files; MEDIUM on AC fișe collection, which cannot be automated; MEDIUM on Claude call details, which could not be smoke-tested because no API key is in this environment)

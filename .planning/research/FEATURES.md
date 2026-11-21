@@ -1,5 +1,7 @@
 # Feature Research
 
+> **Scope note:** Scope narrowed 2026-11-21 to AC only (D-17, `.planning/phases/01-course-matcher/01-CONTEXT.md`). Multi-faculty content below is reference for a later phase.
+
 **Domain:** English-first onboarding assistant for incoming Erasmus+ students at UPT (AI course matcher for Learning Agreements + paperwork checklist + cross-year/cross-faculty schedule builder)
 **Researched:** 2026-11-20 (today); demo Sunday 2026-11-22
 **Confidence:** MEDIUM-HIGH on features and on the paperwork facts. MEDIUM on data-source usability: the *current* catalogue and the *current* AC timetable sit behind SharePoint sign-in and could not be fetched from here.

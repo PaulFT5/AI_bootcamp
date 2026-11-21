@@ -1,7 +1,7 @@
 # API Coverage — Anthropic Claude API (Messages API via @anthropic-ai/sdk 1.12.0)
 
 > Full coverage by default. Opt-outs are explicit, reasoned decisions.
-> Phase 1 uses Claude for three single-shot structured calls: shortlist + rank/explain (runtime, `claude-sonnet-5-5`), syllabus upload extraction (runtime) and fișă topic extraction (offline, `claude-opus-5-5`). A second external service, Voyage AI embeddings, is opted out as a whole (last row).
+> Phase 1 uses Claude for three single-shot structured calls: rank/explain over the prompt-cached AC catalogue (runtime, `claude-sonnet-5-5`; one call per home course, D-17 scope), syllabus upload extraction (runtime) and fișă topic extraction (offline, `claude-opus-5-5`). A second external service, Voyage AI embeddings, is opted out as a whole (last row).
 
 | capability | decision | reason |
 |---|---|---|
@@ -23,4 +23,4 @@
 | Models API (list/retrieve) | OPT-OUT | model ids are fixed in env vars CLAUDE_MODEL / CLAUDE_INGEST_MODEL |
 | compaction / message threads / context editing | OPT-OUT | every call is single-turn; there is no conversation to compact |
 | fast mode (speed fast) | OPT-OUT | not needed for the demo; doubles cost; Sonnet latency is acceptable with per-course loading |
-| Voyage AI embeddings (voyage-4) + pgvector similarity | OPT-OUT | no Voyage key; research chose Plan B (Claude over cached catalogue); kept swappable behind the single shortlist() function |
+| Voyage AI embeddings (voyage-4) + pgvector similarity | OPT-OUT | no Voyage key; the 204-course AC catalogue (D-17) fits in one cached ranking call, so no shortlist stage is needed; one can go in front of rankForInput() if the catalogue grows |

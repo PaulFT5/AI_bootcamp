@@ -1,5 +1,7 @@
 # Architecture Research
 
+> **Scope note:** Scope narrowed 2026-11-21 to AC only (D-17, `.planning/phases/01-course-matcher/01-CONTEXT.md`). Multi-faculty content below is reference for a later phase.
+
 **Domain:** AI-assisted student-onboarding web app (semantic course matcher + rule-based checklist + timetable extraction/conflict detection/.ics) for incoming Erasmus+ students at UPT Timisoara
 **Researched:** 2026-11-20
 **Confidence:** HIGH on structural patterns; MEDIUM on UPT-specific data semantics (parity rule, room codes, catalogue format) - flagged inline and in "Open Verification Items"

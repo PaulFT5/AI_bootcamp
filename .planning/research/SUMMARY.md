@@ -1,5 +1,7 @@
 # Project Research Summary
 
+> **Scope note:** Scope narrowed 2026-11-21 to AC only (D-17, `.planning/phases/01-course-matcher/01-CONTEXT.md`). Multi-faculty content below is reference for a later phase.
+
 **Project:** Erasmus@UPT
 **Domain:** English-first AI onboarding assistant for incoming Erasmus+ students at UPT Timișoara (course matcher for Learning Agreements, paperwork checklist, cross-faculty schedule builder with .ics export)
 **Researched:** 2026-11-20

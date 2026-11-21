@@ -64,6 +64,10 @@ Recent decisions affecting current work:
 - [Roadmap]: PLAT-02 (account-wide restore) is mapped to Phase 3, the first phase where LA draft, checklist and schedule all exist. Phases 1-2 persist their own data per user
 - [Roadmap]: Campus Map is its own last phase, reuses Phase 3 building records, and is the first cut if time runs out
 - [Research]: Binding overrides in research/SUMMARY.md "Decisions Overriding Research" (local Docker DB, laptop demo, manual SharePoint catalogue download)
+- [Phase 1 D-17, 2026-11-21, user-approved]: Current scope is AC students and AC courses only. Import only the AC catalogue file (204 rows, 84 Bachelor + 120 Master); Matcher, catalogue and LA know only AC courses; no faculty filter; one coordinator (AC's). Other faculties (CT, ET, ARH, IH, MEC, RIA; ETC, Chemistry, MPT, Communication Sciences) moved to v2, not deleted; raw files stay in `data/raw/catalogue-2024-27/`. Supersedes D-15, narrows D-16
+- [Phase 1 D-12 clarified, 2026-11-21, user-approved]: An LA course's Winter/Summer placement always comes from its catalogue semester and cannot be changed by the user
+- [Phase 1 D-02]: MATCH-06 (English-taught-only filter) removed; REQUIREMENTS and ROADMAP updated 2026-11-21
+- [Phase 1 planning]: Matching is one Claude call over the prompt-cached AC catalogue (no Voyage key, no shortlist stage at 204 rows)
 
 ### Pending Todos
 
@@ -71,20 +75,20 @@ None yet.
 
 ### Blockers/Concerns
 
-- [Phase 1]: Current 2024-27 catalogue needs a manual SharePoint download by the user. The fallback is the 2021-22 `.xls` snapshot, which needs a parse spike first
-- [Phase 1]: Get the Voyage API key Friday. If it is missing by Saturday noon, use Plan B (Claude-only ranking)
+- [Phase 1]: AC fișe disciplinei need a manual browser download from the ac.upt.ro programme pages (SharePoint folders); without them success criterion 3 is waived (the app still works, "Compared by catalogue entry")
 - [Phase 1]: Confirm Claude model IDs, API key tier and spend cap on Friday
 - [Phase 3]: UPT odd/even parity convention and Week 1 anchor are unverified. This is a gate before .ics export
 
 ### Roadmap Evolution
 
 - Phase 1 edited: edited fields: goal, requirements, success_criteria, notes (2026-27 catalogue, AC syllabus matching, City Lines design)
+- 2026-11-21: Scope narrowed to AC only (D-17): Phase 1 goal, criteria 2/3/5 and notes; Phase 3 and 4 narrowed to AC timetables and buildings; "Deferred: other faculties" section added; MATCH-06 removed from the Phase 1 requirements line (D-02)
 
 ## Deferred Items
 
 | Category | Item | Status | Deferred At | Milestone |
 |----------|------|--------|-------------|-----------|
-| *(none)* | | | | |
+| Scope | Other faculties: CT, ET, ARH, IH, MEC, RIA catalogues (files downloaded, not imported) and ETC, Chemistry, MPT, Communication Sciences (files never found); their timetables, buildings, coordinators and fișe (MATCH-V2-03/04/05, SCHED-V2-03, MAP-V2-01) | Deferred (D-17) | 2026-11-21 | v2 |
 
 ## Session Continuity
 
