@@ -9,6 +9,10 @@
     "lint": "eslint",
     "db:up": "docker compose up -d --wait db",
     "db:push": "tsx --env-file=.env.local scripts/db-init.ts && drizzle-kit push --force && tsx --env-file=.env.local scripts/db-init.ts",
+    "catalogue:import": "tsx scripts/import-catalogue.ts",
+    "db:seed": "tsx --env-file=.env.local scripts/seed.ts",
+    "smoke:auth": "tsx --env-file=.env.local scripts/smoke-auth.ts",
+    "smoke:catalogue": "tsx --env-file=.env.local scripts/smoke-catalogue.ts",
     "test": "vitest run"
   },
   "dependencies": {
