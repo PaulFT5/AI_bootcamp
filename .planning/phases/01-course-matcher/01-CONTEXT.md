@@ -6,7 +6,7 @@
 <domain>
 ## Phase Boundary
 
-A signed-in student hosted by the Faculty of Automation and Computers (AC) turns their home-university courses (typed, or from a one-course syllabus PDF/screenshot) into ranked, explained matches from the AC courses of the 2026-27 Erasmus catalogue (scope: D-17). Courses with a collected UPT fișa disciplinei are compared syllabus to syllabus; the others are compared by catalogue entry. The student collects matches in a Learning Agreement draft that exports as CSV and as a printable view. Also in scope: the app foundation (Next.js, Docker Postgres+pgvector, Better Auth, Claude client) and a filterable AC catalogue browser. Other faculties are deferred (see `<deferred>`). The matching flow, data source, design ("City Lines") and fallbacks are already fixed in ROADMAP.md Phase 1 "Notes for planning" and are not repeated here.
+A student hosted by the Faculty of Automation and Computers (AC), entering as the mock test student (D-18), turns their home-university courses (typed, or from a one-course syllabus PDF/screenshot) into ranked, explained matches from the AC courses of the 2026-27 Erasmus catalogue (scope: D-17). Courses with a collected UPT fișa disciplinei are compared syllabus to syllabus; the others are compared by catalogue entry. The student collects matches in a Learning Agreement draft that exports as CSV and as a printable view. Also in scope: the app foundation (Next.js, Docker Postgres+pgvector, a single mock student account instead of real auth (D-18), Claude client) and a filterable AC catalogue browser. Other faculties are deferred (see `<deferred>`). The matching flow, data source, design ("City Lines") and fallbacks are already fixed in ROADMAP.md Phase 1 "Notes for planning" and are not repeated here.
 
 </domain>
 
@@ -30,7 +30,9 @@ A signed-in student hosted by the Faculty of Automation and Computers (AC) turns
 - **D-07:** Only the course name is required. Description/topics, ECTS and study year are optional, with a hint that a description improves matches. Upload (MATCH-04) pre-fills the same form.
 - **D-08:** Matching runs per course, as soon as the course is added or edited. Each course loads on its own; one slow call does not block the others. Changing the semester filter re-runs matching (cache by normalised input hash + filter).
 - **D-09:** Home courses and their last match results are saved to the user's account, so after logging back in the Matcher looks the same. The user can re-run matching on request.
-- **D-10:** Sign-in comes first: the whole app (Matcher, catalogue, LA) requires an account. No anonymous mode and no anonymous-to-account migration. (The roadmap's anonymous-cookie fallback remains only as the emergency fallback if Better Auth exceeds its 45-min time box.)
+- **D-10:** ~~Sign-in comes first: the whole app (Matcher, catalogue, LA) requires an account. No anonymous mode and no anonymous-to-account migration. (The roadmap's anonymous-cookie fallback remains only as the emergency fallback if Better Auth exceeds its 45-min time box.)~~ **Superseded by D-18.**
+- **D-18 (2026-11-21, user-approved):** No real login. Better Auth is dropped (no packages, no session/account/verification tables, no /api/auth route, no sign-in/sign-up pages, no proxy.ts gate, no BETTER_AUTH_* env vars). One mock student row in a minimal `user` table (id `mock-student`, name, email, timestamps), seeded idempotently. `src/lib/session.ts` keeps `requireUser()` and returns the mock user, so every user-scoped table still keys on `user.id` and all saved data persists for the mock account. `/` is a landing page whose "Log in" button (no form) links to `/matcher`. PLAT-01 now means "enter as the mock student, data persists"; real accounts are v2.
+- **D-19 (2026-11-21, user-approved):** No AI provider in Phase 1 (no paid API key). Matching is deterministic name similarity in code over the AC catalogue, with template reasons; every match says "Compared by catalogue entry". MATCH-04 (syllabus PDF/screenshot upload) and MATCH-10 (fișe collection + topic extraction) are deferred to v2; SC3 is recorded as waived. No `@anthropic-ai/sdk`, no `ANTHROPIC_API_KEY`, no `src/llm/`. An LLM rerank can be added later behind an optional key without changing the match contract.
 
 ### Learning Agreement draft
 - **D-11:** Each LA row may link to the home course it replaces. Rows added from the Matcher are linked automatically. Rows added from the catalogue show "No home course" and can be linked later. Several UPT courses may link to one home course.
@@ -83,7 +85,7 @@ A signed-in student hosted by the Faculty of Automation and Computers (AC) turns
 - `data/raw/catalogue-2024-27/Course_catalogue_Automatics and Computing_2026-2027_ERASMUS.xlsx` — the only file imported (D-17). Bachelor and Master sheets only; skip `Lista`. The other six files in the folder (CT `.xlsb`, ET/Power Engineering, ARH, IH, MEC, RIA) stay untouched for later.
 
 ### Design
-- `.impeccable/mocks/prototype/index.html` — working reference prototype (LA panel, 30-ECTS meter messages, CSV export, home-course linking).
+- `prototype/index.html` — working reference prototype (LA panel, 30-ECTS meter messages, CSV export, home-course linking).
 - `.impeccable/mocks/colors/`, `.impeccable/mocks/decision/` — shape brief and design decision.
 - `PRODUCT.md` — product context for impeccable.
 
@@ -93,7 +95,7 @@ A signed-in student hosted by the Faculty of Automation and Computers (AC) turns
 ## Existing Code Insights
 
 ### Reusable Assets
-- No application code yet (greenfield). The prototype `.impeccable/mocks/prototype/index.html` is the UI reference: its LA meter logic (under / at 30 / over messages) and CSV export are the behaviour to reproduce.
+- No application code yet (greenfield). The prototype `prototype/index.html` is the UI reference: its LA meter logic (under / at 30 / over messages) and CSV export are the behaviour to reproduce.
 
 ### Established Patterns
 - Stack fixed in `.claude/CLAUDE.md`: Next.js 16 App Router, Drizzle + pg, Better Auth, `@anthropic-ai/sdk` `messages.parse` + `zodOutputFormat`, shadcn/Tailwind 4.

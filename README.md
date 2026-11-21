@@ -6,6 +6,16 @@ English-first web assistant for incoming Erasmus+ students at Politehnica Univer
 
 Read first: `PRODUCT.md`, `.planning/PROJECT.md`, `.planning/REQUIREMENTS.md`, `.planning/ROADMAP.md`.
 
+## Start here: UI prototype
+
+The shared UI skeleton for web and the mobile app is **`prototype/index.html`**. Open it in a browser (double-click); nothing to install. It is a clickable mock with sample data:
+
+- Left sidebar: Home page, Courses (course matcher, with Catalogue), Schedule, Resources, First week; profile menu and notifications at the bottom. On phones it becomes a top bar.
+- Courses: home courses, ranked UPT matches, syllabus drawer ("Fit with your course"), Learning Agreement draft with CSV export and "Print agreement".
+- Settings: name and home university, shown on the printed agreement.
+
+Colours and type are documented in `COLOR-GUIDE.md`. The folders `.impeccable/mocks/colors/` and `.impeccable/mocks/decision/` are archived design explorations, not the current UI.
+
 ## Setup
 
 1. Install Git, Node 24, and Docker Desktop (keep it running; the database is Postgres + pgvector in Docker).

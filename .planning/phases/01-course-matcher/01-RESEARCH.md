@@ -592,7 +592,7 @@ All five questions are resolved (2026-11-21). Each item names where the resoluti
 - Admin/legal content must come from official UPT sources (coordinator contacts: official pages only).
 - No local embedding models, no LangChain/LlamaIndex, no pdf-parse/pdfjs for catalogue/timetable extraction, no standalone vector DB.
 - Business logic in `domain/` + `services/` behind thin route handlers (mobile reuse).
-- GSD enforcement: all file edits through GSD workflow commands. Project skills present: `impeccable` (frontend design) and `karpathy-guidelines`; frontend tasks should follow the "City Lines" design (`.impeccable/mocks/prototype/index.html`, `COLOR-GUIDE.md`).
+- GSD enforcement: all file edits through GSD workflow commands. Project skills present: `impeccable` (frontend design) and `karpathy-guidelines`; frontend tasks should follow the "City Lines" design (`prototype/index.html`, `COLOR-GUIDE.md`).
 - Demo-ready Sunday 2026-11-22: favour fewest moving parts; Better Auth hard 45-min time box with anonymous-cookie fallback.
 
 ## Sources
