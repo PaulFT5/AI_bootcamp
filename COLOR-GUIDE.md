@@ -47,12 +47,19 @@ Use `#0a6f7e` for the accent, not the mock's `#0b7a8a`: white text on it has mor
 
 Each faculty has one fixed colour. The same colour means the same faculty on every screen: matches, Learning Agreement, schedule, map.
 
+**Current scope: Automation and Computers (AC) only.** The app covers AC students and AC courses for now, so AC is the only faculty colour in use.
+
 | Faculty | Hex |
 |---|---|
 | AC: Automation and Computers | `#d4631f` |
+
+**Reserved for later** (when other faculties are added; do not reuse these hues for anything else):
+
+| Faculty | Hex |
+|---|---|
 | CT: Civil Engineering | `#2b62b8` |
 | MEC: Mechanical Engineering | `#2f7d47` |
-| RIA: Mechatronics and Robotics | `#7a4fc9` |
+| RIA: Robotics, Artificial Intelligence and Autonomous Systems | `#7a4fc9` |
 | ET: Electrical and Power Engineering | `#c23b5a` |
 | ARH: Architecture and Urbanism | `#8a6a08` |
 | IH: *(not defined yet)* | — |
@@ -83,7 +90,7 @@ Use faculty colours for dots, left borders and timetable blocks, not small text 
 
 ## Open items
 
-- **IH has no faculty colour.** Its 2026-27 catalogue is in the repo, but the prototype defines only six faculties.
+- **IH has no faculty colour** (only matters once faculties beyond AC are added).
 - **Dark-theme buttons:** mock 6 puts white on `#2b95a5`, which fails contrast (3.53). Use `#2fa3b3` with `#06181c` text (6.07), as its active nav already does.
-- **Faculty colours on dark panels:** CT blue (2.66) and RIA purple (2.84) fail even 3:1 for graphics. Each faculty needs a lighter dark-mode version.
+- **Faculty colours on dark panels:** AC orange is 4.20:1 on the dark panel, which is fine for lines and dots. The reserved CT blue (2.66) and RIA purple (2.84) fail even 3:1, so they need lighter dark-mode versions before those faculties are added.
 - **Dark mock 6 is built on the teal shell, not charcoal.** If the app ships dark mode, consider a charcoal-based dark version so both themes read as one family.
