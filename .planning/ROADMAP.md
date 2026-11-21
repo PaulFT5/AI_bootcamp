@@ -34,11 +34,22 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 6 plans
 
 Plans:
+**Wave 1**
 - [ ] 01-01-PLAN.md — Walking skeleton: Next 16 + Docker Postgres/pgvector + full schema + Better Auth sign-up/sign-in, City Lines shell (wave 1)
+
+**Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 01-02-PLAN.md — Catalogue: import the AC file (204 rows), seed with the AC coordinator (studies-2026-2027 page), /catalogue browse + filters (semester, ECTS, syllabus, search), D-17 scope line (wave 2)
+
+**Wave 3** *(blocked on Wave 2 completion)*
 - [ ] 01-03-PLAN.md — Matcher engine: one Claude call over the prompt-cached AC catalogue, facts from DB, /api/matches, minimal Matcher, AC golden-set gate (wave 3)
+
+**Wave 4** *(blocked on Wave 3 completion)*
 - [ ] 01-04-PLAN.md — Full Matcher UI (saved courses, per-course loading, semester filter, show more) + syllabus PDF/screenshot upload pre-fill (wave 4)
+
+**Wave 5** *(blocked on Wave 4 completion)*
 - [ ] 01-05-PLAN.md — Learning Agreement draft: panel with Winter/Summer meters (semester locked to the catalogue), full draft, CSV export, printable view (wave 5)
+
+**Wave 6** *(blocked on Wave 5 completion)*
 - [ ] 01-06-PLAN.md — AC fișe (main path for SC3): pair by code, extract topics offline, seed, syllabus view, golden AC case, SC3 met-or-waived sign-off (wave 6)
 **UI hint**: yes
 
