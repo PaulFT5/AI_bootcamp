@@ -31,7 +31,15 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. User uploads a one-course syllabus PDF or screenshot, reviews and edits the pre-filled name, description, ECTS and topics, then gets matches for it
   5. User browses the full 2026-27 Erasmus catalogue (full-time Bachelor and Master only, no distance learning), labelled with its source year, and filters it by faculty, semester, ECTS, language and "has UPT syllabus". "English-taught only" is on by default and shows how many courses it hides. AC courses with a syllabus open a syllabus view with a link to the official PDF
   6. From the Matcher, the student adds courses to a Learning Agreement draft panel with a running ECTS total per semester and opens the full draft from that panel; the full draft exports as CSV and as a printable view, and is unchanged after logging out and back in
-**Plans**: TBD
+**Plans:** 6 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Walking skeleton: Next 16 + Docker Postgres/pgvector + full schema + Better Auth sign-up/sign-in, City Lines shell (wave 1)
+- [ ] 01-02-PLAN.md — Catalogue: import the 7 files (1327 rows), seed with coordinators, /catalogue browse + filters, D-02 doc edits, IH colour (wave 2)
+- [ ] 01-03-PLAN.md — Matcher engine: Claude Plan B shortlist + rank, facts from DB, /api/matches, minimal Matcher, golden-set gate (wave 3)
+- [ ] 01-04-PLAN.md — Full Matcher UI (saved courses, per-course loading, semester filter, show more) + syllabus PDF/screenshot upload pre-fill (wave 4)
+- [ ] 01-06-PLAN.md — AC fișe: pair by code, extract topics offline, seed, syllabus view, golden AC case (wave 4, parallel with 01-04)
+- [ ] 01-05-PLAN.md — Learning Agreement draft: panel with Winter/Summer meters, full draft, CSV export, printable view (wave 5)
 **UI hint**: yes
 
 **Notes for planning:**
