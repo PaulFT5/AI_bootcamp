@@ -26,17 +26,36 @@ svg.i{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke
 * {scrollbar-width:thin;scrollbar-color:#c4c7c5 transparent}
 
 /* shell */
-.top{background:var(--shell);color:var(--shell-ink);position:sticky;top:0;z-index:20}
-.top-in{display:flex;align-items:center;gap:28px;height:60px;padding:0 24px;max-width:1440px;margin:0 auto}
-.brand{font-weight:800;font-size:19px;letter-spacing:-.01em;white-space:nowrap}
+.app{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100vh}
+.side{background:var(--shell);color:var(--shell-ink);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:22px 12px 12px;z-index:20}
+.brand{font-weight:800;font-size:19px;letter-spacing:-.01em;white-space:nowrap;padding:0 10px 24px}
 .brand span{color:#5fc3d0}
-.nav{display:flex;gap:4px;overflow-x:auto}
-.nav button{background:none;border:0;padding:8px 12px;border-radius:6px;color:var(--shell-sub);font-weight:600;white-space:nowrap;transition:background .2s var(--ease),color .2s}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav button{display:flex;align-items:center;gap:11px;width:100%;text-align:left;background:none;border:0;padding:9px 10px;border-radius:6px;color:var(--shell-sub);font-weight:600;white-space:nowrap;transition:background .2s var(--ease),color .2s}
 .nav button:hover{color:#fff;background:#2d3238}
 .nav button[aria-current="page"]{background:var(--accent);color:#fff}
-.nav button .soon{font-size:11px;font-weight:600;opacity:.75;margin-left:4px}
-.who{margin-left:auto;font-size:13px;color:var(--shell-sub);white-space:nowrap}
-.data-note{background:#2a2f35;color:var(--shell-sub);font-size:12.5px;text-align:center;padding:5px 12px}
+.nav button.sub{padding:7px 10px 7px 39px;font-size:14px}
+.nav button .soon{font-size:11px;font-weight:600;opacity:.75;margin-left:auto}
+.side :focus-visible{outline-color:#5fc3d0}
+.side-foot{margin-top:auto;border-top:1px solid #30363d;padding-top:12px;display:flex;align-items:center;gap:4px}
+.acct{flex:1;min-width:0;position:relative}
+.acct-btn{display:flex;align-items:center;gap:10px;width:100%;background:none;border:0;border-radius:8px;padding:6px;color:var(--shell-ink);text-align:left;transition:background .2s}
+.acct-btn:hover,.acct-btn[aria-expanded="true"]{background:#2d3238}
+.avatar{width:34px;height:34px;border-radius:50%;background:#2d3238;border:1.5px solid #3a4047;display:flex;align-items:center;justify-content:center;flex:none}
+.acct-btn[aria-expanded="true"] .avatar{border-color:#5fc3d0}
+.acct-txt{min-width:0;display:flex;flex-direction:column;line-height:1.25}
+.acct-txt b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acct-txt small{font-size:12px;color:var(--shell-sub)}
+.bell{width:40px;height:40px;border-radius:8px;border:0;background:none;color:var(--shell-sub);display:flex;align-items:center;justify-content:center;flex:none;padding:0;transition:background .2s,color .2s}
+.bell:hover{background:#2d3238;color:#fff}
+.acct-menu{position:absolute;left:0;bottom:calc(100% + 8px);min-width:220px;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 8px 24px #0002;padding:6px}
+.acct-menu button{display:flex;gap:10px;align-items:center;width:100%;border:0;background:none;padding:9px 10px;border-radius:6px;font-weight:600;text-align:left}
+.acct-menu button:hover{background:var(--chip)}
+.acct-menu :focus-visible{outline-color:var(--accent);outline-offset:-2px}
+.settings{max-width:480px}
+.settings .pane{margin-top:16px}
+.settings .btn{margin-top:16px}
+.data-note{background:#e9e9e6;color:var(--sub);font-size:12.5px;text-align:center;padding:6px 12px}
 .data-note .short{display:none}
 @media (max-width:760px){.data-note .short{display:inline}}
 
@@ -44,9 +63,9 @@ main{max-width:1440px;margin:0 auto;padding:20px 24px 48px}
 .view{display:none}.view.on{display:block}
 
 /* matcher layout */
-.cols{display:grid;grid-template-columns:290px minmax(0,1fr) 340px;gap:20px;align-items:start}
+.cols{display:grid;grid-template-columns:260px minmax(0,1fr) 300px;gap:20px;align-items:start}
 .pane{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px}
-.sticky{position:sticky;top:96px}
+.sticky{position:sticky;top:20px}
 h2{font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);margin:0 0 12px;font-weight:700}
 h1{font-size:26px;font-weight:800;letter-spacing:-.02em;margin:2px 0 4px;text-wrap:balance}
 .muted{color:var(--sub);font-size:13.5px}
@@ -147,17 +166,25 @@ td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
 tr:last-child td{border-bottom:0}
 tbody tr:hover{background:#fafaf9}
 
-.placeholder{max-width:560px;margin:60px auto;text-align:center}
-.placeholder h1{margin-bottom:8px}
 
 /* mobile tabs */
 .mtabs{display:none}
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--shell);color:#fff;padding:10px 16px;border-radius:var(--r);font-size:14px;opacity:0;transition:opacity .3s,transform .4s var(--ease);pointer-events:none;z-index:50;box-shadow:0 6px 20px #0003}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
-@media (max-width:1100px){.cols{grid-template-columns:260px minmax(0,1fr)}.la-col{grid-column:1 / -1}.sticky{position:static}}
+@media (max-width:1400px){.cols{grid-template-columns:260px minmax(0,1fr)}.la-col{grid-column:1 / -1}.sticky{position:static}}
+@media (max-width:960px){.cols{grid-template-columns:1fr}}
 @media (max-width:760px){
-  .top-in{gap:14px;padding:0 16px}.who{display:none}.data-note .long{display:none}.brand{font-size:17px}
+  .app{display:block}
+  .side{flex-direction:row;flex-wrap:wrap;align-items:center;height:auto;padding:6px 8px 6px 16px;gap:2px 10px}
+  .brand{font-size:17px;padding:0}
+  .nav{order:3;flex-direction:row;flex-basis:100%;min-width:0;overflow-x:auto;margin-left:-8px;scrollbar-width:none}
+  .nav button{width:auto;padding:8px 10px}.nav button.sub{padding:8px 10px;font-size:15px}
+  .nav button svg.i,.nav button .soon{display:none}
+  .side-foot{margin:0 0 0 auto;border:0;padding:0;flex:none}
+  .acct{flex:none}.acct-btn{padding:4px}.acct-txt{display:none}
+  .acct-menu{left:auto;right:0;bottom:auto;top:calc(100% + 8px)}
+  .data-note .long{display:none}
   main{padding:14px 16px 96px}
   .cols{grid-template-columns:1fr}
   .cols>section{display:none}.cols>section.mon{display:block}
@@ -174,7 +201,7 @@ tbody tr:hover{background:#fafaf9}
 .print-only{display:none}
 @media print{
   body{background:#fff}
-  .top,.data-note,main,.mtabs,.toast{display:none!important}
+  .app,.mtabs,.toast{display:none!important}
   .print-only{display:block;padding:24px;font-size:12pt}
   .print-only h1{font-size:20pt}
   .print-only table{min-width:0}
@@ -209,32 +236,53 @@ tbody tr:hover{background:#fafaf9}
 .drawer header h1{font-size:21px;margin:2px 0}
 .drawer .close{margin-left:auto;border:0;background:none;padding:6px;border-radius:6px;color:var(--sub)}
 .drawer .close:hover{background:var(--chip);color:var(--ink)}
-.drawer .body{padding:18px 20px;overflow:auto;flex:1}
-.drawer .body h3{font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);margin:20px 0 8px}
-.drawer .body h3:first-child{margin-top:0}
-.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:14px}
+.drawer .body{padding:20px;overflow:auto;flex:1}
+.drawer .body h2{text-transform:none;letter-spacing:-.01em;color:var(--ink);font-size:17px;font-weight:800;margin:0}
+.fit-course{margin:2px 0 0;font-size:14px;color:var(--sub)}
+.fit-course b{color:var(--ink);font-weight:700}
+.fit-sum{margin:14px 0 0;font-size:15.5px;font-weight:700;line-height:1.4;display:flex;flex-wrap:wrap;gap:2px 8px}
+.fit-sum .sep{color:var(--faint);font-weight:400}
+.fit-sum .flag{color:#7a5200}
+.tg{margin-top:18px}
+.tg+.tg{margin-top:14px}
+.drawer .tg h3{font-size:13px;font-weight:700;color:var(--sub);margin:0 0 6px}
+.tg .topics{margin-top:0}
+.topics .only{background:var(--chip);border-color:var(--chip);color:var(--ink)}
+.syl{margin-top:28px;background:var(--ground);border-radius:var(--r);padding:14px 16px}
+.drawer .syl h2{font-size:14px;font-weight:700;margin-bottom:10px}
+.syl h2 span{font-weight:500;color:var(--sub)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:13.5px}
 .kv dt{color:var(--sub)}.kv dd{margin:0;font-weight:600}
-.drawer ol{margin:0;padding-left:20px;font-size:14px}.drawer ol li{margin:3px 0}
 .drawer footer{padding:14px 20px;border-top:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap}
 .proto-note{font-size:12.5px;color:var(--faint);margin-top:14px}
 
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="top-in">
-    <div class="brand">Erasmus<span>@</span>UPT</div>
-    <nav class="nav" aria-label="Main">
-      <button data-view="matcher" aria-current="page">Matcher</button>
-      <button data-view="catalogue">Catalogue</button>
-      <button data-view="checklist">Checklist<span class="soon">soon</span></button>
-      <button data-view="schedule">Schedule<span class="soon">soon</span></button>
-      <button data-view="map">Map<span class="soon">soon</span></button>
-    </nav>
-    <div class="who">Signed in as Demo student</div>
+<div class="app">
+<header class="side">
+  <div class="brand">Erasmus<span>@</span>UPT</div>
+  <nav class="nav" aria-label="Main">
+    <button data-view="home"><svg class="i" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Home page<span class="soon">soon</span></button>
+    <button data-view="matcher" aria-current="page"><svg class="i" viewBox="0 0 24 24"><path d="M22 9 12 4 2 9l10 5 10-5z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5M22 9v6"/></svg>Courses</button>
+    <button data-view="catalogue" class="sub">Catalogue</button>
+    <button data-view="schedule"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Schedule<span class="soon">soon</span></button>
+    <button data-view="resources"><svg class="i" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg>Resources<span class="soon">soon</span></button>
+    <button data-view="firstweek"><svg class="i" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>First week<span class="soon">soon</span></button>
+  </nav>
+  <div class="side-foot">
+    <div class="acct">
+      <button class="acct-btn" data-acct aria-label="Account menu" aria-expanded="false" aria-controls="acctMenu"><span class="avatar"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><span class="acct-txt"><b id="acctName">Demo student</b><small>Profile &amp; settings</small></span></button>
+      <div class="acct-menu" id="acctMenu" hidden>
+        <button data-view="settings"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Settings</button>
+        <button data-signout><svg class="i" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Sign out</button>
+      </div>
+    </div>
+    <button class="bell" data-notif aria-label="Notifications"><svg class="i" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></button>
   </div>
-  <div class="data-note"><span class="long">Prototype with sample data. Real 2026-27 course names and codes; topics, syllabus details, reasons and contacts are invented.</span><span class="short">Sample data · Catalogue 2026-27</span></div>
 </header>
+<div class="content">
+<div class="data-note"><span class="long">Prototype with sample data. Real 2026-27 course names and codes; topics, syllabus details, reasons and contacts are invented.</span><span class="short">Sample data · Catalogue 2026-27</span></div>
 
 <main>
   <!-- MATCHER -->
@@ -302,14 +350,28 @@ tbody tr:hover{background:#fafaf9}
     </table></div>
     <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
       <button class="btn btn-primary" data-act="csv"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Export CSV</button>
-      <button class="btn btn-quiet" data-act="print"><svg class="i" viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4v-7h16v7h-2M8 14h8v7H8z"/></svg>Printable view</button>
+      <button class="btn btn-quiet" data-act="print"><svg class="i" viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4v-7h16v7h-2M8 14h8v7H8z"/></svg>Print agreement</button>
     </div>
   </div>
 
-  <div class="view" id="v-checklist"><div class="placeholder"><h1>Arrival checklist</h1><p class="muted">Coming in phase 2: a personal pre-arrival and Week 1 checklist, with the official UPT source for every step.</p></div></div>
-  <div class="view" id="v-schedule"><div class="placeholder"><h1>Schedule</h1><p class="muted">Coming in phase 3: one weekly timetable across faculties, with odd and even weeks and clash checks. Lessons will use the same faculty colours.</p></div></div>
-  <div class="view" id="v-map"><div class="placeholder"><h1>Campus map</h1><p class="muted">Coming in phase 4: faculty buildings, dorms and services, with directions.</p></div></div>
+  <!-- SETTINGS -->
+  <div class="view" id="v-settings"><div class="settings">
+    <h1>Settings</h1>
+    <p class="muted" style="margin:0">Your name and home university appear at the top of the printed agreement.</p>
+    <form class="pane" id="setForm">
+      <label for="sName" style="margin-top:0">Name</label><input type="text" id="sName" required>
+      <label for="sUni">Home university</label><input type="text" id="sUni" placeholder="e.g. University of Porto">
+      <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+  </div></div>
+
+  <div class="view" id="v-home"><h1>Home page</h1></div>
+  <div class="view" id="v-schedule"><h1>Schedule</h1></div>
+  <div class="view" id="v-resources"><h1>Resources</h1></div>
+  <div class="view" id="v-firstweek"><h1>First week</h1></div>
 </main>
+</div>
+</div>
 
 <nav class="mtabs" aria-label="Matcher sections">
   <button data-m="col-courses" aria-pressed="true"><svg class="i" viewBox="0 0 24 24"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM19 19v3"/></svg>Courses</button>
@@ -389,6 +451,7 @@ const store = {
 };
 let home = store.get("home",HOME_SEED);
 let la = store.get("la",[]);
+let profile = store.get("profile",{name:"Demo student",uni:""});
 let active = home[0]?.id || null;
 let laSem = 1;
 const matchCache = {};
@@ -478,17 +541,35 @@ let lastFocus=null;
 function openSyl(id){
   const c=byId[id];if(!c?.syl)return;
   const h=home.find(x=>x.id===active);
-  const cov = h ? coverage(h.topics.split(/[,;\n]/).map(s=>s.trim()).filter(Boolean),c) : null;
   const inLa = la.some(x=>x.id===id);
+  const sep = `<span class="sep" aria-hidden="true">·</span>`;
+  const lang = `<span${c.lang!=="EN"?' class="flag"':""}>Taught in ${LANG[c.lang]}</span>`;
+  const grp = (label,items,cls,icon="")=>items.length?`<div class="tg"><h3>${label} · ${items.length}</h3><div class="topics">${items.map(t=>`<span class="${cls}">${icon}${esc(t)}</span>`).join("")}</div></div>`:"";
+  let fit;
+  if(h){
+    const hT = h.topics.split(/[,;\n]/).map(s=>s.trim()).filter(Boolean);
+    const cov = coverage(hT,c);
+    const hTok = new Set(hT.flatMap(toks));
+    const onlyUpt = c.topics.filter(t=>!toks(t).some(w=>hTok.has(w)));
+    const d = c.ects-h.ects;
+    fit = `<h2 id="fitH">Fit with your course</h2>
+      <p class="fit-course"><b>${esc(h.name)}</b> · ${h.ects} ECTS</p>
+      <p class="fit-sum"><span>Covers ${cov.hit.length} of your ${hT.length} topics</span>${sep}<span${d<0?' class="flag"':""}>${c.ects} ECTS (${d?`${Math.abs(d)} ${d<0?"fewer":"more"}`:"same as yours"})</span>${sep}${lang}</p>
+      ${grp("Covered",cov.hit,"hit",ICON.check)}${grp("Not covered at UPT",cov.miss,"miss")}${grp("Only at UPT",onlyUpt,"only")}`;
+  } else {
+    fit = `<h2 id="fitH">Topics in this syllabus</h2>
+      <p class="fit-sum"><span>${c.ects} ECTS</span>${sep}${lang}</p>
+      <div class="tg"><div class="topics">${c.topics.map(t=>`<span class="only">${esc(t)}</span>`).join("")}</div></div>`;
+  }
   $("#drawer").innerHTML = `
     <header>${lineDot(c.fac)}<div><div class="code">${c.id}</div><h1 id="dTitle">${esc(c.name)}</h1><div class="muted">${esc(FAC[c.fac].name)} · ${c.ects} ECTS · ${when(c)}</div></div>
       <button class="close" data-close aria-label="Close syllabus"><svg class="i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></header>
     <div class="body">
-      <h3>Fișa disciplinei</h3>
-      <dl class="kv"><dt>Academic year</dt><dd>2026-27</dd><dt>Document language</dt><dd>${LANG[c.syl.lang]}${c.syl.lang==="RO"?" (topics below are translated)":""}</dd><dt>Teaching</dt><dd>${esc(c.syl.hours)}</dd><dt>Assessment</dt><dd>${esc(c.syl.assess)}</dd><dt>Course taught in</dt><dd>${LANG[c.lang]}</dd></dl>
-      <h3>Topics from the syllabus</h3>
-      <ol>${c.topics.map(t=>`<li>${esc(t)}</li>`).join("")}</ol>
-      ${cov&&cov.hit.length?`<h3>Compared with ${esc(h.name)}</h3><div class="topics">${cov.hit.map(t=>`<span class="hit">${ICON.check}${esc(t)}</span>`).join("")}${cov.miss.map(t=>`<span class="miss">Not covered: ${esc(t)}</span>`).join("")}</div>`:""}
+      <section aria-labelledby="fitH">${fit}</section>
+      <section class="syl" aria-labelledby="sylH">
+        <h2 id="sylH">Official syllabus <span lang="ro">(fișa disciplinei)</span></h2>
+        <dl class="kv"><dt>Teaching</dt><dd>${esc(c.syl.hours)}</dd><dt>Assessment</dt><dd>${esc(c.syl.assess)}</dd><dt>Document language</dt><dd>${LANG[c.syl.lang]}${c.syl.lang==="RO"?" (topics above are translated)":""}</dd></dl>
+      </section>
       <p class="proto-note">Prototype: syllabus details are sample data. In the app, topics are extracted from the official PDF and the button opens it on upt.ro.</p>
     </div>
     <footer>
@@ -570,7 +651,7 @@ function csv(){
 }
 function printView(){
   const {t}=laTotals();
-  $("#printView").innerHTML=`<h1>Learning Agreement draft · Erasmus@UPT</h1><p>Draft only. Not signed. Final approval by the faculty Erasmus coordinator. Erasmus Course Catalogue 2026-27.</p>
+  $("#printView").innerHTML=`<h1>Learning Agreement draft · Erasmus@UPT</h1><p><b>${esc(profile.name)}</b>${profile.uni?" · "+esc(profile.uni):""} · ${new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})}</p><p>Draft only. Not signed. Final approval by the faculty Erasmus coordinator. Erasmus Course Catalogue 2026-27.</p>
   <table><thead><tr><th>Semester</th><th>Code</th><th>Course</th><th>Faculty</th><th>ECTS</th></tr></thead><tbody>${la.map(x=>{const c=byId[x.id];return `<tr><td>${c.sem===1?"Winter":"Summer"}</td><td>${c.id}</td><td>${esc(c.name)}</td><td>${esc(FAC[c.fac].name)}</td><td>${c.ects}</td></tr>`}).join("")}</tbody></table>
   <p><b>Winter:</b> ${t[1]} ECTS · <b>Summer:</b> ${t[2]} ECTS</p>`;
   window.print();
@@ -586,10 +667,23 @@ function showMobile(id){
   document.querySelectorAll(".mtabs button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===id));
 }
 
+function setAcct(open){$("#acctMenu").hidden=!open;$("[data-acct]").setAttribute("aria-expanded",open)}
+function renderProfile(){$("#acctName").textContent=profile.name;$("#sName").value=profile.name;$("#sUni").value=profile.uni}
+$("#setForm").onsubmit=e=>{
+  e.preventDefault();
+  profile={name:$("#sName").value.trim()||"Demo student",uni:$("#sUni").value.trim()};
+  store.set("profile",profile);renderProfile();toast("Settings saved");
+};
+
 document.addEventListener("click",e=>{
+  const t=e.target.closest("button");
+  if(!(t&&"acct" in t.dataset))setAcct(false);
   if(e.target.id==="scrim"){closeSyl();return}
-  const t=e.target.closest("button");if(!t)return;
-  if(t.dataset.view)showView(t.dataset.view);
+  if(!t)return;
+  if("acct" in t.dataset)setAcct($("#acctMenu").hidden);
+  else if("signout" in t.dataset)toast("Prototype: sign out is not wired up");
+  else if("notif" in t.dataset)toast("No notifications yet");
+  else if(t.dataset.view)showView(t.dataset.view);
   else if(t.dataset.go)showView(t.dataset.go);
   else if(t.dataset.h){runMatch(t.dataset.h);showMobile("col-matches")}
   else if(t.dataset.syl)openSyl(t.dataset.syl);
@@ -603,7 +697,11 @@ document.addEventListener("click",e=>{
   else if(t.dataset.m)showMobile(t.dataset.m);
   else if(t.dataset.sort){sortDir=sortKey===t.dataset.sort?-sortDir:1;sortKey=t.dataset.sort;renderCat()}
 });
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#drawer").classList.contains("on"))closeSyl()});
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Escape")return;
+  if(!$("#acctMenu").hidden){setAcct(false);$("[data-acct]").focus()}
+  else if($("#drawer").classList.contains("on"))closeSyl();
+});
 $("#btnAdd").onclick=()=>{$("#extractNote").classList.remove("on");$("#addForm").reset();$("#addForm").dataset.source="typed";$("#addForm").classList.add("on");$("#fName").focus()};
 $("#btnCancel").onclick=()=>$("#addForm").classList.remove("on");
 $("#addForm").onsubmit=e=>{
@@ -626,7 +724,7 @@ const facSel=$("#cFac");Object.entries(FAC).forEach(([k,v])=>facSel.insertAdjace
 ["#cFac","#cSem","#cEcts","#cEn","#cSyl"].forEach(s=>$(s).onchange=renderCat);$("#cQ").oninput=renderCat;
 
 if(active)matchCache[active]=match(home.find(h=>h.id===active));
-renderAll();
+renderAll();renderProfile();
 </script>
 
 </body>
