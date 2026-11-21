@@ -17,6 +17,7 @@ A signed-in student turns their home-university courses (typed, or from a one-co
 - **D-01:** Every course in the 2026-27 Erasmus catalogue files counts as open to Erasmus students in English, whatever its language column says (user: "those are english even if not stated as they are proposed to erasmus projects"). Do not treat Romanian/French/German/blank rows as unavailable. — **Reversibility:** costly — reintroducing a language filter touches import, schema, matcher filters and the catalogue UI.
 - **D-02:** **Drop the "English-taught only" filter and its hidden-count (MATCH-06 removed).** The planner must update REQUIREMENTS.md and the ROADMAP Phase 1 success criterion 5 to match. The roadmap question "AC Master = English?" is moot as a result.
 - **D-03:** Still import and store the language exactly as written in the file (plus the "English materials", "individual study in English" and "recommended for international students" columns where present). Show it as plain info on the course, labelled e.g. "Listed language: Romanian" (blank → nothing shown). It is never used as a filter or for ranking. This still satisfies MATCH-03, which asks for the teaching language to be shown.
+  - *(clarified 2026-11-21, user-approved)* The "recommended for international students" value, where the file has one, IS shown to students as plain info next to "Listed language", on match cards and on catalogue rows, as written in the file (e.g. "Recommended for international students: Yes, if participants are familiar with the language…"); blank → nothing shown. It is never a filter, never used for ranking and never sent to Claude. The "English materials" and "individual study in English" values follow MATCH-03 the same way: shown where present on match cards and catalogue rows, nothing when blank.
 - Measured on the files (for awareness only, it does not change D-01): about 925 rows Romanian, 8 French, 8 German, 222 blank (202 of them AC); 442 Romanian rows are recommended for internationals with "Yes, if participants are familiar with the language…". Check file produced during discussion: `catalogue-language-check.xlsx` (scratchpad; regenerate from the raw files if needed).
 
 ### Match scope & ranking
@@ -38,7 +39,7 @@ A signed-in student turns their home-university courses (typed, or from a one-co
 
 ### Catalogue gaps & contacts
 - **D-15:** Missing faculties (ETC, Chemistry, MPT, Communication Sciences): show one line in the catalogue: "Not yet included: ETC, Chemistry, MPT, Communication Sciences. Ask incoming@upt.ro." No 2021-22 fallback import. Add them if the files turn up.
-- **D-16:** Coordinator contacts (MATCH-09) are hand-curated into a seed JSON, one entry per faculty (coordinator name, email, source URL, date checked), from https://international.upt.ro/en/contact/. If a faculty has no listed coordinator, show incoming@upt.ro. Note: the MEC catalogue file itself contains a faculty contact person (header area / row 4 col A of the Licenta sheet and the Faculty cell of Master row 2); use it only to cross-check, with the contact page as the source.
+- **D-16:** *(amended 2026-11-21, user-approved)* Coordinator contacts (MATCH-09) are hand-curated into a seed JSON, one entry per faculty (coordinator name, email, source URL, date checked), from the official studies-2026-2027 page https://international.upt.ro/en/incoming-students/erasmus-studies/studies-2026-2027/ (table "Host faculty at Politehnica University Timișoara"). If a faculty has no listed coordinator, show incoming@upt.ro. Reason for the amendment: the page first named here, https://international.upt.ro/en/contact/, lists no per-faculty coordinators (only erasmus.outgoing@upt.ro, student-admissions@upt.ro and phone numbers; RESEARCH Open Question 2), so following it literally would replace every named coordinator with a generic inbox. Note: the MEC catalogue file itself contains a faculty contact person (header area / row 4 col A of the Licenta sheet and the Faculty cell of Master row 2); use it only to cross-check, with the studies page as the source.
 
 ### Import notes discovered during discussion
 - Find the header row as the first row containing "Course unit". MEC and RIA Licenta have a junk row above the header. IH Master has a "Supliment diploma" row under the header; skip rows with no course name or no code. The RIA Licenta sheet has blank rows after the header.
@@ -61,7 +62,7 @@ A signed-in student turns their home-university courses (typed, or from a one-co
 - `.planning/REQUIREMENTS.md` — PLAT-01, MATCH-01..11 (MATCH-06 removed by D-02).
 - `.planning/PROJECT.md` — Key Decisions table.
 - `.planning/research/SUMMARY.md` — "Decisions Overriding Research (read first)".
-- `.planning/research/SOURCES.md` — official URLs, incl. coordinator contacts page (line 11).
+- `.planning/research/SOURCES.md` — official URLs, incl. coordinator contacts page (line 11). Coordinators are now seeded from the studies-2026-2027 page (D-16 amended 2026-11-21).
 - `.planning/research/PITFALLS.md`, `.planning/research/ARCHITECTURE.md`, `.planning/research/FEATURES.md`, `.planning/research/STACK.md`.
 
 ### Data

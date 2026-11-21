@@ -35,11 +35,11 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [ ] 01-01-PLAN.md — Walking skeleton: Next 16 + Docker Postgres/pgvector + full schema + Better Auth sign-up/sign-in, City Lines shell (wave 1)
-- [ ] 01-02-PLAN.md — Catalogue: import the 7 files (1327 rows), seed with coordinators, /catalogue browse + filters, D-02 doc edits, IH colour (wave 2)
+- [ ] 01-02-PLAN.md — Catalogue: import the 7 files (1327 rows), seed with coordinators (studies-2026-2027 page, D-16 amended), /catalogue browse + filters, D-02 doc edits, IH colour (wave 2)
 - [ ] 01-03-PLAN.md — Matcher engine: Claude Plan B shortlist + rank, facts from DB, /api/matches, minimal Matcher, golden-set gate (wave 3)
 - [ ] 01-04-PLAN.md — Full Matcher UI (saved courses, per-course loading, semester filter, show more) + syllabus PDF/screenshot upload pre-fill (wave 4)
-- [ ] 01-06-PLAN.md — AC fișe: pair by code, extract topics offline, seed, syllabus view, golden AC case (wave 4, parallel with 01-04)
 - [ ] 01-05-PLAN.md — Learning Agreement draft: panel with Winter/Summer meters, full draft, CSV export, printable view (wave 5)
+- [ ] 01-06-PLAN.md — AC fișe: pair by code, extract topics offline, seed, syllabus view, golden AC case, SC3 met-or-waived sign-off (wave 6)
 **UI hint**: yes
 
 **Notes for planning:**
