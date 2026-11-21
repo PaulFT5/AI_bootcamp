@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Not app code: tooling, design mocks and the static prototype.
+    ".claude/**",
+    ".gsd/**",
+    ".impeccable/**",
+    "prototype/**",
   ]),
 ]);
 
