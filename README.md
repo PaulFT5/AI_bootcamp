@@ -1,6 +1,8 @@
 # Erasmus@UPT
 
-English-first web assistant for incoming Erasmus+ students at Politehnica University of Timișoara: course matching for the Learning Agreement, a paperwork checklist, a cross-faculty schedule builder and a campus map.
+English-first web assistant for incoming Erasmus+ students at Politehnica University of Timișoara: course matching for the Learning Agreement, a paperwork checklist, a schedule builder and a campus map.
+
+**Current scope:** students hosted by the Faculty of Automation and Computers (AC) and AC courses only. Other faculties come later (see "Deferred: other faculties" in `.planning/ROADMAP.md`).
 
 Read first: `PRODUCT.md`, `.planning/PROJECT.md`, `.planning/REQUIREMENTS.md`, `.planning/ROADMAP.md`.
 

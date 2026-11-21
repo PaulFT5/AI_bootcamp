@@ -1,5 +1,7 @@
 # Data Sources (user-provided, 2026-11-20)
 
+> **Scope note:** Scope narrowed 2026-11-21 to AC only (D-17, `.planning/phases/01-course-matcher/01-CONTEXT.md`). Multi-faculty content below is reference for a later phase.
+
 Canonical URL list supplied by the user. Ingestion and checklist content should prefer these. See FEATURES.md "Data Sources" for fetch status/format notes found during research.
 
 ## 1. Official UPT Mobility, Courses & Paperwork

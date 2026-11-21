@@ -1,5 +1,7 @@
 # Pitfalls Research
 
+> **Scope note:** Scope narrowed 2026-11-21 to AC only (D-17, `.planning/phases/01-course-matcher/01-CONTEXT.md`). Multi-faculty content below is reference for a later phase.
+
 **Domain:** AI-assisted web app for incoming Erasmus+ students at UPT Timisoara (course matcher, paperwork checklist, cross-faculty timetable builder with LLM/vision extraction and .ics export), built by an AI-agent workflow in ~2 days
 **Researched:** 2026-11-20
 **Confidence:** MEDIUM overall. HIGH on engineering failure modes (Unicode, iCalendar/DST, LLM grounding, demo operations), which are well established. MEDIUM on UPT-specific data shapes, because the catalogue and timetable pages were only located through search, not opened and parsed. LOW on UPT's parity-numbering convention, which must be checked against a real timetable PDF.

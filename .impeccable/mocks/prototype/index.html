@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Erasmus@UPT prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Red+Hat+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --shell:#1f2328;--shell-ink:#f1f3f4;--shell-sub:#b9c0c7;
+  --ground:#f5f5f4;--panel:#fff;--ink:#1b1d20;--sub:#4a4f56;--faint:#6b7178;
+  --line:#e2e2df;--chip:#efefed;--accent:#0a6f7e;--accent-ink:#fff;--accent-soft:#e3f1f3;
+  --warn-bg:#fff6dc;--warn-line:#ecd28a;--err:#b3261e;--ok:#1d7a46;
+  --r:8px;--mono:'Red Hat Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:'Public Sans',system-ui,sans-serif;background:var(--ground);color:var(--ink);font-size:15px;line-height:1.45;font-variant-numeric:tabular-nums}
+::selection{background:#bfe3e8;color:var(--ink)}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+svg.i{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+* {scrollbar-width:thin;scrollbar-color:#c4c7c5 transparent}
+
+/* shell */
+.app{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100vh}
+.side{background:var(--shell);color:var(--shell-ink);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:22px 12px 12px;z-index:20}
+.brand{font-weight:800;font-size:19px;letter-spacing:-.01em;white-space:nowrap;padding:0 10px 24px}
+.brand span{color:#5fc3d0}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav button{display:flex;align-items:center;gap:11px;width:100%;text-align:left;background:none;border:0;padding:9px 10px;border-radius:6px;color:var(--shell-sub);font-weight:600;white-space:nowrap;transition:background .2s var(--ease),color .2s}
+.nav button:hover{color:#fff;background:#2d3238}
+.nav button[aria-current="page"]{background:var(--accent);color:#fff}
+.nav button.sub{padding:7px 10px 7px 39px;font-size:14px}
+.nav button .soon{font-size:11px;font-weight:600;opacity:.75;margin-left:auto}
+.side :focus-visible{outline-color:#5fc3d0}
+.side-foot{margin-top:auto;border-top:1px solid #30363d;padding-top:12px;display:flex;align-items:center;gap:4px}
+.acct{flex:1;min-width:0;position:relative}
+.acct-btn{display:flex;align-items:center;gap:10px;width:100%;background:none;border:0;border-radius:8px;padding:6px;color:var(--shell-ink);text-align:left;transition:background .2s}
+.acct-btn:hover,.acct-btn[aria-expanded="true"]{background:#2d3238}
+.avatar{width:34px;height:34px;border-radius:50%;background:#2d3238;border:1.5px solid #3a4047;display:flex;align-items:center;justify-content:center;flex:none}
+.acct-btn[aria-expanded="true"] .avatar{border-color:#5fc3d0}
+.acct-txt{min-width:0;display:flex;flex-direction:column;line-height:1.25}
+.acct-txt b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acct-txt small{font-size:12px;color:var(--shell-sub)}
+.bell{width:40px;height:40px;border-radius:8px;border:0;background:none;color:var(--shell-sub);display:flex;align-items:center;justify-content:center;flex:none;padding:0;transition:background .2s,color .2s}
+.bell:hover{background:#2d3238;color:#fff}
+.acct-menu{position:absolute;left:0;bottom:calc(100% + 8px);min-width:220px;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 8px 24px #0002;padding:6px}
+.acct-menu button{display:flex;gap:10px;align-items:center;width:100%;border:0;background:none;padding:9px 10px;border-radius:6px;font-weight:600;text-align:left}
+.acct-menu button:hover{background:var(--chip)}
+.acct-menu :focus-visible{outline-color:var(--accent);outline-offset:-2px}
+.settings{max-width:480px}
+.settings .pane{margin-top:16px}
+.settings .btn{margin-top:16px}
+.data-note{background:#e9e9e6;color:var(--sub);font-size:12.5px;text-align:center;padding:6px 12px}
+.data-note .short{display:none}
+@media (max-width:760px){.data-note .short{display:inline}}
+
+main{max-width:1440px;margin:0 auto;padding:20px 24px 48px}
+.view{display:none}.view.on{display:block}
+
+/* matcher layout */
+.cols{display:grid;grid-template-columns:260px minmax(0,1fr) 300px;gap:20px;align-items:start}
+.pane{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.sticky{position:sticky;top:20px}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);margin:0 0 12px;font-weight:700}
+h1{font-size:26px;font-weight:800;letter-spacing:-.02em;margin:2px 0 4px;text-wrap:balance}
+.muted{color:var(--sub);font-size:13.5px}
+
+.home-list{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.home{width:100%;text-align:left;background:var(--panel);border:1.5px solid var(--line);border-radius:var(--r);padding:11px 12px;transition:border-color .2s,background .2s}
+.home:hover{border-color:#c4c7c5}
+.home[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.home b{display:block;font-size:15px}
+.home small{color:var(--sub);font-size:12.5px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:var(--r);padding:10px 14px;font-weight:700;border:1.5px solid transparent;transition:background .2s,border-color .2s,transform .15s var(--ease)}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{background:#096a78}
+.btn-outline{border-color:var(--accent);color:var(--accent);background:var(--panel)}
+.btn-outline:hover{background:var(--accent-soft)}
+.btn-quiet{border-color:var(--line);background:var(--panel);color:var(--ink)}
+.btn-quiet:hover{border-color:#c4c7c5}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.btn-block{width:100%}
+.stack{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+
+form.add{display:none;margin-top:12px;border-top:1px solid var(--line);padding-top:14px}
+form.add.on{display:block}
+label{display:block;font-size:12.5px;font-weight:600;color:var(--sub);margin:10px 0 4px}
+input[type=text],input[type=number],select,textarea{width:100%;border:1.5px solid var(--line);border-radius:6px;padding:9px 10px;background:#fff}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px #0b7a8a26}
+textarea{min-height:70px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.extract-note{background:var(--accent-soft);border:1px solid #b9dfe4;border-radius:6px;padding:9px 10px;font-size:13px;margin-top:10px;display:none}
+.extract-note.on{display:block}
+.error{color:var(--err);font-size:13px;margin-top:8px;display:none}
+.error.on{display:block}
+
+/* matches */
+.match-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;margin-bottom:14px;flex-wrap:wrap}
+.matches{display:flex;flex-direction:column;gap:12px}
+.match{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:start;animation:rise .5s var(--ease) both}
+.match:nth-child(2){animation-delay:.06s}.match:nth-child(3){animation-delay:.12s}.match:nth-child(4){animation-delay:.18s}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.line{width:42px;height:42px;border-radius:50%;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;letter-spacing:.02em;flex:none}
+.line.sm{width:22px;height:22px;font-size:9px}
+.code{font-family:var(--mono);font-size:12.5px;color:var(--faint)}
+.mname{font-weight:800;margin:1px 0 5px;letter-spacing:-.01em}
+.band-Strong .mname{font-size:19px}.band-Good .mname{font-size:17px}.band-Partial .mname{font-size:16px;font-weight:700}
+.reason{color:var(--sub);font-size:14px;max-width:68ch}
+.facts{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.facts span{font-size:12.5px;background:var(--chip);border-radius:5px;padding:3px 8px}
+.facts .band{font-weight:700}
+.facts .en-yes{background:#ddf0e4;color:#145a33}
+.facts .en-unk{background:var(--warn-bg);color:#6b4d00}
+.match .btn{min-width:92px}
+.added{background:var(--accent);color:#fff}
+.added:hover{background:#096a78}
+
+.notice{display:flex;gap:10px;background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:var(--r);padding:12px 14px;font-size:13.5px;margin-top:16px;color:#4d3a00}
+.empty{border:1.5px dashed #cfd1ce;border-radius:var(--r);padding:36px 24px;text-align:center;color:var(--sub)}
+.empty b{display:block;color:var(--ink);font-size:17px;margin-bottom:4px}
+
+/* loading */
+.loading{display:flex;flex-direction:column;gap:12px}
+.ghost{height:112px;border-radius:var(--r);background:linear-gradient(90deg,#ececea 0,#f6f6f5 40%,#ececea 80%);background-size:200% 100%;animation:shim 1.2s linear infinite}
+@keyframes shim{to{background-position:-200% 0}}
+.loading-msg{font-size:14px;color:var(--sub);display:flex;align-items:center;gap:8px}
+.spin{width:16px;height:16px;border:2px solid #c9dfe2;border-top-color:var(--accent);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* LA */
+.total{display:flex;align-items:baseline;gap:6px;margin:4px 0 2px}
+.total b{font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1;transition:color .3s}
+.total span{font-size:16px;color:var(--sub);font-weight:600}
+.meter{height:8px;background:var(--chip);border-radius:4px;overflow:hidden;display:flex;margin:10px 0 6px}
+.meter i{display:block;height:100%;transition:width .5s var(--ease)}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12.5px;color:var(--sub);margin-bottom:12px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.sem-tabs{display:flex;gap:4px;background:var(--chip);border-radius:7px;padding:3px;margin:12px 0}
+.sem-tabs button{flex:1;border:0;background:none;padding:6px;border-radius:5px;font-weight:600;font-size:13px;color:var(--sub)}
+.sem-tabs button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 2px #0002}
+.la-list{list-style:none;margin:0;padding:0}
+.la-list li{display:grid;grid-template-columns:auto 1fr auto auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.la-list .x{border:0;background:none;color:var(--faint);padding:4px;border-radius:5px}
+.la-list .x:hover{color:var(--err);background:#fbeceb}
+.status{font-size:13px;margin:8px 0 14px;display:flex;gap:6px;align-items:center}
+.status.under{color:var(--sub)}.status.at{color:var(--ok);font-weight:600}.status.over{color:var(--err);font-weight:600}
+
+/* catalogue */
+.cat-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:14px}
+.cat-bar>div{min-width:150px}
+.toggle{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;cursor:pointer;padding:9px 0}
+.toggle input{width:18px;height:18px;accent-color:var(--accent)}
+.hidden-count{font-size:13px;color:var(--sub)}
+.table-wrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
+th{text-align:left;font-size:12.5px;color:var(--faint);font-weight:700;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+th button{border:0;background:none;font-weight:700;color:inherit;padding:0;display:inline-flex;gap:4px;align-items:center}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fafaf9}
+
+
+/* mobile tabs */
+.mtabs{display:none}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--shell);color:#fff;padding:10px 16px;border-radius:var(--r);font-size:14px;opacity:0;transition:opacity .3s,transform .4s var(--ease);pointer-events:none;z-index:50;box-shadow:0 6px 20px #0003}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:1400px){.cols{grid-template-columns:260px minmax(0,1fr)}.la-col{grid-column:1 / -1}.sticky{position:static}}
+@media (max-width:960px){.cols{grid-template-columns:1fr}}
+@media (max-width:760px){
+  .app{display:block}
+  .side{flex-direction:row;flex-wrap:wrap;align-items:center;height:auto;padding:6px 8px 6px 16px;gap:2px 10px}
+  .brand{font-size:17px;padding:0}
+  .nav{order:3;flex-direction:row;flex-basis:100%;min-width:0;overflow-x:auto;margin-left:-8px;scrollbar-width:none}
+  .nav button{width:auto;padding:8px 10px}.nav button.sub{padding:8px 10px;font-size:15px}
+  .nav button svg.i,.nav button .soon{display:none}
+  .side-foot{margin:0 0 0 auto;border:0;padding:0;flex:none}
+  .acct{flex:none}.acct-btn{padding:4px}.acct-txt{display:none}
+  .acct-menu{left:auto;right:0;bottom:auto;top:calc(100% + 8px)}
+  .data-note .long{display:none}
+  main{padding:14px 16px 96px}
+  .cols{grid-template-columns:1fr}
+  .cols>section{display:none}.cols>section.mon{display:block}
+  .mtabs{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);z-index:30;padding:6px 8px calc(6px + env(safe-area-inset-bottom))}
+  .mtabs button{border:0;background:none;padding:8px 4px;border-radius:6px;font-weight:700;font-size:13px;color:var(--sub);display:flex;flex-direction:column;align-items:center;gap:2px}
+  .mtabs button[aria-pressed="true"]{color:var(--accent);background:var(--accent-soft)}
+  .match{grid-template-columns:auto minmax(0,1fr);padding:14px}
+  .match .btn{grid-column:1 / -1;width:100%}
+  h1{font-size:22px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* print view of the LA */
+.print-only{display:none}
+@media print{
+  body{background:#fff}
+  .app,.mtabs,.toast{display:none!important}
+  .print-only{display:block;padding:24px;font-size:12pt}
+  .print-only h1{font-size:20pt}
+  .print-only table{min-width:0}
+  .print-only th,.print-only td{border-bottom:1px solid #999;padding:6px 8px}
+}
+
+/* evidence + topics */
+.evidence{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;border-radius:5px;padding:3px 8px;margin:0 0 6px}
+.ev-syl{background:var(--accent-soft);color:#075866}
+.ev-cat{background:var(--chip);color:var(--sub)}
+.ev-syl svg.i,.ev-cat svg.i{width:14px;height:14px}
+.cover{margin-top:10px;font-size:13.5px}
+.cover b{font-weight:700}
+.topics{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.topics span{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;border-radius:999px;padding:3px 10px;border:1px solid var(--line)}
+.topics .hit{background:#e6f3ec;border-color:#bfe0cc;color:#145a33}
+.topics .miss{background:#fff;border-style:dashed;color:var(--sub)}
+.topics svg.i{width:12px;height:12px}
+.linkbtn{border:0;background:none;color:var(--accent);font-weight:700;padding:0;font-size:13.5px;text-decoration:underline;text-underline-offset:3px;display:inline-flex;gap:5px;align-items:center}
+.linkbtn:hover{color:#075866}
+.match-foot{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px;align-items:center}
+.nosyl{font-size:13px;color:var(--faint)}
+.coverage{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13.5px;color:var(--sub);margin:-6px 0 16px}
+.coverage b{color:var(--ink)}
+
+/* syllabus drawer */
+.scrim{position:fixed;inset:0;background:#1f232866;opacity:0;pointer-events:none;transition:opacity .3s var(--ease);z-index:60}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);background:var(--panel);z-index:61;transform:translateX(102%);transition:transform .45s var(--ease);display:flex;flex-direction:column;box-shadow:-8px 0 32px #0002}
+.drawer.on{transform:none}
+.drawer header{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:flex-start}
+.drawer header h1{font-size:21px;margin:2px 0}
+.drawer .close{margin-left:auto;border:0;background:none;padding:6px;border-radius:6px;color:var(--sub)}
+.drawer .close:hover{background:var(--chip);color:var(--ink)}
+.drawer .body{padding:20px;overflow:auto;flex:1}
+.drawer .body h2{text-transform:none;letter-spacing:-.01em;color:var(--ink);font-size:17px;font-weight:800;margin:0}
+.fit-course{margin:2px 0 0;font-size:14px;color:var(--sub)}
+.fit-course b{color:var(--ink);font-weight:700}
+.fit-sum{margin:14px 0 0;font-size:15.5px;font-weight:700;line-height:1.4;display:flex;flex-wrap:wrap;gap:2px 8px}
+.fit-sum .sep{color:var(--faint);font-weight:400}
+.fit-sum .flag{color:#7a5200}
+.tg{margin-top:18px}
+.tg+.tg{margin-top:14px}
+.drawer .tg h3{font-size:13px;font-weight:700;color:var(--sub);margin:0 0 6px}
+.tg .topics{margin-top:0}
+.topics .only{background:var(--chip);border-color:var(--chip);color:var(--ink)}
+.syl{margin-top:28px;background:var(--ground);border-radius:var(--r);padding:14px 16px}
+.drawer .syl h2{font-size:14px;font-weight:700;margin-bottom:10px}
+.syl h2 span{font-weight:500;color:var(--sub)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:13.5px}
+.kv dt{color:var(--sub)}.kv dd{margin:0;font-weight:600}
+.drawer footer{padding:14px 20px;border-top:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap}
+.proto-note{font-size:12.5px;color:var(--faint);margin-top:14px}
+
+</style>
+</head>
+<body>
+<div class="app">
+<header class="side">
+  <div class="brand">Erasmus<span>@</span>UPT</div>
+  <nav class="nav" aria-label="Main">
+    <button data-view="home"><svg class="i" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Home page<span class="soon">soon</span></button>
+    <button data-view="matcher" aria-current="page"><svg class="i" viewBox="0 0 24 24"><path d="M22 9 12 4 2 9l10 5 10-5z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5M22 9v6"/></svg>Courses</button>
+    <button data-view="catalogue" class="sub">Catalogue</button>
+    <button data-view="schedule"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Schedule<span class="soon">soon</span></button>
+    <button data-view="resources"><svg class="i" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg>Resources<span class="soon">soon</span></button>
+    <button data-view="firstweek"><svg class="i" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>First week<span class="soon">soon</span></button>
+  </nav>
+  <div class="side-foot">
+    <div class="acct">
+      <button class="acct-btn" data-acct aria-label="Account menu" aria-expanded="false" aria-controls="acctMenu"><span class="avatar"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><span class="acct-txt"><b id="acctName">Demo student</b><small>Profile &amp; settings</small></span></button>
+      <div class="acct-menu" id="acctMenu" hidden>
+        <button data-view="settings"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Settings</button>
+        <button data-signout><svg class="i" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Sign out</button>
+      </div>
+    </div>
+    <button class="bell" data-notif aria-label="Notifications"><svg class="i" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></button>
+  </div>
+</header>
+<div class="content">
+<div class="data-note"><span class="long">Prototype with sample data. Real 2026-27 course names and codes; topics, syllabus details, reasons and contacts are invented.</span><span class="short">Sample data · Catalogue 2026-27</span></div>
+
+<main>
+  <!-- MATCHER -->
+  <div class="view on" id="v-matcher">
+    <div class="cols">
+      <section class="pane mon" id="col-courses" aria-labelledby="h-home">
+        <h2 id="h-home">Your home courses</h2>
+        <ul class="home-list" id="homeList"></ul>
+        <div class="stack">
+          <button class="btn btn-quiet btn-block" id="btnAdd"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add a course</button>
+          <label class="btn btn-quiet btn-block" style="margin:0;color:var(--ink);font-size:15px"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 18v-6M9 15l3-3 3 3"/></svg>Upload syllabus (PDF or image)<input type="file" id="file" accept=".pdf,image/png,image/jpeg" hidden></label>
+        </div>
+        <div class="error" id="fileErr" role="alert"></div>
+        <form class="add" id="addForm">
+          <div class="extract-note" id="extractNote">We filled this in from your syllabus. Check each field before matching.</div>
+          <label for="fName">Course name</label><input type="text" id="fName" required placeholder="e.g. Operating Systems">
+          <div class="row2">
+            <div><label for="fEcts">ECTS</label><input type="number" id="fEcts" min="1" max="30" value="5" required></div>
+            <div><label for="fYear">Study year</label><select id="fYear"><option>1</option><option>2</option><option selected>3</option><option>4</option></select></div>
+          </div>
+          <label for="fDesc">Description or topics</label><textarea id="fDesc" placeholder="Paste the course description or list the main topics"></textarea>
+          <div class="stack"><button class="btn btn-primary" type="submit">Find matches</button><button class="btn btn-quiet" type="button" id="btnCancel">Cancel</button></div>
+        </form>
+      </section>
+
+      <section id="col-matches" aria-live="polite">
+        <div id="matchArea"></div>
+      </section>
+
+      <section class="pane la-col sticky" id="col-la" aria-labelledby="h-la">
+        <h2 id="h-la">Learning Agreement draft</h2>
+        <div id="laPanel"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- CATALOGUE -->
+  <div class="view" id="v-catalogue">
+    <h1>UPT course catalogue</h1>
+    <p class="muted" style="margin:0 0 12px">Erasmus Course Catalogue 2026-27. Real course names and codes; topics, syllabus details and links are sample data in this prototype.</p>
+    <div class="coverage" id="coverage"></div>
+    <div class="cat-bar">
+      <div><label for="cFac">Faculty</label><select id="cFac"><option value="">All faculties</option></select></div>
+      <div><label for="cSem">Semester</label><select id="cSem"><option value="">Both</option><option value="1">Winter</option><option value="2">Summer</option></select></div>
+      <div><label for="cEcts">ECTS</label><select id="cEcts"><option value="">Any</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
+      <div style="min-width:auto"><label class="toggle"><input type="checkbox" id="cEn" checked> English-taught only</label><div class="hidden-count" id="cHidden"></div></div>
+      <div style="min-width:auto"><label class="toggle"><input type="checkbox" id="cSyl"> With UPT syllabus</label></div>
+      <div style="flex:1;min-width:200px"><label for="cQ">Search</label><input type="text" id="cQ" placeholder="Course name or code"></div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Faculty</th><th><button data-sort="name">Course <svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="m7 15 5 5 5-5M7 9l5-5 5 5"/></svg></button></th><th><button data-sort="ects">ECTS <svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="m7 15 5 5 5-5M7 9l5-5 5 5"/></svg></button></th><th>When</th><th>Language</th><th>Syllabus</th><th></th></tr></thead>
+      <tbody id="catBody"></tbody>
+    </table></div>
+  </div>
+
+
+  <!-- LA full -->
+  <div class="view" id="v-la">
+    <button class="linkbtn" data-view="matcher" style="margin-bottom:10px"><svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back to Matcher</button>
+    <h1>Learning Agreement draft</h1>
+    <p class="muted" style="margin:0 0 16px">This draft helps you fill in the official Online Learning Agreement. It is not the agreement itself.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Semester</th><th>Code</th><th>UPT course</th><th>Faculty</th><th>ECTS</th><th>Matched to</th><th></th></tr></thead>
+      <tbody id="laBody"></tbody>
+    </table></div>
+    <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+      <button class="btn btn-primary" data-act="csv"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Export CSV</button>
+      <button class="btn btn-quiet" data-act="print"><svg class="i" viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4v-7h16v7h-2M8 14h8v7H8z"/></svg>Print agreement</button>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="view" id="v-settings"><div class="settings">
+    <h1>Settings</h1>
+    <p class="muted" style="margin:0">Your name and home university appear at the top of the printed agreement.</p>
+    <form class="pane" id="setForm">
+      <label for="sName" style="margin-top:0">Name</label><input type="text" id="sName" required>
+      <label for="sUni">Home university</label><input type="text" id="sUni" placeholder="e.g. University of Porto">
+      <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+  </div></div>
+
+  <div class="view" id="v-home"><h1>Home page</h1></div>
+  <div class="view" id="v-schedule"><h1>Schedule</h1></div>
+  <div class="view" id="v-resources"><h1>Resources</h1></div>
+  <div class="view" id="v-firstweek"><h1>First week</h1></div>
+</main>
+</div>
+</div>
+
+<nav class="mtabs" aria-label="Matcher sections">
+  <button data-m="col-courses" aria-pressed="true"><svg class="i" viewBox="0 0 24 24"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM19 19v3"/></svg>Courses</button>
+  <button data-m="col-matches" aria-pressed="false"><svg class="i" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 6h4a4 4 0 0 1 4 4v5"/></svg>Matches</button>
+  <button data-m="col-la" aria-pressed="false"><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg><span id="mTotal">LA · 0 ECTS</span></button>
+</nav>
+
+<div class="toast" id="toast" role="status"></div>
+<div class="print-only" id="printView"></div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dTitle" aria-hidden="true"></aside>
+
+<script>
+const FAC = {
+  AC:  {name:"Automation and Computers", color:"#d4631f"},
+  CT:  {name:"Civil Engineering", color:"#2b62b8"},
+  MEC: {name:"Mechanical Engineering", color:"#2f7d47"},
+  RIA: {name:"Mechatronics and Robotics", color:"#7a4fc9"},
+  ET:  {name:"Electrical and Power Engineering", color:"#c23b5a"},
+  ARH: {name:"Architecture and Urbanism", color:"#8a6a08"},
+};
+const COORD = Object.fromEntries(Object.entries(FAC).map(([k,v])=>[k,`Erasmus coordinator, Faculty of ${v.name} · erasmus.${k.toLowerCase()}@example.upt.ro`]));
+const LANG = {EN:"English", RO:"Romanian"};
+
+// Real 2026-27 catalogue rows (name, code, year, programme semester 1-8, ECTS).
+// t = topics: for AC these stand for topics extracted from the UPT syllabus (sample);
+// for other faculties they are the catalogue's own keywords.
+// s = syllabus [language of the PDF, hours, assessment] (sample); null = not collected.
+const R = (fac,id,name,year,psem,ects,lang,t,s)=>({fac,id,name,year,psem,sem:psem%2?1:2,ects,lang,topics:t.split(";").map(x=>x.trim()),syl:s?{lang:s[0],hours:s[1],assess:s[2]}:null});
+const CAT = [
+ R("AC","L002.25.03.F1","Databases",2,3,4,"EN","relational model; SQL queries; ER modelling; normalisation; indexing; transactions",["RO","2 h lecture · 2 h lab per week","Exam 60% · lab work 40%"]),
+ R("AC","L002.23.07.S2-08","Database Design",4,7,5,"EN","conceptual and ER modelling; normalisation; advanced SQL; stored procedures; transactions and concurrency; query optimisation",["EN","2 h lecture · 2 h project per week","Exam 50% · project 50%"]),
+ R("AC","L002.25.03.F2","Data Structures and Algorithms",2,3,5,"EN","lists and stacks; trees; graphs; hashing; sorting; complexity",["RO","2 h lecture · 2 h lab","Exam 60% · lab 40%"]),
+ R("AC","L002.25.03.F3","Object-Oriented Programming",2,3,5,"EN","classes and objects; inheritance; polymorphism; Java; design patterns; unit testing",["EN","2 h lecture · 2 h lab","Exam 50% · lab 50%"]),
+ R("AC","L002.25.03.F4","Computer Architectures",2,3,5,"EN","instruction sets; pipelining; memory hierarchy; caches; assembly",["RO","2 h lecture · 2 h lab","Exam 60% · lab 40%"]),
+ R("AC","L002.25.04.F1","Algorithm Design and Analysis",2,4,5,"EN","greedy algorithms; dynamic programming; graph algorithms; complexity; NP-completeness",["RO","2 h lecture · 2 h seminar","Exam 70% · seminar 30%"]),
+ R("AC","L002.25.04.F2","Software Engineering Fundamentals",2,4,6,"EN","requirements; UML modelling; software testing; agile methods; version control",["EN","2 h lecture · 2 h project","Exam 50% · project 50%"]),
+ R("AC","L002.25.04.F3","Computer Networks",2,4,4,"EN","OSI and TCP/IP models; IP addressing and routing; switching; transport protocols; network programming",["RO","2 h lecture · 2 h lab","Exam 60% · lab 40%"]),
+ R("AC","L002.25.04.F4","Operating Systems",2,4,5,"EN","processes and threads; scheduling; memory management; file systems; synchronisation",["RO","2 h lecture · 2 h lab","Exam 60% · lab 40%"]),
+ R("AC","L002.24.05.D1","Artificial Intelligence Fundamentals",3,5,5,"EN","search; knowledge representation; planning; machine learning basics; neural networks",["EN","2 h lecture · 2 h lab","Exam 60% · lab 40%"]),
+ R("AC","L002.24.05.D3-02","Parallel and Distributed Algorithms",3,5,5,"EN","parallel computation models; distributed consensus; replication; distributed transactions; MPI",["RO","2 h lecture · 2 h lab","Exam 50% · lab 50%"]),
+ R("AC","L002.24.05.D3-01","Image Processing and Recognition",3,5,5,"EN","image filtering; edge detection; segmentation; feature extraction; classification",["RO","2 h lecture · 2 h lab","Exam 50% · lab 50%"]),
+ R("AC","L002.24.06.F1","Computer Graphics",3,6,4,"EN","rasterisation; transformations; shading; OpenGL; 3D rendering",["EN","2 h lecture · 2 h lab","Exam 50% · lab 50%"]),
+ R("AC","L002.24.06.S3-05","Data Mining",3,6,3,"EN","data preprocessing; clustering; classification; association rules; data warehouses; SQL analytics",["RO","2 h lecture · 1 h lab","Colloquium 60% · lab 40%"]),
+ R("AC","L002.24.06.S3-04","Introduction to IoT and Cloud Architectures",3,6,3,"EN","IoT protocols; sensors; cloud services; network architectures; MQTT",["EN","2 h lecture · 1 h lab","Colloquium 50% · lab 50%"]),
+ R("AC","L002.24.06.S3-07","Computer Security",3,6,3,"EN","cryptography; authentication; network security; web attacks; security protocols",["EN","2 h lecture · 1 h lab","Colloquium 60% · lab 40%"]),
+ R("AC","L002.24.06.S3-01","Embedded Systems",3,6,3,"EN","microcontrollers; C programming; real-time systems; sensors; interrupts",["RO","2 h lecture · 1 h lab","Colloquium 50% · lab 50%"]),
+ R("AC","L002.23.07.S1","Mobile Systems and Applications",4,7,5,"EN","Android; mobile UI; local storage; REST services; wireless networks",["EN","2 h lecture · 2 h lab","Exam 50% · project 50%"]),
+ R("AC","L002.23.07.S2-06","Web Application Design",4,7,5,"EN","HTTP; HTML and CSS; JavaScript; REST APIs; databases for web",["EN","2 h lecture · 2 h project","Project 60% · exam 40%"]),
+ R("AC","L002.23.08.S2-01","Software Project Management",4,8,5,"EN","planning and estimation; risk management; agile methods; team organisation",["RO","2 h lecture · 2 h seminar","Exam 50% · seminar 50%"]),
+ R("AC","L002.23.08.S2-02","Reconfigurable Computing",4,8,5,"EN","FPGA; hardware description languages; reconfigurable architectures",null),
+ R("AC","L002.23.07.S7","Specialty Project",4,7,2,"EN","project work",null),
+ R("CT","L.154.26.01.F1","Mathematical Analysis",1,1,4,"EN","functions of one variable; sequences; series; continuity; Taylor polynomials",null),
+ R("CT","L.154.26.01.F4","Surveying",1,1,5,"EN","topographic elements; plans and maps; planimetry; levelling",null),
+ R("CT","L.154.26.02.F5","Numerical Analysis",1,2,3,"EN","interpolation and approximation; numerical methods for equations; differential equations",null),
+ R("CT","L.154.26.02.F4","Mechanics",1,2,4,"EN","Newton mechanics; statics of the particle; rigid body; equilibrium",null),
+ R("CT","M147.24.01.A1","Theory of Elasticity and Plastic Analysis of Structures",1,1,6,"EN","torsion; stress and strain in three dimensions; plane stress; plastic analysis",null),
+ R("CT","M147.24.01.A2","Advanced Finite Element Analysis",1,1,5,"EN","ABAQUS; linear and nonlinear analysis; finite element method; numerical modelling",null),
+ R("MEC","L431.26.01.F1","Mathematical Analysis",1,1,4,"EN","calculus; series; differential equations",null),
+ R("ET","L200.24.01.F1","Mathematical Analysis",1,1,4,"RO","numerical series; convergence criteria; power series",null),
+ R("RIA","M443.24.01.S3","Artificial Intelligence for Robotics",1,1,5,"RO","search and planning; regression; classification; neural networks",null),
+ R("ARH","L061.26.01.F2","Theory of Architecture 1",1,1,2,"RO","form; space; order; composition; proportion",null),
+];
+const byId = Object.fromEntries(CAT.map(c=>[c.id,c]));
+
+const HOME_SEED = [
+  {id:"h1",name:"Database Systems",ects:6,year:3,source:"typed",topics:"SQL, relational model, normalisation, transactions, ER modelling, NoSQL databases"},
+  {id:"h2",name:"Computer Networks",ects:5,year:2,source:"typed",topics:"TCP/IP, routing, switching, network protocols, wireless networks"},
+  {id:"h3",name:"Structural Mechanics",ects:5,year:2,source:"typed",topics:"statics, equilibrium, stress and strain, finite element method"},
+];
+const SYLLABUS_SAMPLE = {name:"Operating Systems Principles",ects:6,year:2,topics:"Processes and threads, CPU scheduling, memory management, file systems, synchronisation, virtualisation"};
+
+const store = {
+  get(k,d){try{const v=localStorage.getItem("eupt2-"+k);return v?JSON.parse(v):d}catch{return d}},
+  set(k,v){try{localStorage.setItem("eupt2-"+k,JSON.stringify(v))}catch{}}
+};
+let home = store.get("home",HOME_SEED);
+let la = store.get("la",[]);
+let profile = store.get("profile",{name:"Demo student",uni:""});
+let active = home[0]?.id || null;
+let laSem = 1;
+const matchCache = {};
+
+const $ = s=>document.querySelector(s);
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const lineDot = (fac,sm)=>`<span class="line${sm?" sm":""}" style="background:${FAC[fac].color}" title="${esc(FAC[fac].name)}">${fac}</span>`;
+const when = c=>`Year ${c.year} · ${c.sem===1?"Winter":"Summer"} (sem ${c.psem})`;
+const ICON = {
+  doc:'<svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>',
+  tag:'<svg class="i" viewBox="0 0 24 24"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>',
+  check:'<svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>',
+  ext:'<svg class="i" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>',
+};
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("on");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("on"),2200)}
+
+// ---- mock matcher: topic coverage ----
+const STOP = new Set("and the of for with to in on a an basics fundamentals introduction advanced systems system database data".split(" "));
+const toks = s=>s.toLowerCase().replace(/[^a-z0-9/ -]/g," ").split(/[\s/-]+/).filter(w=>w.length>2&&!STOP.has(w)).map(w=>w.replace(/s$/,""));
+function coverage(hTopics, c){
+  const cTok = new Set(c.topics.flatMap(toks));
+  const hit=[], miss=[];
+  hTopics.forEach(t=>(toks(t).some(w=>cTok.has(w))?hit:miss).push(t));
+  return {hit,miss};
+}
+function match(h){
+  const hTopics = h.topics.split(/[,;\n]/).map(s=>s.trim()).filter(Boolean);
+  return CAT.map(c=>{
+    const {hit,miss}=coverage(hTopics,c);
+    const ratio = hit.length/Math.max(1,hTopics.length);
+    const score = ratio*10 + toks(h.name).filter(w=>toks(c.name).includes(w)).length*1.5 - Math.abs(c.ects-h.ects)*.3 - (c.lang!=="EN"?3:0);
+    return {c,hit,miss,ratio,score};
+  }).filter(m=>m.hit.length>0).sort((a,b)=>b.score-a.score).slice(0,4).map(m=>{
+    const band = m.ratio>=.65?"Strong":m.ratio>=.35?"Good":"Partial";
+    const viaSyl = !!m.c.syl;
+    let reason;
+    if(viaSyl){
+      reason = `Covers ${m.hit.length} of your ${m.hit.length+m.miss.length} topics according to the UPT syllabus.`;
+      if(m.miss.length) reason += ` Not covered: ${m.miss.slice(0,2).join(", ")}.`;
+      if(m.c.ects<h.ects) reason += ` ${h.ects-m.c.ects} ECTS fewer than your course.`;
+    } else {
+      reason = `The catalogue keywords overlap with ${m.hit.length} of your topics. No UPT syllabus is available yet, so check the details with your coordinator.`;
+    }
+    return {...m,band,reason,viaSyl};
+  });
+}
+
+// ---- render: home ----
+function renderHome(){
+  $("#homeList").innerHTML = home.map(h=>{
+    const n = matchCache[h.id]?.length;
+    const inLa = la.filter(x=>x.homeId===h.id).length;
+    const meta = inLa?`${inLa} in your draft`: n!=null?`${n} matches`:"Not matched yet";
+    return `<li><button class="home" aria-pressed="${h.id===active}" data-h="${h.id}"><b>${esc(h.name)}</b><small>${h.ects} ECTS · ${h.source==="syllabus"?"from syllabus":"typed"} · ${meta}</small></button></li>`;
+  }).join("");
+}
+
+// ---- render: matches ----
+function renderMatches(loading){
+  const h = home.find(x=>x.id===active);
+  const area = $("#matchArea");
+  if(!h){area.innerHTML=`<div class="empty"><b>Add your first home course</b>Type a course from your home university, or upload its syllabus.</div>`;return}
+  const src = h.source==="syllabus"?"your syllabus":"your description";
+  const head = `<div class="match-head"><div><div class="muted">Matches for</div><h1>${esc(h.name)} · ${h.ects} ECTS</h1><div class="muted">Ranked by AI from ${src}. ECTS, semester, faculty and language come from the UPT catalogue.</div></div></div>`;
+  if(loading){area.innerHTML = head+`<div class="loading"><div class="loading-msg"><span class="spin"></span>Comparing with UPT courses and their syllabi. This takes a few seconds.</div><div class="ghost"></div><div class="ghost"></div><div class="ghost"></div></div>`;return}
+  const ms = matchCache[h.id]||[];
+  if(!ms.length){area.innerHTML = head+`<div class="empty"><b>No good matches found</b>Add more topics to the description, or browse the catalogue.<div style="margin-top:14px"><button class="btn btn-outline" data-go="catalogue">Browse catalogue</button></div></div>`;return}
+  const facs=[...new Set(ms.map(m=>m.c.fac))];
+  const nudge = h.source!=="syllabus" ? `<div class="notice" style="background:var(--accent-soft);border-color:#b9dfe4;color:#0b3f47;margin:0 0 14px">${ICON.doc}<div>Matched from what you typed. <b>Upload your home syllabus</b> for a precise topic-by-topic comparison.</div></div>` : "";
+  area.innerHTML = head + nudge + `<div class="matches">${ms.map(m=>{
+    const inLa = la.some(x=>x.id===m.c.id);
+    const ev = m.viaSyl ? `<span class="evidence ev-syl">${ICON.doc}Compared with UPT syllabus</span>` : `<span class="evidence ev-cat">${ICON.tag}Compared by catalogue entry</span>`;
+    const chips = `<div class="topics">${m.hit.map(t=>`<span class="hit">${ICON.check}${esc(t)}</span>`).join("")}${m.miss.map(t=>`<span class="miss">Not covered: ${esc(t)}</span>`).join("")}</div>`;
+    return `<article class="match band-${m.band}">
+      ${lineDot(m.c.fac)}
+      <div>${ev}<div class="code">${m.c.id}</div><div class="mname">${esc(m.c.name)}</div><div class="reason">${esc(m.reason)}</div>
+      ${chips}
+      <div class="facts"><span class="band">${m.band} match</span><span>${m.c.ects} ECTS</span><span>${when(m.c)}</span><span>${esc(FAC[m.c.fac].name)}</span><span class="${m.c.lang==="EN"?"en-yes":"en-unk"}">Taught in ${LANG[m.c.lang]}</span></div>
+      <div class="match-foot">${m.c.syl?`<button class="linkbtn" data-syl="${m.c.id}">${ICON.doc}View UPT syllabus</button>`:`<span class="nosyl">UPT syllabus not available yet</span>`}</div></div>
+      <button class="btn ${inLa?"added":"btn-outline"}" data-add="${m.c.id}" aria-pressed="${inLa}">${inLa?ICON.check+"Added":"Add"}</button>
+    </article>`}).join("")}</div>
+    <div class="notice" role="note"><svg class="i" viewBox="0 0 24 24" style="margin-top:1px"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><div>These are suggestions, not official equivalences. The Erasmus coordinator of each faculty gives final approval.<br>${facs.map(f=>esc(COORD[f])).join("<br>")}</div></div>`;
+}
+
+// ---- syllabus drawer ----
+let lastFocus=null;
+function openSyl(id){
+  const c=byId[id];if(!c?.syl)return;
+  const h=home.find(x=>x.id===active);
+  const inLa = la.some(x=>x.id===id);
+  const sep = `<span class="sep" aria-hidden="true">·</span>`;
+  const lang = `<span${c.lang!=="EN"?' class="flag"':""}>Taught in ${LANG[c.lang]}</span>`;
+  const grp = (label,items,cls,icon="")=>items.length?`<div class="tg"><h3>${label} · ${items.length}</h3><div class="topics">${items.map(t=>`<span class="${cls}">${icon}${esc(t)}</span>`).join("")}</div></div>`:"";
+  let fit;
+  if(h){
+    const hT = h.topics.split(/[,;\n]/).map(s=>s.trim()).filter(Boolean);
+    const cov = coverage(hT,c);
+    const hTok = new Set(hT.flatMap(toks));
+    const onlyUpt = c.topics.filter(t=>!toks(t).some(w=>hTok.has(w)));
+    const d = c.ects-h.ects;
+    fit = `<h2 id="fitH">Fit with your course</h2>
+      <p class="fit-course"><b>${esc(h.name)}</b> · ${h.ects} ECTS</p>
+      <p class="fit-sum"><span>Covers ${cov.hit.length} of your ${hT.length} topics</span>${sep}<span${d<0?' class="flag"':""}>${c.ects} ECTS (${d?`${Math.abs(d)} ${d<0?"fewer":"more"}`:"same as yours"})</span>${sep}${lang}</p>
+      ${grp("Covered",cov.hit,"hit",ICON.check)}${grp("Not covered at UPT",cov.miss,"miss")}${grp("Only at UPT",onlyUpt,"only")}`;
+  } else {
+    fit = `<h2 id="fitH">Topics in this syllabus</h2>
+      <p class="fit-sum"><span>${c.ects} ECTS</span>${sep}${lang}</p>
+      <div class="tg"><div class="topics">${c.topics.map(t=>`<span class="only">${esc(t)}</span>`).join("")}</div></div>`;
+  }
+  $("#drawer").innerHTML = `
+    <header>${lineDot(c.fac)}<div><div class="code">${c.id}</div><h1 id="dTitle">${esc(c.name)}</h1><div class="muted">${esc(FAC[c.fac].name)} · ${c.ects} ECTS · ${when(c)}</div></div>
+      <button class="close" data-close aria-label="Close syllabus"><svg class="i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></header>
+    <div class="body">
+      <section aria-labelledby="fitH">${fit}</section>
+      <section class="syl" aria-labelledby="sylH">
+        <h2 id="sylH">Official syllabus <span lang="ro">(fișa disciplinei)</span></h2>
+        <dl class="kv"><dt>Teaching</dt><dd>${esc(c.syl.hours)}</dd><dt>Assessment</dt><dd>${esc(c.syl.assess)}</dd><dt>Document language</dt><dd>${LANG[c.syl.lang]}${c.syl.lang==="RO"?" (topics above are translated)":""}</dd></dl>
+      </section>
+      <p class="proto-note">Prototype: syllabus details are sample data. In the app, topics are extracted from the official PDF and the button opens it on upt.ro.</p>
+    </div>
+    <footer>
+      <button class="btn btn-quiet" data-pdf>${ICON.ext}Open original PDF on upt.ro</button>
+      <button class="btn ${inLa?"added":"btn-primary"}" data-add="${c.id}">${inLa?ICON.check+"Added":"Add to Learning Agreement"}</button>
+    </footer>`;
+  lastFocus=document.activeElement;
+  $("#drawer").classList.add("on");$("#scrim").classList.add("on");$("#drawer").setAttribute("aria-hidden","false");
+  $("#drawer .close").focus();
+}
+function closeSyl(){
+  $("#drawer").classList.remove("on");$("#scrim").classList.remove("on");$("#drawer").setAttribute("aria-hidden","true");
+  lastFocus&&lastFocus.focus();
+}
+
+// ---- LA ----
+function laTotals(){
+  const t={1:0,2:0},f={1:{},2:{}};
+  la.forEach(x=>{const c=byId[x.id];if(!c)return;t[c.sem]+=c.ects;f[c.sem][c.fac]=(f[c.sem][c.fac]||0)+c.ects});
+  return {t,f};
+}
+function renderLA(){
+  la = la.filter(x=>byId[x.id]);
+  const {t,f}=laTotals();
+  const items = la.filter(x=>byId[x.id].sem===laSem);
+  const tot=t[laSem];
+  const st = tot===0?["under","Add courses to start your draft."]:tot<30?["under",`${30-tot} ECTS to go for a full semester (30).`]:tot===30?["at","Full semester: 30 ECTS."]:["over",`${tot-30} ECTS over the usual 30. Check with your coordinator.`];
+  const segs = Object.entries(f[laSem]).map(([fac,e])=>`<i style="width:${e/Math.max(30,tot)*100}%;background:${FAC[fac].color}"></i>`).join("");
+  $("#laPanel").innerHTML = `
+    <div class="sem-tabs" role="group" aria-label="Semester">
+      <button data-sem="1" aria-pressed="${laSem===1}">Winter · ${t[1]}</button><button data-sem="2" aria-pressed="${laSem===2}">Summer · ${t[2]}</button>
+    </div>
+    <div class="total"><b style="color:${tot>30?"var(--err)":"var(--ink)"}">${tot}</b><span>/ 30 ECTS</span></div>
+    <div class="meter" role="img" aria-label="${tot} of 30 ECTS">${segs}</div>
+    <div class="legend">${Object.entries(f[laSem]).map(([fac,e])=>`<span><i style="background:${FAC[fac].color}"></i>${fac} ${e}</span>`).join("")}</div>
+    <div class="status ${st[0]}">${st[1]}</div>
+    ${items.length?`<ul class="la-list">${items.map(x=>{const c=byId[x.id];return `<li>${lineDot(c.fac,1)}<span><span class="code">${c.id}</span><br>${esc(c.name)}</span><b>${c.ects}</b><button class="x" data-rm="${c.id}" aria-label="Remove ${esc(c.name)}"><svg class="i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></li>`}).join("")}</ul>`:`<div class="empty" style="padding:22px 14px;font-size:14px">No ${laSem===1?"winter":"summer"} courses yet.</div>`}
+    <div class="stack" style="margin-top:16px">
+      <button class="btn btn-primary btn-block" data-view="la">${ICON.doc}Open full draft</button>
+    </div>`;
+  $("#mTotal").textContent = `LA · ${t[1]+t[2]} ECTS`;
+  $("#laBody").innerHTML = la.length? la.slice().sort((a,b)=>byId[a.id].sem-byId[b.id].sem).map(x=>{const c=byId[x.id];const h=home.find(y=>y.id===x.homeId);return `<tr><td>${c.sem===1?"Winter":"Summer"}</td><td class="code">${c.id}</td><td><b>${esc(c.name)}</b></td><td>${lineDot(c.fac,1)} ${esc(FAC[c.fac].name)}</td><td>${c.ects}</td><td>${h?esc(h.name):"Catalogue"}</td><td><button class="btn btn-quiet" data-rm="${c.id}">Remove</button></td></tr>`}).join("") : `<tr><td colspan="7" style="text-align:center;padding:28px;color:var(--sub)">Your draft is empty. Add courses from the Matcher or the Catalogue.</td></tr>`;
+}
+
+// ---- catalogue ----
+let sortKey="name",sortDir=1;
+function renderCat(){
+  const fac=$("#cFac").value,sem=$("#cSem").value,ects=$("#cEcts").value,en=$("#cEn").checked,syl=$("#cSyl").checked,q=$("#cQ").value.toLowerCase().trim();
+  const base = CAT.filter(c=>(!fac||c.fac===fac)&&(!sem||c.sem==sem)&&(!ects||c.ects==ects)&&(!syl||c.syl)&&(!q||c.name.toLowerCase().includes(q)||c.id.toLowerCase().includes(q)));
+  const rows = base.filter(c=>!en||c.lang==="EN").sort((a,b)=>(a[sortKey]>b[sortKey]?1:-1)*sortDir);
+  const hidden = base.length-rows.length;
+  $("#cHidden").textContent = en? `Hides ${hidden} course${hidden===1?"":"s"} not taught in English` : "Showing all languages";
+  $("#catBody").innerHTML = rows.length? rows.map(c=>{const inLa=la.some(x=>x.id===c.id);return `<tr><td>${lineDot(c.fac,1)}</td><td><span class="code">${c.id}</span><br><b>${esc(c.name)}</b></td><td>${c.ects}</td><td>${when(c)}</td><td>${LANG[c.lang]}</td><td>${c.syl?`<button class="linkbtn" data-syl="${c.id}">${ICON.doc}View (${c.syl.lang})</button>`:`<span class="nosyl">Not available yet</span>`}</td><td><button class="btn ${inLa?"added":"btn-outline"}" data-add="${c.id}">${inLa?"Added":"Add"}</button></td></tr>`}).join("") : `<tr><td colspan="7" style="text-align:center;padding:28px;color:var(--sub)">No courses match these filters.</td></tr>`;
+  const ac=CAT.filter(c=>c.fac==="AC"),acS=ac.filter(c=>c.syl).length;
+  $("#coverage").innerHTML = `<span>${ICON.doc} UPT syllabi: <b>${acS} of ${ac.length}</b> Automation and Computers courses in this sample</span><span>Other faculties: <b>not collected yet</b>, matched by catalogue keywords</span>`;
+}
+
+function renderAll(){renderHome();renderMatches();renderLA();renderCat()}
+
+// ---- actions ----
+function runMatch(id){
+  active=id;renderHome();
+  if(matchCache[id]){renderMatches();return}
+  renderMatches(true);
+  setTimeout(()=>{matchCache[id]=match(home.find(h=>h.id===id));renderAll()},1300);
+}
+function toggleLA(id){
+  const i=la.findIndex(x=>x.id===id);
+  if(i>=0){la.splice(i,1);toast("Removed from your draft")}
+  else{la.push({id,homeId:active});const c=byId[id];laSem=c.sem;toast(`Added ${c.name} · ${c.ects} ECTS`)}
+  store.set("la",la);renderAll();
+  if($("#drawer").classList.contains("on"))openSyl(id);
+}
+function csv(){
+  const rows=[["Semester","UPT code","UPT course","Faculty","ECTS","Matched to home course"]].concat(la.map(x=>{const c=byId[x.id];const h=home.find(y=>y.id===x.homeId);return [c.sem===1?"Winter":"Summer",c.id,c.name,FAC[c.fac].name,c.ects,h?h.name:""]}));
+  const text=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\r\n");
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["﻿"+text],{type:"text/csv"}));a.download="learning-agreement-draft.csv";a.click();
+  toast("CSV downloaded");
+}
+function printView(){
+  const {t}=laTotals();
+  $("#printView").innerHTML=`<h1>Learning Agreement draft · Erasmus@UPT</h1><p><b>${esc(profile.name)}</b>${profile.uni?" · "+esc(profile.uni):""} · ${new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})}</p><p>Draft only. Not signed. Final approval by the faculty Erasmus coordinator. Erasmus Course Catalogue 2026-27.</p>
+  <table><thead><tr><th>Semester</th><th>Code</th><th>Course</th><th>Faculty</th><th>ECTS</th></tr></thead><tbody>${la.map(x=>{const c=byId[x.id];return `<tr><td>${c.sem===1?"Winter":"Summer"}</td><td>${c.id}</td><td>${esc(c.name)}</td><td>${esc(FAC[c.fac].name)}</td><td>${c.ects}</td></tr>`}).join("")}</tbody></table>
+  <p><b>Winter:</b> ${t[1]} ECTS · <b>Summer:</b> ${t[2]} ECTS</p>`;
+  window.print();
+}
+function showView(v){
+  document.querySelectorAll(".view").forEach(x=>x.classList.toggle("on",x.id==="v-"+v));
+  document.querySelectorAll(".nav button").forEach(b=>b.removeAttribute("aria-current"));
+  const b=document.querySelector(`.nav button[data-view="${v==="la"?"matcher":v}"]`);b&&b.setAttribute("aria-current","page");
+  window.scrollTo({top:0});
+}
+function showMobile(id){
+  document.querySelectorAll(".cols>section").forEach(s=>s.classList.toggle("mon",s.id===id));
+  document.querySelectorAll(".mtabs button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===id));
+}
+
+function setAcct(open){$("#acctMenu").hidden=!open;$("[data-acct]").setAttribute("aria-expanded",open)}
+function renderProfile(){$("#acctName").textContent=profile.name;$("#sName").value=profile.name;$("#sUni").value=profile.uni}
+$("#setForm").onsubmit=e=>{
+  e.preventDefault();
+  profile={name:$("#sName").value.trim()||"Demo student",uni:$("#sUni").value.trim()};
+  store.set("profile",profile);renderProfile();toast("Settings saved");
+};
+
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button");
+  if(!(t&&"acct" in t.dataset))setAcct(false);
+  if(e.target.id==="scrim"){closeSyl();return}
+  if(!t)return;
+  if("acct" in t.dataset)setAcct($("#acctMenu").hidden);
+  else if("signout" in t.dataset)toast("Prototype: sign out is not wired up");
+  else if("notif" in t.dataset)toast("No notifications yet");
+  else if(t.dataset.view)showView(t.dataset.view);
+  else if(t.dataset.go)showView(t.dataset.go);
+  else if(t.dataset.h){runMatch(t.dataset.h);showMobile("col-matches")}
+  else if(t.dataset.syl)openSyl(t.dataset.syl);
+  else if("close" in t.dataset)closeSyl();
+  else if("pdf" in t.dataset)toast("Prototype: in the app this opens the official PDF on upt.ro");
+  else if(t.dataset.add)toggleLA(t.dataset.add);
+  else if(t.dataset.rm)toggleLA(t.dataset.rm);
+  else if(t.dataset.sem){laSem=+t.dataset.sem;renderLA()}
+  else if(t.dataset.act==="csv")csv();
+  else if(t.dataset.act==="print")printView();
+  else if(t.dataset.m)showMobile(t.dataset.m);
+  else if(t.dataset.sort){sortDir=sortKey===t.dataset.sort?-sortDir:1;sortKey=t.dataset.sort;renderCat()}
+});
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Escape")return;
+  if(!$("#acctMenu").hidden){setAcct(false);$("[data-acct]").focus()}
+  else if($("#drawer").classList.contains("on"))closeSyl();
+});
+$("#btnAdd").onclick=()=>{$("#extractNote").classList.remove("on");$("#addForm").reset();$("#addForm").dataset.source="typed";$("#addForm").classList.add("on");$("#fName").focus()};
+$("#btnCancel").onclick=()=>$("#addForm").classList.remove("on");
+$("#addForm").onsubmit=e=>{
+  e.preventDefault();
+  const h={id:"h"+Date.now(),name:$("#fName").value.trim(),ects:+$("#fEcts").value,year:+$("#fYear").value,source:$("#addForm").dataset.source||"typed",topics:$("#fDesc").value||$("#fName").value};
+  if(!h.name)return;
+  home.push(h);store.set("home",home);$("#addForm").classList.remove("on");runMatch(h.id);showMobile("col-matches");
+};
+$("#file").onchange=e=>{
+  const f=e.target.files[0];const err=$("#fileErr");err.classList.remove("on");if(!f)return;
+  if(f.size>4*1024*1024){err.textContent=`This file is ${(f.size/1048576).toFixed(1)} MB. The limit is 4 MB. Try a smaller PDF or a screenshot of one page.`;err.classList.add("on");e.target.value="";return}
+  toast("Reading your syllabus…");
+  setTimeout(()=>{
+    $("#addForm").classList.add("on");$("#addForm").dataset.source="syllabus";$("#extractNote").classList.add("on");
+    $("#fName").value=SYLLABUS_SAMPLE.name;$("#fEcts").value=SYLLABUS_SAMPLE.ects;$("#fYear").value=SYLLABUS_SAMPLE.year;$("#fDesc").value=SYLLABUS_SAMPLE.topics;
+    $("#fName").focus();e.target.value="";
+  },1400);
+};
+const facSel=$("#cFac");Object.entries(FAC).forEach(([k,v])=>facSel.insertAdjacentHTML("beforeend",`<option value="${k}">${esc(v.name)}</option>`));
+["#cFac","#cSem","#cEcts","#cEn","#cSyl"].forEach(s=>$(s).onchange=renderCat);$("#cQ").oninput=renderCat;
+
+if(active)matchCache[active]=match(home.find(h=>h.id===active));
+renderAll();renderProfile();
+</script>
+
+</body>
+</html>

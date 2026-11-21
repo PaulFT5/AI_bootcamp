@@ -4,6 +4,8 @@
 
 Erasmus@UPT is an English-first web assistant for incoming Erasmus+ exchange students (Studies and Traineeships, EU/EEA KA131 and Non-EU KA171) arriving at Politehnica University of Timișoara (UPT), Romania. It replaces scattered PDFs, Romanian-only maps, 10+ disconnected faculty timetable subdomains and informal WhatsApp groups with one unified tool covering a student's critical first weeks: choosing courses, completing paperwork, and building a personal timetable.
 
+**Current scope (2026-11-21, D-17):** students hosted by the Faculty of Automation and Computers (AC) and AC courses only: the matcher, catalogue, Learning Agreement draft, schedule and map cover AC. The other faculties come later (REQUIREMENTS v2 "Other faculties"; ROADMAP "Deferred: other faculties").
+
 ## Core Value
 
 An incoming student can enter their home-university courses and get ranked, explained UPT course matches (ECTS, semester, faculty, English status) they can put straight into their Learning Agreement.
@@ -17,12 +19,12 @@ An incoming student can enter their home-university courses and get ranked, expl
 ### Active
 
 **Module 1 — AI Course Matcher (priority 1)**
-- [ ] Ingest UPT's official Erasmus Course Catalogue (public URL) as the base course catalog
-- [ ] Enrich courses with metadata from official UPT faculty pages / study plans: ECTS, semester, study year, host faculty, evaluation type, English status (fully taught in English vs. English tutoring/materials)
-- [ ] Student enters home-university courses (name, description, ECTS) and gets ranked UPT equivalents with similarity score, short AI reason, ECTS, semester, faculty, English status
+- [ ] Ingest the AC file of UPT's official 2026-27 Erasmus Course Catalogue as the base course catalog (other faculties' files later)
+- [ ] Enrich AC courses with their UPT syllabi (fișe disciplinei): topics for syllabus-to-syllabus matching
+- [ ] Student enters home-university courses (name, description, ECTS) and gets ranked AC course matches with a score band, short AI reason, ECTS, semester, faculty, listed language
 - [ ] Student can add matched courses to a saved Learning Agreement selection
-- [ ] Student can upload a home-course syllabus (PDF or screenshot) and see possible UPT matches
-- [ ] Browse/filter catalogue; English-only filter on by default; LA draft CSV/print export
+- [ ] Student can upload a home-course syllabus (PDF or screenshot) and see possible AC matches
+- [ ] Browse/filter the AC catalogue (semester, ECTS, has UPT syllabus; no English-only filter per D-02); LA draft CSV/print export
 
 **Module 2 — Paperwork & Legal Assistant (priority 2)**
 - [ ] 4-question onboarding: Citizenship (EU/EEA vs Non-EU), Grant (KA131 vs KA171), Mobility (Study vs Traineeship), Arrival Date
@@ -30,14 +32,14 @@ An incoming student can enter their home-university courses and get ranked, expl
 - [ ] Student can tick off checklist items; progress persists
 
 **Module 3 — Cross-Year Schedule Builder (priority 3)**
-- [ ] Pick a course (e.g., OOP) from any faculty/year and see all its available slots on the weekly grid; combine into one personal schedule (pre-loaded timetable data)
+- [ ] Pick an AC course (e.g., OOP) from any study year/programme and see all its available slots on the weekly grid; combine into one personal schedule (pre-loaded AC timetable data; other faculties later)
 - [ ] Detect time overlaps, handle odd/even week parity and week ranges
 - [ ] Suggest conflict-free lab subgroups when multiple lab slots exist
 - [ ] Decode UPT room codes (e.g., B417 → wing B, floor 4, room 17) with a Google Maps link to the building
 - [ ] Export unified schedule as .ics calendar file
 
 **Campus Map**
-- [ ] Map of UPT points of interest (faculty buildings, dorms, UPT-owned/partner food & cafés, services); filter by category; select one for details + Google Maps link
+- [ ] Map of UPT points of interest (AC faculty buildings, dorms, UPT-owned/partner food & cafés, services); filter by category; select one for details + Google Maps link
 
 **Platform**
 - [ ] Own accounts (students have no UPT credentials on arrival) — matches, checklist and schedule saved per user
@@ -60,7 +62,7 @@ An incoming student can enter their home-university courses and get ranked, expl
 
 - **Built for an AI bootcamp.** Demo deadline: **Sunday 2026-11-22** (project started Friday 2026-11-20 — ~2 days).
 - User wants **all 3 modules fully working** at demo, built in priority order Matcher → Paperwork → Schedule. Timeline is extremely tight; phases must deliver demoable vertical slices so that whatever is done by Sunday works end-to-end.
-- **Data sources are public URLs** on upt.ro: Erasmus Course Catalogue, faculty timetables (ac.upt.ro, etc.upt.ro, mec.upt.ro, and others), official mobility guides. Exact URLs to be confirmed with the user / located during research. Sources may be PDF or HTML and may be partly Romanian.
+- **Data sources are public URLs** on upt.ro: Erasmus Course Catalogue, faculty timetables (ac.upt.ro, etc.upt.ro, mec.upt.ro, and others), official mobility guides. Exact URLs to be confirmed with the user / located during research. Sources may be PDF or HTML and may be partly Romanian. For now only the AC sources are used (D-17); the others are kept as reference for later.
 - Users are non-Romanian speakers; many source documents, maps and signs are in Romanian.
 - Erasmus students take courses across faculties and study years via their Learning Agreements, so a single group timetable does not work for them.
 - Greenfield repo (only `.claude/`, `.idea/`, `.impeccable/` present).
@@ -72,7 +74,7 @@ An incoming student can enter their home-university courses and get ranked, expl
 - **Tech stack**: No bootcamp constraint — pick what ships fastest
 - **Platform**: Web only (responsive) for now; a colleague's mobile app will later call this same backend
 - **Database**: Plain Postgres + pgvector (`pgvector/pgvector:pg17`) in Docker via docker compose; development and the demo run on the laptop. User testing runs on Vercel + Neon (Postgres 17), reached by changing `DATABASE_URL`, then `CREATE EXTENSION vector` + `drizzle-kit push` + reseed
-- **Catalogue access**: Current 2024-27 Erasmus catalogues sit in SharePoint folders that block automated fetch — user must download them in a browser; fallback is the public 2021-22 `.xls` catalogue (~2,700 rows)
+- **Catalogue access**: Current Erasmus catalogues sit in SharePoint folders that block automated fetch — the user downloaded the 2026-27 files in a browser (`data/raw/catalogue-2024-27/`). Only the AC file is imported for now (D-17); no 2021-22 fallback import (Phase 1 CONTEXT D-15)
 - **Data accuracy**: Admin/legal checklist content must come from official UPT guides, not invented — wrong paperwork advice harms students
 
 ## Key Decisions
@@ -89,6 +91,7 @@ An incoming student can enter their home-university courses and get ranked, expl
 | Syllabus upload accepts PDF and screenshots (PNG/JPEG) | Students may only have a screenshot; Claude reads both. File-size errors shown before upload (Vercel ~4.5 MB body limit) | — Pending |
 | RAG chatbot = stretch goal | User unsure it ships; build last | — Pending |
 | Build order Matcher → Paperwork → Schedule | User's stated priority | — Pending |
+| D-17 (2026-11-21): current scope is AC students and AC courses only; import only the AC catalogue file (204 rows), no faculty filter, one coordinator (AC's); other faculties moved to later, not deleted | User: "For now the implementation will work only for AC students." Smaller, demoable scope before Sunday; AC is the faculty with the syllabus (fișe) path | — Pending |
 
 ## Evolution
 
@@ -108,4 +111,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-11-20 after initialization*
+*Last updated: 2026-11-21 after the AC-only re-scope (D-17)*
