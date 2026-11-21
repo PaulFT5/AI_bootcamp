@@ -13,7 +13,11 @@
     "db:seed": "tsx --env-file=.env.local scripts/seed.ts",
     "smoke:auth": "tsx --env-file=.env.local scripts/smoke-auth.ts",
     "smoke:catalogue": "tsx --env-file=.env.local scripts/smoke-catalogue.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "topics:enrich": "tsx --env-file=.env.local scripts/enrich-topics.ts",
+    "embed:courses": "tsx --env-file=.env.local scripts/embed-courses.ts",
+    "smoke:match": "tsx --env-file=.env.local scripts/smoke-match.ts",
+    "golden": "tsx --env-file=.env.local scripts/golden.ts"
   },
   "dependencies": {
     "@google/genai": "3.6.1",

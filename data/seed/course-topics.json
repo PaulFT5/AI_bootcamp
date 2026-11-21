@@ -1,0 +1,2561 @@
+[
+  {
+    "id": "AC-B-10",
+    "topics": [
+      "Large language models",
+      "Prompt engineering",
+      "AI code generation",
+      "Natural language processing",
+      "Machine learning APIs"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-11",
+    "topics": [
+      "Greedy algorithms",
+      "Dynamic programming",
+      "Graph traversal",
+      "Advanced data structures",
+      "String algorithms"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-12",
+    "topics": [
+      "Symbolic computation",
+      "Numerical integration",
+      "Mathematical visualization",
+      "Curve plotting",
+      "Matrix manipulation"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-13",
+    "topics": [
+      "Probability distributions",
+      "Statistical inference",
+      "Hypothesis testing",
+      "Regression analysis",
+      "Random variables"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-14",
+    "topics": [
+      "PN junction diodes",
+      "Bipolar junction transistors",
+      "Operational amplifiers",
+      "Electrical measurements",
+      "Oscilloscope usage"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-15",
+    "topics": [
+      "Recursion and backtracking",
+      "Dynamic memory allocation",
+      "Sorting algorithms",
+      "File input output",
+      "Pointer arithmetic"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-16",
+    "topics": [
+      "Boolean algebra",
+      "Combinational logic circuits",
+      "Sequential circuits",
+      "Finite state machines",
+      "Karnaugh maps"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-17",
+    "topics": [
+      "Grammar structures",
+      "Conversational fluency",
+      "Technical vocabulary",
+      "Listening comprehension",
+      "Professional writing"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-18",
+    "topics": [
+      "Cardiovascular endurance",
+      "Team sports",
+      "Physical conditioning",
+      "Coordination exercises",
+      "Sports rules"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-19",
+    "topics": [
+      "Community service",
+      "Project coordination",
+      "Team collaboration",
+      "Social responsibility",
+      "Event organization"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-2",
+    "topics": [
+      "Limits and continuity",
+      "Differential calculus",
+      "Integral calculus",
+      "Infinite series",
+      "Differential equations"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-20",
+    "topics": [
+      "Network flow algorithms",
+      "Computational geometry",
+      "Advanced graph theory",
+      "String matching",
+      "NP-hardness"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-21",
+    "topics": [
+      "Real-time operating systems",
+      "IoT sensor networks",
+      "Microcontroller interfacing",
+      "Data acquisition",
+      "Embedded communication protocols"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-22",
+    "topics": [
+      "Relational algebra",
+      "SQL queries",
+      "Database normalization",
+      "Transaction management",
+      "Index structures"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-23",
+    "topics": [
+      "Binary search trees",
+      "Hash tables",
+      "Graph representations",
+      "Sorting algorithms",
+      "Heap structures"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-24",
+    "topics": [
+      "Class inheritance",
+      "Polymorphism and encapsulation",
+      "Exception handling",
+      "Design patterns",
+      "Generic programming"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-25",
+    "topics": [
+      "Instruction set architecture",
+      "Pipelining hazards",
+      "Memory hierarchy",
+      "Cache optimization",
+      "Processor datapath"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-26",
+    "topics": [
+      "Logic gates",
+      "Signal waveform analysis",
+      "Combinational design",
+      "Synchronous counters",
+      "Analog to digital conversion"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-27",
+    "topics": [
+      "Transfer functions",
+      "Feedback control systems",
+      "State space representation",
+      "Stability analysis",
+      "Frequency response"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-28",
+    "topics": [
+      "Physical training",
+      "Fitness routines",
+      "Sports techniques",
+      "Athletic endurance",
+      "Team collaboration"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-29",
+    "topics": [
+      "Advanced vocabulary",
+      "Grammatical accuracy",
+      "Technical translation",
+      "Oral presentation",
+      "Idiomatic expressions"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-3",
+    "topics": [
+      "Vector spaces",
+      "Linear transformations",
+      "Eigenvalues and eigenvectors",
+      "Analytic geometry",
+      "Matrix operations"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-30",
+    "topics": [
+      "Greedy algorithms",
+      "Dynamic programming",
+      "Graph algorithms",
+      "Combinatorial search",
+      "Bit manipulation"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-31",
+    "topics": [
+      "Asymptotic complexity",
+      "Divide and conquer",
+      "Dynamic programming",
+      "Greedy method",
+      "NP-completeness"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-32",
+    "topics": [
+      "Agile methodologies",
+      "Requirements elicitation",
+      "Software testing",
+      "UML diagrams",
+      "Version control systems"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-33",
+    "topics": [
+      "OSI reference model",
+      "TCP IP protocol suite",
+      "routing algorithms",
+      "congestion control",
+      "network security basics",
+      "socket programming",
+      "local area networks",
+      "wireless networks"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-34",
+    "topics": [
+      "CPU scheduling",
+      "process synchronization",
+      "virtual memory",
+      "file systems",
+      "deadlock management",
+      "input output systems",
+      "concurrency control",
+      "memory allocation"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-35",
+    "topics": [
+      "combinational logic circuits",
+      "sequential logic circuits",
+      "arithmetic logic units",
+      "memory organization",
+      "register transfer level",
+      "hardware description languages",
+      "bus structures",
+      "microprocessor architecture"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-36",
+    "topics": [
+      "interpersonal communication",
+      "public speaking skills",
+      "technical writing",
+      "business presentation",
+      "active listening",
+      "negotiation techniques",
+      "professional correspondence"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-37",
+    "topics": [
+      "aerobic conditioning",
+      "team sports",
+      "physical endurance",
+      "fitness training",
+      "sports coordination",
+      "gymnastics fundamentals"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-38",
+    "topics": [
+      "community engagement",
+      "social responsibility",
+      "civic participation",
+      "nonprofit organization",
+      "team collaboration",
+      "philanthropic action"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-39",
+    "topics": [
+      "advanced grammar structures",
+      "conversational fluency",
+      "vocabulary enrichment",
+      "reading comprehension",
+      "listening proficiency",
+      "composition writing"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-4",
+    "topics": [
+      "classical mechanics",
+      "electromagnetism principles",
+      "wave optics",
+      "thermodynamics laws",
+      "quantum physics basics",
+      "semiconductor physics",
+      "electric circuits"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-40",
+    "topics": [
+      "advanced graph algorithms",
+      "dynamic programming",
+      "greedy algorithms",
+      "string matching algorithms",
+      "computational geometry",
+      "combinatorial search",
+      "time complexity analysis"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-41",
+    "topics": [
+      "search algorithms",
+      "knowledge representation",
+      "propositional logic",
+      "machine learning basics",
+      "expert systems",
+      "natural language processing",
+      "heuristic search"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-42",
+    "topics": [
+      "microcontroller architecture",
+      "sensor interfacing",
+      "actuator control",
+      "embedded firmware",
+      "interrupt handling",
+      "serial communication protocols",
+      "power management"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-43",
+    "topics": [
+      "software architecture patterns",
+      "object oriented design",
+      "design patterns",
+      "unified modeling language",
+      "software requirements specification",
+      "modular design",
+      "refactoring techniques"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-44",
+    "topics": [
+      "image enhancement",
+      "image segmentation",
+      "feature extraction",
+      "edge detection",
+      "object recognition",
+      "morphological operations",
+      "color space transformation"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-45",
+    "topics": [
+      "parallel processing models",
+      "shared memory systems",
+      "message passing interface",
+      "distributed algorithms",
+      "load balancing",
+      "race condition resolution",
+      "cluster computing"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-46",
+    "topics": [
+      "fault tolerance",
+      "boundary scan testing",
+      "built in self test",
+      "reliability analysis",
+      "digital system testing",
+      "error detection codes",
+      "hardware verification"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-47",
+    "topics": [
+      "discrete event simulation",
+      "mathematical modeling",
+      "monte carlo methods",
+      "queueing systems",
+      "system dynamics",
+      "stochastic processes",
+      "validation of models"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-48",
+    "topics": [
+      "syntax and semantics",
+      "type systems",
+      "lambda calculus",
+      "functional programming",
+      "object orientation",
+      "control flow",
+      "scope and binding"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-49",
+    "topics": [
+      "mosfet characteristics",
+      "cmos inverter design",
+      "logic gate layout",
+      "parasitic capacitances",
+      "power dissipation",
+      "vlsi fabrication",
+      "delay analysis"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-5",
+    "topics": [
+      "control structures",
+      "functions and recursion",
+      "arrays and pointers",
+      "dynamic memory allocation",
+      "file input output",
+      "basic data structures",
+      "algorithm implementation"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-50",
+    "topics": [
+      "educational software design",
+      "e learning platforms",
+      "multimedia in education",
+      "adaptive learning systems",
+      "instructional design",
+      "computer based testing",
+      "learning management systems"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-51",
+    "topics": [
+      "rasterization algorithms",
+      "geometric transformations",
+      "3d rendering pipeline",
+      "lighting and shading",
+      "texture mapping",
+      "ray tracing",
+      "color models"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-52",
+    "topics": [
+      "lexical analysis",
+      "syntax analysis",
+      "semantic analysis",
+      "intermediate code generation",
+      "code optimization",
+      "symbol table management",
+      "formal grammars"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-53",
+    "topics": [
+      "supply and demand",
+      "consumer theory",
+      "producer theory",
+      "market structures",
+      "elasticity concepts",
+      "cost minimization",
+      "price determination"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-54",
+    "topics": [
+      "real time operating systems",
+      "microcontroller peripherals",
+      "hardware software codesign",
+      "embedded system design",
+      "low power design",
+      "sensor networks",
+      "watchdog timers"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-55",
+    "topics": [
+      "discrete fourier transform",
+      "digital filter design",
+      "sampling theorem",
+      "convolution and correlation",
+      "z transform",
+      "spectral analysis",
+      "fast fourier transform"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-56",
+    "topics": [
+      "Remote procedure calls",
+      "Distributed consensus algorithms",
+      "Fault tolerance models",
+      "Peer-to-peer networks",
+      "Load balancing strategies",
+      "Distributed file systems"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-57",
+    "topics": [
+      "Sensor node deployment",
+      "Cloud service models",
+      "Virtualization technologies",
+      "Edge computing paradigms",
+      "MQTT communication protocol",
+      "Data ingestion pipelines"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-58",
+    "topics": [
+      "Association rule mining",
+      "Classification decision trees",
+      "Cluster analysis methods",
+      "Dimensionality reduction techniques",
+      "Outlier detection algorithms",
+      "Data preprocessing workflows"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-59",
+    "topics": [
+      "Architectural design patterns",
+      "Microservices deployment strategies",
+      "System scalability metrics",
+      "Enterprise integration buses",
+      "Software quality attributes",
+      "Component-based development"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-6",
+    "topics": [
+      "Propositional logic formulas",
+      "Predicate logic syntax",
+      "Set theory operations",
+      "Combinatorics and permutations",
+      "Graph theory basics",
+      "Mathematical induction proofs"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-60",
+    "topics": [
+      "Symmetric encryption algorithms",
+      "Public key infrastructure",
+      "Access control models",
+      "Network intrusion detection",
+      "Vulnerability assessment methods",
+      "Secure coding practices"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-61",
+    "topics": [
+      "Plagiarism prevention standards",
+      "Research citation styles",
+      "Intellectual property rights",
+      "Scientific misconduct cases",
+      "Data privacy regulations",
+      "Ethical dilemmas in research"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-62",
+    "topics": [
+      "Historical cultural movements",
+      "Artistic expression periods",
+      "Societal evolution phases",
+      "Philosophical thought traditions",
+      "Cultural heritage preservation",
+      "Comparative civilization studies"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-63",
+    "topics": [
+      "Student behavioral management",
+      "Interactive learning environments",
+      "Classroom communication strategies",
+      "Conflict resolution techniques",
+      "Inclusive education practices",
+      "Motivational teaching methods"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-64",
+    "topics": [
+      "Community engagement projects",
+      "Nonprofit organization support",
+      "Social responsibility initiatives",
+      "Teamwork and leadership",
+      "Civic participation models",
+      "Altruistic service delivery"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-65",
+    "topics": [
+      "Mobile user interfaces",
+      "Cross-platform application frameworks",
+      "Location-based services",
+      "Local data storage",
+      "Mobile sensor integration",
+      "Application lifecycle management"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-66",
+    "topics": [
+      "Strategic business planning",
+      "Marketing mix strategies",
+      "Financial budgeting basics",
+      "Consumer behavior analysis",
+      "Organizational structure design",
+      "Market research methods"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-67",
+    "topics": [
+      "Technical specification writing",
+      "Implementation and testing",
+      "Project documentation creation",
+      "Engineering design principles",
+      "Prototype validation methods",
+      "Independent research execution"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-68",
+    "topics": [
+      "Multithreading synchronization primitives",
+      "Asynchronous event loops",
+      "Deadlock prevention strategies",
+      "Actor model concurrency",
+      "Non-blocking I/O operations",
+      "Thread safe data structures"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-69",
+    "topics": [
+      "Hardware software codesign",
+      "High level synthesis",
+      "System level modeling",
+      "Fpga prototyping flows",
+      "Embedded system integration",
+      "Hardware verification techniques"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-7",
+    "topics": [
+      "direct current circuits",
+      "alternating current analysis",
+      "electromagnetic fields",
+      "transformers and motors",
+      "semiconductor diodes",
+      "bipolar junction transistors",
+      "operational amplifiers",
+      "electrical measurements"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-70",
+    "topics": [
+      "Formal hardware verification",
+      "Digital system testing",
+      "Fault simulation methods",
+      "Boundary scan architecture",
+      "Assertion based verification",
+      "Modern digital circuits"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-71",
+    "topics": [
+      "White box testing",
+      "Black box testing",
+      "Automated test frameworks",
+      "Software quality assurance",
+      "Code coverage metrics",
+      "Regression testing strategies"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-72",
+    "topics": [
+      "Digital modulation techniques",
+      "Error correction coding",
+      "Multiplexing and multiple access",
+      "Transmission channel models",
+      "Optical communication systems",
+      "Wireless signal propagation"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-73",
+    "topics": [
+      "Client side scripting",
+      "Server side rendering",
+      "Restful api design",
+      "Front end frameworks",
+      "Web security principles",
+      "Responsive layout design"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-74",
+    "topics": [
+      "Kinematic robotic models",
+      "Actuator control systems",
+      "Sensor integration robotics",
+      "Mechanical linkage design",
+      "Robot path planning",
+      "Mechatronic system components"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-75",
+    "topics": [
+      "Entity relationship modeling",
+      "Relational schema normalization",
+      "SQL query optimization",
+      "Transaction management acid",
+      "Index structures indexing",
+      "NoSQL database concepts"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-76",
+    "topics": [
+      "Startup business models",
+      "Venture capital funding",
+      "Product market fit",
+      "Minimum viable product",
+      "Pitch deck creation",
+      "Intellectual property strategy"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-77",
+    "topics": [
+      "Agile scrum methodology",
+      "Software cost estimation",
+      "Risk management planning",
+      "Resource allocation scheduling",
+      "Project milestone tracking",
+      "Quality management processes"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-78",
+    "topics": [
+      "Field programmable gate arrays",
+      "Hardware reconfiguration paradigms",
+      "High performance computing",
+      "Custom computing architectures",
+      "Hardware accelerator design",
+      "Dynamic logic reconfiguration"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-79",
+    "topics": [
+      "fault tolerance",
+      "system reliability metrics",
+      "hardware redundancy",
+      "software reliability models",
+      "error detection",
+      "fault tree analysis",
+      "recovery mechanisms",
+      "dependable computing"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-8",
+    "topics": [
+      "grammatical structures",
+      "vocabulary building",
+      "conversational practice",
+      "listening comprehension",
+      "reading comprehension",
+      "technical terminology",
+      "written communication"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-80",
+    "topics": [
+      "knowledge representation",
+      "inference engines",
+      "rule-based systems",
+      "expert system shells",
+      "uncertainty reasoning",
+      "decision support systems",
+      "knowledge acquisition",
+      "heuristic search"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-81",
+    "topics": [
+      "fuzzy sets",
+      "membership functions",
+      "linguistic variables",
+      "fuzzy logic controllers",
+      "defuzzification methods",
+      "approximate reasoning",
+      "fuzzy inference systems",
+      "applications in control"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-82",
+    "topics": [
+      "audio compression",
+      "video codecs",
+      "image processing",
+      "multimedia streaming",
+      "hypermedia systems",
+      "data synchronization",
+      "computer graphics",
+      "interactive media"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-83",
+    "topics": [
+      "community engagement",
+      "team collaboration",
+      "project contribution",
+      "social responsibility",
+      "volunteer management",
+      "civic participation",
+      "nonprofit support"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-88",
+    "topics": [
+      "project planning",
+      "agile methodologies",
+      "risk management",
+      "cost estimation",
+      "software metrics",
+      "resource allocation",
+      "quality assurance",
+      "schedule tracking"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-9",
+    "topics": [
+      "physical conditioning",
+      "cardiovascular endurance",
+      "strength training",
+      "sports rules",
+      "team sports",
+      "motor skills",
+      "health and wellness"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-B-93",
+    "topics": [
+      "entity relationship models",
+      "relational schema design",
+      "normalization forms",
+      "sql DDL statements",
+      "functional dependencies",
+      "database constraints",
+      "conceptual modeling",
+      "physical database design"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-10",
+    "topics": [
+      "multicore processors",
+      "heterogeneous computing",
+      "real-time operating systems",
+      "power management",
+      "hardware accelerators",
+      "embedded system design",
+      "interconnect networks",
+      "low-power architectures"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-100",
+    "topics": [
+      "bayesian networks",
+      "markov random fields",
+      "factor graphs",
+      "inference algorithms",
+      "parameter estimation",
+      "hidden markov models",
+      "directed graphical models",
+      "undirected graphical models"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-101",
+    "topics": [
+      "information visualization",
+      "multivariate data",
+      "interactive dashboards",
+      "visual analytics",
+      "dimensionality reduction",
+      "network visualization",
+      "time series plotting",
+      "perceptual principles"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-102",
+    "topics": [
+      "sensor fusion",
+      "path planning",
+      "obstacle avoidance",
+      "vehicle localization",
+      "perception systems",
+      "control algorithms",
+      "slam algorithms",
+      "traffic scenarios"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-103",
+    "topics": [
+      "object detection",
+      "image segmentation",
+      "deep convolutional networks",
+      "feature extraction",
+      "stereo vision",
+      "optical flow",
+      "facial recognition",
+      "3d reconstruction"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-104",
+    "topics": [
+      "sentiment analysis",
+      "collaborative filtering",
+      "document classification",
+      "topic modeling",
+      "matrix factorization",
+      "content-based filtering",
+      "information extraction",
+      "word embeddings"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-105",
+    "topics": [
+      "genomic data analysis",
+      "electronic health records",
+      "biomedical imaging",
+      "sequence alignment",
+      "protein structure prediction",
+      "clinical decision support",
+      "epidemiological modeling"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-106",
+    "topics": [
+      "kinematics and dynamics",
+      "robot actuators",
+      "sensor integration",
+      "trajectory generation",
+      "manipulator control",
+      "mobile robots",
+      "grasping algorithms",
+      "robot operating system"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-11",
+    "topics": [
+      "automated test generation",
+      "machine learning for testing",
+      "test oracle problem",
+      "bug prediction models",
+      "fuzz testing",
+      "code coverage analysis",
+      "deep learning validation",
+      "smart test execution"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-111",
+    "topics": [
+      "linear algebra for quantum",
+      "complex vector spaces",
+      "tensor products",
+      "hilbert spaces",
+      "unitary operators",
+      "matrix mechanics",
+      "eigenvalues and eigenvectors",
+      "probability amplitudes"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-112",
+    "topics": [
+      "wave particle duality",
+      "schrodinger equation",
+      "quantum superposition",
+      "quantum entanglement",
+      "uncertainty principle",
+      "potential wells",
+      "spin and angular momentum",
+      "quantum tunneling"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-113",
+    "topics": [
+      "qubits",
+      "quantum gates",
+      "quantum circuits",
+      "quantum algorithms",
+      "no cloning theorem",
+      "bell states",
+      "quantum teleportation",
+      "superdense coding"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-114",
+    "topics": [
+      "embedded control loops",
+      "networked control systems",
+      "sensor networks",
+      "real-time scheduling",
+      "feedback mechanisms",
+      "distributed architectures",
+      "system stability",
+      "actuator networks"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-115",
+    "topics": [
+      "error correcting codes",
+      "block codes",
+      "convolutional codes",
+      "hamming distance",
+      "channel capacity",
+      "linear codes",
+      "cyclic redundancy check",
+      "decoding algorithms"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-116",
+    "topics": [
+      "plagiarism prevention",
+      "research misconduct",
+      "citation standards",
+      "intellectual property",
+      "data fabrication",
+      "ethical research design",
+      "peer review integrity",
+      "academic authorship"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-117",
+    "topics": [
+      "von neumann entropy",
+      "quantum relative entropy",
+      "quantum channel capacity",
+      "entanglement measures",
+      "quantum error correction",
+      "density matrices",
+      "quantum state tomography",
+      "information compression"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-118",
+    "topics": [
+      "lattice based cryptography",
+      "post quantum cryptography",
+      "multivariate public key cryptography",
+      "hash based signatures",
+      "code based cryptography",
+      "quantum key distribution security"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-119",
+    "topics": [
+      "quantum gates and circuits",
+      "quantum error correction codes",
+      "surface codes architecture",
+      "fault tolerant quantum computation",
+      "quantum noise and decoherence",
+      "stabilizer formalism"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-12",
+    "topics": [
+      "research ethics principles",
+      "plagiarism detection and prevention",
+      "intellectual property rights",
+      "academic integrity standards",
+      "responsible conduct of research",
+      "data fabrication avoidance"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-120",
+    "topics": [
+      "digital circuit testing",
+      "fault models and simulation",
+      "design for testability techniques",
+      "built in self test",
+      "boundary scan architecture",
+      "automatic test pattern generation"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-121",
+    "topics": [
+      "quantum key distribution protocols",
+      "quantum teleportation channels",
+      "entanglement based cryptography",
+      "quantum channel security",
+      "quantum internet architecture",
+      "optical quantum communication"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-122",
+    "topics": [
+      "shors factoring algorithm",
+      "grovers search algorithm",
+      "quantum circuit optimization",
+      "variational quantum eigensolver",
+      "quantum programming languages",
+      "quantum phase estimation"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-123",
+    "topics": [
+      "quantum machine learning",
+      "quantum chemistry simulation",
+      "quantum financial modeling",
+      "noisy intermediate scale quantum",
+      "hybrid classical quantum algorithms",
+      "quantum optimization problems"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-124",
+    "topics": [
+      "fault tolerant system design",
+      "cyber security principles",
+      "redundancy management techniques",
+      "secure multiparty computation",
+      "intrusion detection systems",
+      "high availability architectures"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-129",
+    "topics": [
+      "component based design",
+      "software reuse strategies",
+      "interface specification languages",
+      "service oriented architecture",
+      "software component assembly",
+      "middleware technologies"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-13",
+    "topics": [
+      "nonlinear control systems",
+      "lyapunov stability analysis",
+      "phase plane methods",
+      "automotive dynamics modeling",
+      "feedback linearization",
+      "robust control systems"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-130",
+    "topics": [
+      "lexical analysis and parsing",
+      "abstract syntax trees",
+      "intermediate code generation",
+      "code optimization techniques",
+      "register allocation algorithms",
+      "type checking systems"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-131",
+    "topics": [
+      "visual data representation",
+      "exploratory data analysis",
+      "interactive dashboard creation",
+      "graphical user interfaces",
+      "statistical data processing",
+      "data visualization libraries"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-132",
+    "topics": [
+      "user centered design",
+      "wireframing and prototyping",
+      "usability testing methods",
+      "interaction design principles",
+      "information architecture mapping",
+      "accessibility standards compliance"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-133",
+    "topics": [
+      "sequence alignment algorithms",
+      "phylogenetic tree reconstruction",
+      "protein structure prediction",
+      "genomic data analysis",
+      "transcriptomics data processing",
+      "molecular biology databases"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-134",
+    "topics": [
+      "scientific research ethics",
+      "citation and referencing standards",
+      "avoiding academic dishonesty",
+      "data management ethics",
+      "peer review integrity",
+      "conflict of interest disclosure"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-135",
+    "topics": [
+      "multi agent systems",
+      "autonomous software agents",
+      "distributed problem solving",
+      "agent communication languages",
+      "reinforcement learning agents",
+      "swarm intelligence algorithms"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-136",
+    "topics": [
+      "real time scheduling algorithms",
+      "rate monotonic scheduling",
+      "deadline miss handling",
+      "real time operating systems",
+      "priority inversion mitigation",
+      "temporal logic verification"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-137",
+    "topics": [
+      "object relational mapping",
+      "distributed database systems",
+      "query optimization techniques",
+      "nosql database architectures",
+      "database concurrency control",
+      "data warehousing concepts"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-138",
+    "topics": [
+      "genetic algorithms",
+      "simulated annealing technique",
+      "ant colony optimization",
+      "particle swarm optimization",
+      "tabu search method",
+      "metaheuristic design patterns"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-139",
+    "topics": [
+      "enterprise resource planning",
+      "supply chain management systems",
+      "customer relationship management",
+      "business process integration",
+      "enterprise application integration",
+      "workflow management systems"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-14",
+    "topics": [
+      "image filtering techniques",
+      "edge detection algorithms",
+      "feature extraction methods",
+      "object recognition systems",
+      "stereo vision geometry",
+      "motion estimation tracking",
+      "camera calibration procedures",
+      "deep learning for vision"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-140",
+    "topics": [
+      "enterprise architecture frameworks",
+      "togaf methodology",
+      "business capability modeling",
+      "it infrastructure alignment",
+      "enterprise portfolio management",
+      "service portfolio management"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-141",
+    "topics": [
+      "parallel sorting algorithms",
+      "message passing interface",
+      "shared memory programming",
+      "gpu parallel computing",
+      "load balancing strategies",
+      "amdahls law application"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-142",
+    "topics": [
+      "graphics pipeline architecture",
+      "rasterization and ray tracing",
+      "shader programming languages",
+      "geometric transformation matrices",
+      "texture mapping techniques",
+      "hardware acceleration units"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-143",
+    "topics": [
+      "threat modeling methodologies",
+      "secure coding standards",
+      "static application security testing",
+      "dynamic application security testing",
+      "software vulnerability assessment",
+      "devsecops pipeline integration"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-144",
+    "topics": [
+      "leadership styles",
+      "emotional intelligence",
+      "team motivation",
+      "conflict resolution",
+      "strategic planning",
+      "communication skills",
+      "decision making",
+      "change management"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-145",
+    "topics": [
+      "hardware description languages",
+      "combinational circuits",
+      "sequential logic design",
+      "FPGA architecture",
+      "timing analysis",
+      "IP core integration",
+      "synthesizable Verilog",
+      "hardware debugging"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-15",
+    "topics": [
+      "continuous integration",
+      "continuous deployment",
+      "infrastructure as code",
+      "containerization tools",
+      "automated testing",
+      "monitoring and logging",
+      "pipeline automation",
+      "configuration management"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-16",
+    "topics": [
+      "sensor fusion",
+      "object detection",
+      "lane departure warning",
+      "adaptive cruise control",
+      "collision avoidance",
+      "computer vision algorithms",
+      "radar systems",
+      "lidar processing"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-17",
+    "topics": [
+      "residual generation",
+      "fault isolation",
+      "observer based diagnosis",
+      "parameter estimation",
+      "sensor faults",
+      "actuator faults",
+      "fault tolerant systems",
+      "signal analysis"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-18",
+    "topics": [
+      "agent communication languages",
+      "distributed problem solving",
+      "multi-agent planning",
+      "negotiation protocols",
+      "coordination mechanisms",
+      "swarm intelligence",
+      "autonomous agents",
+      "game theory"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-19",
+    "topics": [
+      "gradient descent methods",
+      "convex optimization",
+      "stochastic optimization",
+      "regularization techniques",
+      "hyperparameter tuning",
+      "loss functions",
+      "constrained optimization",
+      "neural network training"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-2",
+    "topics": [
+      "machine learning models",
+      "computer vision for vehicles",
+      "neural networks",
+      "pattern recognition",
+      "decision trees",
+      "reinforcement learning",
+      "data preprocessing",
+      "classification algorithms"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-20",
+    "topics": [
+      "automotive cybersecurity",
+      "CAN bus security",
+      "cryptographic protocols",
+      "secure boot",
+      "threat analysis",
+      "vulnerability assessment",
+      "intrusion detection systems",
+      "hardware security modules"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-21",
+    "topics": [
+      "software architecture patterns",
+      "design patterns",
+      "code refactoring",
+      "software metrics",
+      "advanced UML modeling",
+      "agile methodologies",
+      "legacy system maintenance",
+      "system scalability"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-22",
+    "topics": [
+      "Java virtual machine",
+      "multithreading and concurrency",
+      "Java reflection",
+      "collections framework",
+      "network programming",
+      "enterprise Java beans",
+      "memory management",
+      "lambda expressions"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-23",
+    "topics": [
+      "hardware in the loop",
+      "software in the loop",
+      "unit testing",
+      "functional safety ISO 26262",
+      "automotive test standards",
+      "test case generation",
+      "code coverage analysis",
+      "regression testing"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-28",
+    "topics": [
+      "edge computing architecture",
+      "IoT gateway design",
+      "cloud data pipelines",
+      "edge analytics",
+      "resource constrained devices",
+      "distributed cloud storage",
+      "fog computing",
+      "low latency processing"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-29",
+    "topics": [
+      "MQTT protocol",
+      "CoAP protocol",
+      "LoRaWAN technology",
+      "wireless sensor networks",
+      "5G communications",
+      "TCP IP networking",
+      "gateway communication",
+      "network security protocols"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-3",
+    "topics": [
+      "electronic control units",
+      "automotive networks",
+      "CAN bus architecture",
+      "LIN bus protocol",
+      "FlexRay network",
+      "powertrain systems",
+      "body electronics",
+      "vehicle power distribution"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-30",
+    "topics": [
+      "virtualization technologies",
+      "cloud service models",
+      "infrastructure virtualization",
+      "cloud storage solutions",
+      "identity management",
+      "scalability and elasticity",
+      "hypervisors",
+      "resource allocation"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-31",
+    "topics": [
+      "smart sensor design",
+      "wireless sensor networks",
+      "MEMS sensors",
+      "data acquisition systems",
+      "sensor calibration",
+      "power management",
+      "signal conditioning",
+      "node localization"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-32",
+    "topics": [
+      "error detection codes",
+      "Hamming codes",
+      "block codes",
+      "convolutional codes",
+      "shannon entropy",
+      "channel capacity",
+      "cyclic redundancy check",
+      "information theory"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-33",
+    "topics": [
+      "GPU acceleration",
+      "FPGA acceleration",
+      "parallel processing",
+      "heterogeneous computing",
+      "pipeline optimization",
+      "memory hierarchy",
+      "hardware accelerators",
+      "high performance computing"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-34",
+    "topics": [
+      "intellectual property rights",
+      "academic plagiarism",
+      "research ethics",
+      "citation standards",
+      "data fabrication",
+      "scientific integrity",
+      "peer review process",
+      "conflict of interest"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-35",
+    "topics": [
+      "mobile cloud architecture",
+      "offloading computation",
+      "mobile web services",
+      "cross platform applications",
+      "mobile data synchronization",
+      "latency reduction",
+      "resource management",
+      "location based services"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-36",
+    "topics": [
+      "continuous integration",
+      "continuous delivery pipelines",
+      "container orchestration",
+      "Docker technology",
+      "Kubernetes clustering",
+      "infrastructure automation",
+      "system monitoring",
+      "release management"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-37",
+    "topics": [
+      "machine learning APIs",
+      "cognitive services",
+      "cloud AI platforms",
+      "natural language processing",
+      "computer vision services",
+      "predictive analytics",
+      "model deployment",
+      "scalable inference"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-38",
+    "topics": [
+      "distributed data processing",
+      "Hadoop ecosystem",
+      "Apache Spark",
+      "NoSQL databases",
+      "stream processing",
+      "large scale storage",
+      "data ingestion",
+      "map reduce framework"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-39",
+    "topics": [
+      "fault tolerance mechanisms",
+      "high availability systems",
+      "redundancy strategies",
+      "disaster recovery",
+      "resilient cloud architecture",
+      "error recovery protocols",
+      "dependability metrics",
+      "failure detection"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-4",
+    "topics": [
+      "automotive network security",
+      "CAN bus vulnerabilities",
+      "secure boot mechanisms",
+      "cryptographic key management",
+      "intrusion detection systems",
+      "hardware security modules"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-40",
+    "topics": [
+      "real time operating systems",
+      "microcontroller architecture design",
+      "power management techniques",
+      "interrupt handling mechanisms",
+      "memory protection units",
+      "hardware abstraction layers"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-41",
+    "topics": [
+      "cloud data encryption",
+      "access control policies",
+      "threat modeling in IoT",
+      "privacy preserving protocols",
+      "secure cloud storage",
+      "identity and access management"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-42",
+    "topics": [
+      "lightweight operating systems",
+      "resource constrained devices",
+      "task scheduling algorithms",
+      "low power modes",
+      "kernel configuration",
+      "device driver development"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-43",
+    "topics": [
+      "cloud native telecommunications",
+      "network function virtualization",
+      "software defined networking",
+      "edge computing architectures",
+      "5G network slicing",
+      "telecom service orchestration"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-44",
+    "topics": [
+      "engineering team management",
+      "strategic decision making",
+      "technical conflict resolution",
+      "agile leadership practices",
+      "innovation management",
+      "communication strategies"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-45",
+    "topics": [
+      "hardware prototyping",
+      "sensor integration",
+      "IoT product lifecycle",
+      "printed circuit board design",
+      "firmware deployment",
+      "regulatory compliance testing"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-46",
+    "topics": [
+      "digital signal processors",
+      "fast Fourier transform",
+      "adaptive filtering algorithms",
+      "multirate signal processing",
+      "hardware accelerators",
+      "spectral analysis"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-47",
+    "topics": [
+      "vehicular ad hoc networks",
+      "dedicated short range communications",
+      "cellular vehicle to everything",
+      "traffic safety applications",
+      "cooperative awareness messages",
+      "wireless channel modeling"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-5",
+    "topics": [
+      "user centered design principles",
+      "wireframing and prototyping",
+      "usability testing methods",
+      "interaction design patterns",
+      "visual hierarchy",
+      "accessibility standards"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-52",
+    "topics": [
+      "vector graphics manipulation",
+      "raster image processing",
+      "typography principles",
+      "color theory in design",
+      "layout and composition",
+      "brand identity creation"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-53",
+    "topics": [
+      "search engine optimization",
+      "social media marketing",
+      "web analytics tools",
+      "conversion rate optimization",
+      "campaign performance tracking",
+      "consumer behavior analysis"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-54",
+    "topics": [
+      "responsive web design",
+      "client side scripting",
+      "server side programming",
+      "asynchronous data loading",
+      "DOM manipulation",
+      "web standards and protocols"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-55",
+    "topics": [
+      "information architecture",
+      "user research methods",
+      "interaction design",
+      "frontend prototyping",
+      "heuristic evaluation",
+      "user journey mapping"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-56",
+    "topics": [
+      "research ethics guidelines",
+      "plagiarism detection methods",
+      "intellectual property rights",
+      "scientific citation standards",
+      "data fabrication prevention",
+      "academic integrity policies"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-57",
+    "topics": [
+      "virtual reality applications",
+      "augmented reality development",
+      "mixed reality interfaces",
+      "generative media tools",
+      "immersive environment design",
+      "interactive storytelling"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-58",
+    "topics": [
+      "digital video editing",
+      "audio post production",
+      "motion graphics design",
+      "multimedia asset management",
+      "compression formats",
+      "streaming technologies"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-59",
+    "topics": [
+      "full stack architecture",
+      "database management systems",
+      "RESTful API design",
+      "frontend framework integration",
+      "backend business logic",
+      "application deployment pipelines"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-6",
+    "topics": [
+      "digital image representation",
+      "spatial domain filtering",
+      "frequency domain processing",
+      "image segmentation methods",
+      "morphological image operations",
+      "feature description techniques",
+      "pattern classification basics",
+      "3D reconstruction principles"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-60",
+    "topics": [
+      "modern web frameworks",
+      "content management systems",
+      "web application security",
+      "cross platform development",
+      "version control systems",
+      "build automation tools"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-61",
+    "topics": [
+      "critical rendering path",
+      "asset optimization techniques",
+      "browser caching strategies",
+      "lazy loading implementation",
+      "performance profiling tools",
+      "network latency reduction"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-62",
+    "topics": [
+      "cross site scripting prevention",
+      "SQL injection mitigation",
+      "automated testing frameworks",
+      "penetration testing basics",
+      "authentication and authorization",
+      "secure coding practices"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-63",
+    "topics": [
+      "distributed system architectures",
+      "load balancing strategies",
+      "horizontal and vertical scaling",
+      "fault tolerance mechanisms",
+      "microservices communication",
+      "distributed data consistency"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-64",
+    "topics": [
+      "enterprise application integration",
+      "cloud native development",
+      "containerization technologies",
+      "orchestration platforms",
+      "advanced design patterns",
+      "serverless computing models"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-69",
+    "topics": [
+      "numerical integration methods",
+      "collision detection algorithms",
+      "rigid body dynamics",
+      "particle system simulation",
+      "linear algebra transformations",
+      "differential equations in physics"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-7",
+    "topics": [
+      "Internet of Things architecture",
+      "Cloud computing services",
+      "Edge computing paradigms",
+      "Sensor data streaming",
+      "Wireless sensor networks",
+      "Containerization and deployment",
+      "Edge AI inference"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-70",
+    "topics": [
+      "Core game mechanics",
+      "Player experience design",
+      "Level design principles",
+      "Interactive storytelling",
+      "Game balancing techniques",
+      "Prototyping gameplay loops"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-71",
+    "topics": [
+      "Rendering pipeline architecture",
+      "Scene graph management",
+      "Physics engine integration",
+      "Game loop implementation",
+      "Memory management in engines",
+      "Shader programming basics"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-72",
+    "topics": [
+      "Agile game development",
+      "Scrum methodology in studios",
+      "Milestone planning and scheduling",
+      "Risk management in production",
+      "Resource allocation for teams",
+      "Quality assurance pipelines"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-73",
+    "topics": [
+      "Sprite animation systems",
+      "Tilemap creation workflows",
+      "2D physics collision detection",
+      "User interface implementation",
+      "Side-scrolling mechanics",
+      "Asset integration pipelines"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-74",
+    "topics": [
+      "Advanced game systems",
+      "Emergent gameplay design",
+      "Economy balancing in games",
+      "Nonlinear narrative structures",
+      "Multiplayer game design",
+      "Playtesting methodologies"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-75",
+    "topics": [
+      "Plagiarism prevention strategies",
+      "Research citation standards",
+      "Intellectual property rights",
+      "Data privacy compliance",
+      "Scientific integrity norms",
+      "Ethical research publishing"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-76",
+    "topics": [
+      "Entity component system",
+      "Design patterns in games",
+      "Modular game architecture",
+      "Event-driven messaging systems",
+      "State machine implementation",
+      "Decoupled code structures"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-77",
+    "topics": [
+      "Interactive audio design",
+      "Adaptive music systems",
+      "Sound effect synthesis",
+      "Spatial audio rendering",
+      "Foley recording techniques",
+      "Audio middleware integration"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-78",
+    "topics": [
+      "Finite state machines",
+      "Behavior trees in games",
+      "Pathfinding algorithms",
+      "Steering behaviors implementation",
+      "Utility AI decision making",
+      "Procedural content generation"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-79",
+    "topics": [
+      "Digital painting techniques",
+      "Sprite sheet creation",
+      "Pixel art fundamentals",
+      "Vector graphics for UI",
+      "Color theory in games",
+      "Texture mapping concepts"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-8",
+    "topics": [
+      "Software development life cycle",
+      "Object-oriented design principles",
+      "Design patterns application",
+      "Software testing methodologies",
+      "Version control workflows",
+      "Requirements engineering process"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-80",
+    "topics": [
+      "Advanced 3D environment creation",
+      "Character rigging workflows",
+      "Post-processing effects pipeline",
+      "Level streaming optimization",
+      "Advanced lighting techniques",
+      "Physics interaction scripting"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-81",
+    "topics": [
+      "Serious games for education",
+      "Gamified healthcare applications",
+      "Interactive simulation tools",
+      "Virtual reality therapy",
+      "Cognitive training systems",
+      "Accessibility in interactive media"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-82",
+    "topics": [
+      "Human-computer interaction principles",
+      "Gesture recognition systems",
+      "Voice command interfaces",
+      "Haptic feedback integration",
+      "Eye-tracking technology",
+      "Sensor fusion techniques"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-83",
+    "topics": [
+      "Rasterization pipeline mechanics",
+      "Ray tracing algorithms",
+      "Vertex and pixel shaders",
+      "Global illumination models",
+      "Texture filtering methods",
+      "GPU optimization strategies"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-84",
+    "topics": [
+      "Polygon mesh topology",
+      "UV unwrapping techniques",
+      "PBR material creation",
+      "High-poly sculpting workflows",
+      "Texture baking processes",
+      "Hard-surface modeling methods"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-85",
+    "topics": [
+      "Flocking and steering algorithms",
+      "Crowd navigation meshes",
+      "Boids simulation models",
+      "Agent-based modeling systems",
+      "Collision avoidance techniques",
+      "Behavioral synchronization"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-86",
+    "topics": [
+      "Video game monetization models",
+      "Publisher pitching strategies",
+      "Game marketing campaigns",
+      "Community management practices",
+      "Budgeting and financial forecasting",
+      "Intellectual property licensing"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-9",
+    "topics": [
+      "Automotive communication protocols",
+      "CAN bus architecture",
+      "LIN and FlexRay networks",
+      "Embedded Ethernet standards",
+      "Network security in vehicles",
+      "Real-time data transmission"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-91",
+    "topics": [
+      "Supervised learning algorithms",
+      "Unsupervised clustering methods",
+      "Linear and logistic regression",
+      "Decision trees and forests",
+      "Model evaluation metrics",
+      "Overfitting and regularization"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-92",
+    "topics": [
+      "Convolutional neural networks",
+      "Recurrent neural networks",
+      "Transformer architecture models",
+      "Backpropagation algorithm",
+      "Generative adversarial networks",
+      "Optimization in deep learning"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-93",
+    "topics": [
+      "Image filtering and enhancement",
+      "Feature extraction techniques",
+      "Object detection algorithms",
+      "Image segmentation methods",
+      "Stereo vision geometry",
+      "Camera calibration processes"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-94",
+    "topics": [
+      "Distributed data processing",
+      "MapReduce programming model",
+      "NoSQL database systems",
+      "Stream processing architectures",
+      "Scalable data storage",
+      "Large-scale data pipelines"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-95",
+    "topics": [
+      "Gradient descent variants",
+      "Convex optimization problems",
+      "Lagrange multipliers",
+      "Quadratic programming techniques",
+      "Stochastic optimization methods",
+      "Hyperparameter tuning algorithms"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-96",
+    "topics": [
+      "research misconduct types",
+      "plagiarism detection methods",
+      "intellectual property rights",
+      "citation standards and styles",
+      "data fabrication prevention",
+      "authorship criteria ethics",
+      "conflict of interest",
+      "scientific integrity principles"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-97",
+    "topics": [
+      "Markov decision processes",
+      "Q-learning algorithms",
+      "policy gradient methods",
+      "deep reinforcement learning",
+      "temporal difference learning",
+      "exploration versus exploitation",
+      "actor-critic architectures",
+      "reward function design"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-98",
+    "topics": [
+      "image filtering techniques",
+      "edge detection algorithms",
+      "convolutional neural networks",
+      "object detection models",
+      "image segmentation methods",
+      "feature extraction pipelines",
+      "stereo vision geometry",
+      "facial recognition systems"
+    ],
+    "topicsSource": "inferred"
+  },
+  {
+    "id": "AC-M-99",
+    "topics": [
+      "tokenization and stemming",
+      "part-of-speech tagging",
+      "syntactic parsing trees",
+      "sentiment analysis models",
+      "named entity recognition",
+      "word embedding vectors",
+      "transformer architecture models",
+      "machine translation systems"
+    ],
+    "topicsSource": "inferred"
+  }
+]
