@@ -27,6 +27,21 @@ async function main() {
         await dbCount("language_label is not null"),
         "'Listed language:' count differs from courses with a language",
       );
+      assert.ok(all.includes("Automation and Computers courses only for now"), "D-17 scope line missing");
+
+      const filters: [string, string][] = [
+        ["?semester=winter", "semester % 2 = 1"],
+        ["?semester=summer", "semester % 2 = 0"],
+        ["?ects=7", "ects = 7"],
+        ["?syllabus=1", "has_syllabus"],
+        ["?faculty=CT", "true"], // unknown parameter ignored, there is no faculty filter
+        ["?semester=summer&ects=7", "semester % 2 = 0 and ects = 7"],
+      ];
+      for (const [qs, where] of filters) assert.equal(rowsIn(await get(qs)), await dbCount(where), `${qs} row count`);
+
+      const search = await get("?q=L002.25.04.F4");
+      assert.ok(search.includes("Operating Systems"), "?q=L002.25.04.F4 does not find Operating Systems");
+      assert.equal(rowsIn(search), 1, "?q=L002.25.04.F4 row count");
     });
   } finally {
     await pg.end();
