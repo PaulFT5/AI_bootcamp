@@ -53,11 +53,16 @@ export async function embed(texts: string[], taskType: EmbedTaskType): Promise<n
   return out;
 }
 
-export async function generateJson<S extends z.ZodType>(prompt: string, schema: S): Promise<z.infer<S>> {
+/** `files` (base64, e.g. an uploaded PDF or image) go before the prompt text in the same turn. */
+export async function generateJson<S extends z.ZodType>(
+  prompt: string,
+  schema: S,
+  files: { mimeType: string; data: string }[] = [],
+): Promise<z.infer<S>> {
   const res = await call(() =>
     ai().models.generateContent({
       model: process.env.GEMINI_MODEL!,
-      contents: prompt,
+      contents: files.length ? [{ role: "user", parts: [...files.map((inlineData) => ({ inlineData })), { text: prompt }] }] : prompt,
       config: { responseMimeType: "application/json", responseJsonSchema: z.toJSONSchema(schema) },
     }),
   );

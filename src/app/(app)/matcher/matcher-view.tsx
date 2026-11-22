@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { MatchCard } from "@/components/match-card";
 import type { SemesterFilter } from "@/domain/semester";
+import { sniffKind, uploadError, type ExtractedCourse } from "@/domain/upload";
+import { downscaleImage } from "@/lib/downscale";
+import sampleSyllabus from "@/lib/syllabus-sample.json";
 import type { HomeCourseView } from "@/services/home-courses";
 import type { MatchMode, MatchView } from "@/services/matcher";
 
@@ -17,7 +20,9 @@ type Draft = {
   description: string;
   topics: string; // one per line
   source: "typed" | "syllabus";
+  multi?: boolean; // the uploaded file seemed to hold several courses
 };
+type Upload = { status: "idle" } | { status: "reading" } | { status: "error"; message: string; offerName: boolean };
 type RunOpts = { force?: boolean; byName?: boolean };
 
 const SHOWN = 3; // D-05: top 3, "Show more" reveals up to 5
@@ -47,6 +52,15 @@ const strip = ({ id, name, description, topics, ects, studyYear, source }: HomeC
   source,
 });
 const needsRun = (c: HomeCourseView, filter: SemesterFilter) => !c.last || c.last.filter !== filter;
+const fromExtracted = (x: ExtractedCourse): Draft => ({
+  name: x.name, // empty when no name was found: the required field stays empty
+  ects: x.ects == null ? "" : String(x.ects),
+  studyYear: x.studyYear == null ? "" : String(x.studyYear),
+  description: x.description,
+  topics: x.topics.join("\n"),
+  source: "syllabus",
+  multi: x.multipleCoursesDetected,
+});
 const toDraft = (c: Course): Draft => ({
   id: c.id,
   name: c.name,
@@ -91,6 +105,9 @@ export function MatcherView({
   const [showAll, setShowAll] = useState(false);
   const [tab, setTab] = useState<"courses" | "matches">("courses");
   const controllers = useRef(new Map<string, AbortController>());
+  const [upload, setUpload] = useState<Upload>({ status: "idle" });
+  const uploadCtl = useRef<AbortController | null>(null);
+  const fileInput = useRef<HTMLInputElement>(null);
 
   // D-08: one request per course with its own AbortController; a newer run for the same course aborts the older one.
   // State is only set after the first await, so the mount effect can call this directly.
@@ -138,7 +155,42 @@ export function MatcherView({
   function openForm(d: Draft) {
     setDraft(d);
     setFormError(null);
+    uploadCtl.current?.abort(); // a file still being read must not overwrite this form later
+    setUpload({ status: "idle" });
     setTab("courses");
+  }
+
+  // MATCH-04: checked in the browser first (no request for a bad file), the server checks again.
+  // Each upload aborts the previous one, so only the latest file pre-fills the form.
+  async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // picking the same file again still fires change
+    if (!file) return;
+    uploadCtl.current?.abort();
+    const ctl = new AbortController();
+    uploadCtl.current = ctl;
+    const fail = (message: string, offerName = false) =>
+      !ctl.signal.aborted && setUpload({ status: "error", message, offerName });
+    setUpload({ status: "reading" });
+    try {
+      let blob: Blob = file;
+      let kind = sniffKind(new Uint8Array(await file.slice(0, 8).arrayBuffer()));
+      if (kind === "png" || kind === "jpeg") {
+        blob = await downscaleImage(file);
+        if (blob !== file) kind = "jpeg";
+      }
+      const error = uploadError(blob.size, kind);
+      if (error) return fail(error);
+      const body = new FormData();
+      body.append("file", blob, "syllabus");
+      const res = await fetch("/api/extract", { method: "POST", body, signal: ctl.signal });
+      const data = await res.json().catch(() => ({}));
+      if (ctl.signal.aborted) return;
+      if (!res.ok) return fail(data.message ?? "Could not read this file. Try again.", res.status >= 500);
+      openForm(fromExtracted(data));
+    } catch {
+      fail("Could not read this file. Try a clearer PDF or a screenshot of one page, or search by name instead.", true);
+    }
   }
 
   async function save(e: React.FormEvent) {
@@ -178,7 +230,7 @@ export function MatcherView({
   const mode = run?.mode ?? (active?.topics.length ? "topics" : "name");
   const matches = run?.status === "done" ? run.matches : [];
   const coordinator = matches[0]?.coordinator;
-  const field = (k: keyof Draft) => ({
+  const field = (k: "name" | "ects" | "studyYear" | "description" | "topics") => ({
     value: draft?.[k] ?? "",
     onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
       setDraft((d) => d && { ...d, [k]: e.target.value }),
@@ -217,11 +269,62 @@ export function MatcherView({
               </svg>
               Add a course
             </button>
+            <button
+              type="button"
+              className="btn btn-quiet btn-block"
+              disabled={upload.status === "reading"}
+              onClick={() => fileInput.current?.click()}
+            >
+              <svg className="i" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+                <path d="M14 3v5h5M12 18v-6M9 15l3-3 3 3" />
+              </svg>
+              Upload syllabus (PDF or image)
+            </button>
+            <input ref={fileInput} type="file" accept=".pdf,image/png,image/jpeg" hidden onChange={onFile} />
+            <button
+              type="button"
+              className="linkbtn"
+              style={{ alignSelf: "center" }}
+              onClick={() => openForm(fromExtracted(sampleSyllabus))}
+            >
+              Try sample syllabus
+            </button>
           </div>
+          {upload.status === "reading" && (
+            <div className="loading-msg" role="status" style={{ marginTop: 10 }}>
+              <span className="spin" />
+              Reading your syllabus…
+            </div>
+          )}
+          {upload.status === "error" && (
+            <div className="error on" role="alert">
+              {upload.message}
+              {upload.offerName && (
+                <div style={{ marginTop: 6 }}>
+                  <button type="button" className="linkbtn" onClick={() => openForm(EMPTY_DRAFT)}>
+                    Search by name instead
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
 
           {draft && (
             <form className="add on" onSubmit={save}>
-              <label htmlFor="fName" style={{ marginTop: 0 }}>
+              {!draft.id && draft.source === "syllabus" && (
+                <div className="extract-note on">
+                  We filled this in from your syllabus. Check each field before matching.
+                  {draft.multi && (
+                    <>
+                      {" "}
+                      This file seems to describe more than one course. We filled in the first one; upload one course
+                      per file.
+                    </>
+                  )}
+                </div>
+              )}
+              <label htmlFor="fName">
                 Course name
               </label>
               <input type="text" id="fName" required maxLength={200} placeholder="e.g. Operating Systems" {...field("name")} />

@@ -1,0 +1,15 @@
+{
+  "name": "Operating Systems Principles",
+  "description": "How an operating system manages processes, memory and storage.",
+  "ects": 6,
+  "studyYear": 2,
+  "topics": [
+    "Processes and threads",
+    "CPU scheduling",
+    "Memory management",
+    "File systems",
+    "Synchronisation",
+    "Virtualisation"
+  ],
+  "multipleCoursesDetected": false
+}
