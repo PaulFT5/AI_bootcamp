@@ -5,9 +5,12 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 // The prototype's sidebar shell; below 760px the CSS turns it into a top bar.
+// icon = SVG path data from the prototype; sub items have none.
 const NAV = [
-  { href: "/matcher", label: "Courses" },
+  { href: "/matcher", label: "Courses", icon: ["M22 9 12 4 2 9l10 5 10-5z", "M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5M22 9v6"] },
   { href: "/catalogue", label: "Catalogue", sub: true },
+  { href: "/resources", label: "Resources", icon: ["M6 3h12v18l-6-4-6 4z"] },
+  { href: "/first-week", label: "First week", icon: ["M5 21V4M5 4h11l-2 4 2 4H5"] },
 ];
 
 export function TopBar({ name, email }: { name: string; email: string }) {
@@ -40,10 +43,11 @@ export function TopBar({ name, email }: { name: string; email: string }) {
             className={item.sub ? "sub" : undefined}
             aria-current={pathname.startsWith(item.href) ? "page" : undefined}
           >
-            {!item.sub && (
+            {item.icon && (
               <svg className="i" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M22 9 12 4 2 9l10 5 10-5z" />
-                <path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5M22 9v6" />
+                {item.icon.map((d) => (
+                  <path key={d} d={d} />
+                ))}
               </svg>
             )}
             {item.label}
