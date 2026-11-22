@@ -62,7 +62,11 @@ export function MatchCard({ m, added, onToggle }: { m: MatchView; added: boolean
               View UPT syllabus
             </Link>
           ) : (
-            <span className="nosyl">UPT syllabus not available yet</span>
+            // shortcut: placeholder for the demo, no UPT syllabi collected yet (01-06 skipped); wire to a syllabus view later
+            <button type="button" className="linkbtn">
+              <DocIcon />
+              View UPT syllabus
+            </button>
           )}
         </div>
       </div>
