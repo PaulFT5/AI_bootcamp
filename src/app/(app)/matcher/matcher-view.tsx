@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { LaPanel, type LaPanelItem } from "@/components/la-panel";
 import { MatchCard } from "@/components/match-card";
 import type { SemesterFilter } from "@/domain/semester";
 import { sniffKind, uploadError, type ExtractedCourse } from "@/domain/upload";
@@ -82,9 +83,11 @@ function statusText(run: Run | undefined) {
 export function MatcherView({
   initialCourses,
   initialFilter,
+  initialLa,
 }: {
   initialCourses: HomeCourseView[];
   initialFilter: SemesterFilter;
+  initialLa: LaPanelItem[];
 }) {
   const [courses, setCourses] = useState<Course[]>(() => initialCourses.map(strip));
   // D-09: saved results paint immediately; courses never matched, or matched under another filter, start loading
@@ -103,7 +106,10 @@ export function MatcherView({
   const [draft, setDraft] = useState<Draft | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
-  const [tab, setTab] = useState<"courses" | "matches">("courses");
+  const [tab, setTab] = useState<"courses" | "matches" | "la">("courses");
+  const [la, setLa] = useState(initialLa);
+  const [toast, setToast] = useState({ msg: "", on: false });
+  const toastTimer = useRef<number | undefined>(undefined);
   const controllers = useRef(new Map<string, AbortController>());
   const [upload, setUpload] = useState<Upload>({ status: "idle" });
   const uploadCtl = useRef<AbortController | null>(null);
@@ -225,6 +231,30 @@ export function MatcherView({
     if (activeId === c.id) setActiveId(rest[0]?.id ?? null);
   }
 
+  function showToast(msg: string) {
+    setToast({ msg, on: true });
+    window.clearTimeout(toastTimer.current);
+    toastTimer.current = window.setTimeout(() => setToast((t) => ({ ...t, on: false })), 2200);
+  }
+
+  // Optimistic: the panel updates at once and rolls back if the request fails. Adds link to the active course (D-11).
+  async function toggleLa(item: LaPanelItem) {
+    const had = la.some((x) => x.courseId === item.courseId);
+    const without = (xs: LaPanelItem[]) => xs.filter((x) => x.courseId !== item.courseId);
+    setLa((xs) => (had ? without(xs) : [...without(xs), item]));
+    const res = await (had
+      ? send(`/api/la?courseId=${encodeURIComponent(item.courseId)}`, "DELETE")
+      : send("/api/la", "POST", { courseId: item.courseId, homeCourseId: activeId })
+    ).catch(() => null);
+    if (!res?.ok) {
+      setLa((xs) => (had ? [...without(xs), item] : without(xs)));
+      return showToast("Could not update your draft. Try again.");
+    }
+    showToast(had ? "Removed from your draft" : `Added ${item.name} · ${item.ects} ECTS`);
+  }
+
+  const laIds = new Set(la.map((x) => x.courseId));
+  const laTotal = la.reduce((s, x) => s + x.ects, 0);
   const active = courses.find((c) => c.id === activeId);
   const run = active ? runs[active.id] : undefined;
   const mode = run?.mode ?? (active?.topics.length ? "topics" : "name");
@@ -457,7 +487,7 @@ export function MatcherView({
                   )}
                   <div className="matches">
                     {(showAll ? matches : matches.slice(0, SHOWN)).map((m) => (
-                      <MatchCard key={m.courseId} m={m} />
+                      <MatchCard key={m.courseId} m={m} added={laIds.has(m.courseId)} onToggle={() => toggleLa(m)} />
                     ))}
                   </div>
                   {!showAll && matches.length > SHOWN && (
@@ -477,10 +507,18 @@ export function MatcherView({
             </>
           )}
         </section>
+
+        <section className={`pane la-col sticky${tab === "la" ? " mon" : ""}`} aria-labelledby="h-la">
+          <LaPanel items={la} onRemove={toggleLa} />
+        </section>
       </div>
 
-      {/* "mon" picks the visible column below 760 px; 01-05 adds the LA tab */}
-      <nav className="mtabs" aria-label="Matcher sections" style={{ gridTemplateColumns: "repeat(2,1fr)" }}>
+      <div className={`toast${toast.on ? " on" : ""}`} role="status">
+        {toast.msg}
+      </div>
+
+      {/* "mon" picks the visible column below 760 px */}
+      <nav className="mtabs" aria-label="Matcher sections">
         <button type="button" aria-pressed={tab === "courses"} onClick={() => setTab("courses")}>
           <svg className="i" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM19 19v3" />
@@ -494,6 +532,13 @@ export function MatcherView({
             <path d="M9 6h4a4 4 0 0 1 4 4v5" />
           </svg>
           Matches
+        </button>
+        <button type="button" aria-pressed={tab === "la"} onClick={() => setTab("la")}>
+          <svg className="i" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 11l3 3 8-8" />
+            <path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9" />
+          </svg>
+          {`LA · ${laTotal} ECTS`}
         </button>
       </nav>
     </>

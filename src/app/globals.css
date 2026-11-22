@@ -285,3 +285,7 @@ tbody tr:hover{background:#fafaf9}
 .landing-body p{color:var(--sub);font-size:17px;margin:8px 0 24px;max-width:52ch}
 .landing-body .btn{align-self:flex-start;text-decoration:none;font-size:16px;padding:12px 22px}
 
+
+/* LA panel: one block per season (D-12) */
+.la-sem+.la-sem{margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+.la-sem h3{font-size:14px;font-weight:700;margin:0}

@@ -23,7 +23,8 @@ const CheckIcon = () => (
 // Prototype `.match` card. Every fact comes from the catalogue row (MATCH-03); no percentages (D-06).
 // evidenceLabel is "Compared by catalogue entry", "Topics inferred from course name" or "Compared with UPT syllabus".
 // Topic chips keep the order of the student's topic list (topicOverlap walks the home topics in order).
-export function MatchCard({ m }: { m: MatchView }) {
+// "Add" puts the course into the LA draft linked to the active home course (D-11); "Added" removes it.
+export function MatchCard({ m, added, onToggle }: { m: MatchView; added: boolean; onToggle: () => void }) {
   return (
     <article className={`match band-${m.band}`}>
       <FacultyDot code={m.facultyCode} name={m.facultyName} />
@@ -70,6 +71,16 @@ export function MatchCard({ m }: { m: MatchView }) {
           )}
         </div>
       </div>
+      <button type="button" className={`btn ${added ? "added" : "btn-outline"}`} aria-pressed={added} onClick={onToggle}>
+        {added ? (
+          <>
+            <CheckIcon />
+            Added
+          </>
+        ) : (
+          "Add"
+        )}
+      </button>
     </article>
   );
 }

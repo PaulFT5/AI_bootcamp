@@ -18,7 +18,8 @@
     "embed:courses": "tsx --env-file=.env.local scripts/embed-courses.ts",
     "smoke:match": "tsx --env-file=.env.local scripts/smoke-match.ts",
     "smoke:matcher": "tsx --env-file=.env.local scripts/smoke-matcher.ts",
-    "smoke:extract": "tsx --env-file=.env.local scripts/smoke-extract.ts",
+    "smoke:la": "tsx --env-file=.env.local scripts/smoke-la.ts",
+    "smoke:extract":"tsx --env-file=.env.local scripts/smoke-extract.ts",
     "golden": "tsx --env-file=.env.local scripts/golden.ts"
   },
   "dependencies": {
