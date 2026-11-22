@@ -53,6 +53,7 @@ svg.i{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke
 .nav a[aria-current="page"]{background:var(--accent);color:var(--accent-ink)}
 .nav a.sub{padding:7px 10px 7px 39px;font-size:14px}
 .nav a .soon{font-size:11px;font-weight:600;opacity:.75;margin-left:auto}
+.nav a[aria-disabled="true"]{cursor:default}
 .side :focus-visible{outline-color:var(--brand-mark)}
 .side-foot{margin-top:auto;border-top:1px solid #30363d;padding-top:12px;display:flex;align-items:center;gap:4px}
 .acct{flex:1;min-width:0;position:relative}
