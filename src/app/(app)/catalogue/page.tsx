@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { z } from "zod";
+import { AddToLaButton } from "@/components/add-to-la-button";
 import { FacultyDot } from "@/components/faculty-dot";
+import { requireUser } from "@/lib/session";
 import { catalogueFacets, listCourses } from "@/services/catalogue";
+import { listLa } from "@/services/la";
 import { CatalogueFilters } from "./filters";
 
 const season = (semester: number) => (semester % 2 === 1 ? "Winter" : "Summer");
@@ -22,9 +25,11 @@ export default async function CataloguePage({
 }) {
   const p = Params.parse(await searchParams);
   const q = p.q || undefined;
-  const [courses, facets] = await Promise.all([
+  const user = await requireUser();
+  const [courses, facets, la] = await Promise.all([
     listCourses({ semester: p.semester, ects: p.ects, hasSyllabus: p.syllabus === "1", q, sort: p.sort }),
     catalogueFacets(),
+    listLa(user.id),
   ]);
 
   const sortHref = (sort: "name" | "ects") => {
@@ -37,6 +42,7 @@ export default async function CataloguePage({
     return `/catalogue${qs.size ? `?${qs}` : ""}`;
   };
   const sortedBy = p.sort ?? "name";
+  const inLa = new Set(la.map((r) => r.courseId));
   const sortIcon = (
     <svg className="i" viewBox="0 0 24 24" style={{ width: 14, height: 14 }} aria-hidden="true">
       <path d="m7 15 5 5 5-5M7 9l5-5 5 5" />
@@ -86,12 +92,15 @@ export default async function CataloguePage({
               <th>Programme</th>
               <th>Language</th>
               <th>Syllabus</th>
+              <th>
+                <span className="sr-only">Learning Agreement draft</span>
+              </th>
             </tr>
           </thead>
           <tbody>
             {courses.length === 0 && (
               <tr>
-                <td colSpan={7} style={{ textAlign: "center", padding: 28, color: "var(--sub)" }}>
+                <td colSpan={8} style={{ textAlign: "center", padding: 28, color: "var(--sub)" }}>
                   No courses match these filters.
                 </td>
               </tr>
@@ -120,6 +129,9 @@ export default async function CataloguePage({
                   ) : (
                     <span className="nosyl">Syllabus not available yet</span>
                   )}
+                </td>
+                <td>
+                  <AddToLaButton courseId={c.id} name={c.name} initialAdded={inLa.has(c.id)} />
                 </td>
               </tr>
             ))}

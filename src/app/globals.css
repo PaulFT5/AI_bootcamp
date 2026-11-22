@@ -216,15 +216,18 @@ tbody tr:hover{background:#fafaf9}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-/* print view of the LA */
-.print-only{display:none}
+/* print view of the LA (/la/print is its own page, so main stays visible; chrome is hidden by class) */
+.print-doc h1{margin-bottom:8px}
+.print-doc p{margin:6px 0}
 @media print{
-  body{background:#fff}
-  .app,.mtabs,.toast{display:none!important}
-  .print-only{display:block;padding:24px;font-size:12pt}
-  .print-only h1{font-size:20pt}
-  .print-only table{min-width:0}
-  .print-only th,.print-only td{border-bottom:1px solid #999;padding:6px 8px}
+  body{background:#fff;color:#000;font-size:12pt}
+  .side,.data-note,.mtabs,.toast,.no-print{display:none!important}
+  .app{display:block;min-height:0}
+  main{padding:0;max-width:none}
+  .print-doc h1{font-size:20pt}
+  .print-doc .table-wrap{border:0;overflow:visible}
+  .print-doc table{min-width:0;font-size:11pt}
+  .print-doc th,.print-doc td{border-bottom:1px solid #999;padding:6px 8px}
 }
 
 /* evidence + topics */

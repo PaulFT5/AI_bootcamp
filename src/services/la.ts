@@ -1,7 +1,8 @@
-import { and, asc, eq, sql } from "drizzle-orm";
+import { and, asc, eq, inArray, sql } from "drizzle-orm";
 import { z } from "zod";
 import { db } from "@/db/client";
 import { course, faculty, homeCourse, laItem } from "@/db/schema";
+import { LA_CSV_HEADER, type CsvCell } from "@/domain/csv";
 import { season } from "@/domain/semester";
 
 // Default strip mode: an extra `semester` or `season` key is dropped, never stored (D-12 clarified).
@@ -61,4 +62,46 @@ export async function addLa(userId: string, courseId: string, homeCourseId: stri
 
 export async function removeLa(userId: string, courseId: string) {
   await db.delete(laItem).where(and(eq(laItem.userId, userId), eq(laItem.courseId, courseId)));
+}
+
+export const LaRelinkBody = z.object({ homeCourseId: z.uuid().nullable() }); // strip mode: semester/season dropped
+
+/** Changes only the home-course link (D-11), never the placement. False unless the row and the home course are the user's. */
+export async function relinkLa(userId: string, laItemId: string, homeCourseId: string | null) {
+  if (homeCourseId && !(await ownsHomeCourse(userId, homeCourseId))) return false;
+  const updated = await db
+    .update(laItem)
+    .set({ homeCourseId })
+    .where(and(eq(laItem.id, laItemId), eq(laItem.userId, userId)))
+    .returning({ id: laItem.id });
+  return updated.length > 0;
+}
+
+/** D-13 rows in listLa order, header first. */
+export async function laCsvRows(userId: string): Promise<CsvCell[][]> {
+  const rows = await listLa(userId);
+  return [
+    LA_CSV_HEADER,
+    ...rows.map((r) => [
+      r.season,
+      r.code,
+      r.name,
+      r.facultyName,
+      r.programme,
+      r.studyYear,
+      r.ects,
+      r.homeCourseName ?? "",
+      r.homeCourseEcts ?? "",
+    ]),
+  ];
+}
+
+/** Coordinator contacts for the print view: the draft's faculties, or AC when the draft is empty (D-17). */
+export async function laCoordinators(rows: LaRow[]) {
+  const codes = [...new Set(rows.map((r) => r.facultyCode))];
+  return db
+    .select()
+    .from(faculty)
+    .where(inArray(faculty.code, codes.length ? codes : ["AC"]))
+    .orderBy(asc(faculty.code));
 }
