@@ -1,2 +1,4 @@
 # Shell launcher must keep LF or it breaks under sh on Windows clones
 .claude/skills/impeccable/scripts/impeccable text eol=lf
+# Byte offsets inside PDFs (xref table) break under CRLF conversion
+*.pdf binary

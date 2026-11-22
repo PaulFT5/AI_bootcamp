@@ -211,7 +211,7 @@ Conventions not yet established. Will populate as patterns emerge during develop
 
 ## Architecture
 
-Architecture not yet mapped. Follow existing patterns found in the codebase.
+The product is the Next.js app in `src/`. `prototype/index.html` is a visual reference with sample data only: never add features to it; build them in `src/` (see README "Start here" for where each area lives). Resources and First week content lives in `src/content/`. Business logic goes in `src/domain/` (pure, tested) and `src/services/`; route handlers in `src/app/api/` stay thin.
 <!-- GSD:architecture-end -->
 
 <!-- GSD:skills-start source:skills/ -->
