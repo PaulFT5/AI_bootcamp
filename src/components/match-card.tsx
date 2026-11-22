@@ -36,17 +36,12 @@ export function MatchCard({ m, added, onToggle }: { m: MatchView; added: boolean
         <div className="code">{m.code}</div>
         <div className="mname">{m.name}</div>
         <div className="reason">{m.reason}</div>
-        {m.coveredTopics.length + m.missingTopics.length > 0 && (
+        {m.coveredTopics.length > 0 && (
           <div className="topics">
             {m.coveredTopics.map((t) => (
               <span key={`c-${t}`} className="hit">
                 <CheckIcon />
                 {t}
-              </span>
-            ))}
-            {m.missingTopics.map((t) => (
-              <span key={`m-${t}`} className="miss">
-                Not covered: {t}
               </span>
             ))}
           </div>
