@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FacultyDot } from "@/components/faculty-dot";
 import type { MatchView } from "@/services/matcher";
 
@@ -21,6 +22,7 @@ const CheckIcon = () => (
 
 // Prototype `.match` card. Every fact comes from the catalogue row (MATCH-03); no percentages (D-06).
 // evidenceLabel is "Compared by catalogue entry", "Topics inferred from course name" or "Compared with UPT syllabus".
+// Topic chips keep the order of the student's topic list (topicOverlap walks the home topics in order).
 export function MatchCard({ m }: { m: MatchView }) {
   return (
     <article className={`match band-${m.band}`}>
@@ -56,6 +58,16 @@ export function MatchCard({ m }: { m: MatchView }) {
           <span>{m.facultyName}</span>
           <span>{m.programme}</span>
           {m.languageLabel && <span>Listed language: {m.languageLabel}</span>}
+        </div>
+        <div className="match-foot">
+          {m.hasSyllabus ? (
+            <Link className="linkbtn" href={`/syllabus/${m.courseId}`}>
+              <DocIcon />
+              View UPT syllabus
+            </Link>
+          ) : (
+            <span className="nosyl">UPT syllabus not available yet</span>
+          )}
         </div>
       </div>
     </article>

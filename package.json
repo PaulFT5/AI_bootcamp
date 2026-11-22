@@ -17,6 +17,7 @@
     "topics:enrich": "tsx --env-file=.env.local scripts/enrich-topics.ts",
     "embed:courses": "tsx --env-file=.env.local scripts/embed-courses.ts",
     "smoke:match": "tsx --env-file=.env.local scripts/smoke-match.ts",
+    "smoke:matcher": "tsx --env-file=.env.local scripts/smoke-matcher.ts",
     "golden": "tsx --env-file=.env.local scripts/golden.ts"
   },
   "dependencies": {

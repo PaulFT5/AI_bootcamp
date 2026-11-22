@@ -5,15 +5,16 @@ import { matchHomeCourse, NotFoundError } from "@/services/matcher";
 
 export const maxDuration = 60;
 
-// `force` stays in the contract; with no match cache (D-19) every request ranks afresh, so it has no effect.
-const Body = z.object({ homeCourseId: z.uuid(), force: z.boolean().optional() });
+// force: skip the match cache (D-09 "Re-run matching"); byName: name mode even when the course has topics (D-20 fallback)
+const Body = z.object({ homeCourseId: z.uuid(), force: z.boolean().optional(), byName: z.boolean().optional() });
 
 export async function POST(req: Request) {
   const user = await getSessionUser();
   const parsed = Body.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return Response.json({ error: "invalid_input", issues: parsed.error.issues }, { status: 400 });
+  const { homeCourseId, ...opts } = parsed.data;
   try {
-    return Response.json(await matchHomeCourse(user.id, parsed.data.homeCourseId));
+    return Response.json(await matchHomeCourse(user.id, homeCourseId, opts));
   } catch (e) {
     if (e instanceof NotFoundError) return Response.json({ error: "not_found" }, { status: 404 });
     if (e instanceof GeminiUnavailableError)

@@ -1,11 +1,13 @@
+import { createHash } from "node:crypto";
 import { and, asc, cosineDistance, eq, inArray, isNotNull, sql } from "drizzle-orm";
 import { db } from "@/db/client";
-import { course, faculty, homeCourse, profile } from "@/db/schema";
+import { course, faculty, homeCourse, matchCache, type HomeCourse } from "@/db/schema";
 import { similarityToScore } from "@/domain/bands";
 import { finaliseMatches, MAX_MATCHES, topicOverlap, type RankedMatch } from "@/domain/matches";
 import { scoreName } from "@/domain/name-match";
 import { season, type Season, type SemesterFilter } from "@/domain/semester";
 import { embed } from "@/llm/gemini";
+import { getProfile } from "@/services/profile";
 
 export type HomeCourseInput = {
   name: string;
@@ -43,8 +45,6 @@ export type MatchView = RankedMatch & {
 };
 
 export class NotFoundError extends Error {}
-
-const FILTERS: SemesterFilter[] = ["any", "winter", "summer"];
 
 // D-04 parity as an exact SQL filter
 const inFilter = (filter: SemesterFilter) =>
@@ -152,16 +152,61 @@ export async function enrichMatches(ranked: RankedMatch[], mode: MatchMode): Pro
   });
 }
 
-/** Topic mode when the home course has topics (from an uploaded syllabus, 01-04), otherwise name mode. Nothing is cached (D-19). */
-export async function matchHomeCourse(userId: string, homeCourseId: string) {
+// D-08/D-09 cache: bump when ranking logic changes so old cached results are recomputed.
+// shortcut: entries are never evicted or invalidated on reseed; truncate match_cache after changing course data
+const CACHE_VERSION = 1;
+type CachedResult = { filter: SemesterFilter; mode: MatchMode; ranked: RankedMatch[] };
+
+// Ranked ids and scores depend only on these fields; facts are re-read from the DB on every view.
+const matchHash = (h: HomeCourse, mode: MatchMode, filter: SemesterFilter) =>
+  createHash("sha256")
+    .update(JSON.stringify([CACHE_VERSION, mode, filter, h.name, h.description, h.topics, h.ects]))
+    .digest("hex");
+
+const readCache = async (hash: string) =>
+  (await db.select({ result: matchCache.result }).from(matchCache).where(eq(matchCache.hash, hash)))[0]
+    ?.result as CachedResult | undefined;
+
+/** D-09: the course's last result without ranking again; null when never matched, edited since, or stale. */
+export async function lastMatchesFor(h: HomeCourse) {
+  if (!h.matchHash) return null;
+  const r = await readCache(h.matchHash);
+  // a run that finished after an edit stored the old content's hash: treat it as no result
+  if (!r || matchHash(h, r.mode, r.filter) !== h.matchHash) return null;
+  return { filter: r.filter, mode: r.mode, matches: await enrichMatches(r.ranked, r.mode) };
+}
+
+/**
+ * Topic mode when the home course has topics (uploaded syllabus or typed topics), otherwise name mode.
+ * `byName` forces name mode (D-20 fallback when Gemini is down); `force` skips the cache read (D-09 "Re-run matching").
+ */
+export async function matchHomeCourse(
+  userId: string,
+  homeCourseId: string,
+  opts: { force?: boolean; byName?: boolean } = {},
+) {
   const [h] = await db
     .select()
     .from(homeCourse)
     .where(and(eq(homeCourse.id, homeCourseId), eq(homeCourse.userId, userId)));
   if (!h) throw new NotFoundError("home course not found");
-  const [p] = await db.select({ filter: profile.semesterFilter }).from(profile).where(eq(profile.userId, userId));
-  const filter = FILTERS.find((f) => f === p?.filter) ?? "any";
-  const mode: MatchMode = h.topics.length ? "topics" : "name";
-  const ranked = mode === "topics" ? await matchByTopics(h.topics, filter) : await matchByName(h, filter);
+  const { semesterFilter: filter } = await getProfile(userId);
+  const mode: MatchMode = h.topics.length && !opts.byName ? "topics" : "name";
+  const hash = matchHash(h, mode, filter);
+  let ranked = opts.force ? undefined : (await readCache(hash))?.ranked;
+  if (!ranked) {
+    ranked = mode === "topics" ? await matchByTopics(h.topics, filter) : await matchByName(h, filter);
+    const result: CachedResult = { filter, mode, ranked };
+    await db
+      .insert(matchCache)
+      .values({
+        hash,
+        result,
+        model: mode === "topics" ? (process.env.GEMINI_EMBED_MODEL ?? "embed") : "name",
+        promptVersion: String(CACHE_VERSION),
+      })
+      .onConflictDoUpdate({ target: matchCache.hash, set: { result, createdAt: new Date() } });
+  }
+  await db.update(homeCourse).set({ matchHash: hash }).where(eq(homeCourse.id, h.id));
   return { homeCourseId: h.id, filter, mode, matches: await enrichMatches(ranked, mode) };
 }
