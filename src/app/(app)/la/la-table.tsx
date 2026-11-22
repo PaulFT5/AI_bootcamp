@@ -125,14 +125,18 @@ export function LaTable({
                 <td>
                   <b>{r.name}</b>
                 </td>
-                <td style={{ whiteSpace: "nowrap" }}>
-                  <FacultyDot code={r.facultyCode} name={r.facultyName} sm /> {r.facultyName}
+                <td>
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <FacultyDot code={r.facultyCode} name={r.facultyName} sm />
+                    <span aria-hidden="true">{r.facultyName}</span>
+                  </span>
                 </td>
                 <td>{r.programme}</td>
                 <td>{r.studyYear}</td>
                 <td>{r.ects}</td>
                 <td>
                   <select
+                    style={{ minWidth: 180 }}
                     aria-label={`Matched home course for ${r.name}`}
                     value={r.homeCourseId ?? ""}
                     onChange={(e) => relink(r, e.target.value || null)}
